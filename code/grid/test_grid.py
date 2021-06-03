@@ -1,16 +1,14 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-x = []
-y = []
 
-for n in range(50):
-    x.append(n)
-    y.append(n)
 
-np.asarray(x)
-np.asarray(y)
+grid = []
+for row in range(50):
+    for col in range(50):
+        grid.append([row, col])
 
-plt.grid(color = 'green', linestyle = '-', linewidth = 1)
+
+plt.grid(color = 'green', linestyle = '-', linewidth = 0.5)
 
 plt.savefig("test")
