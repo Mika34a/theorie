@@ -1,10 +1,26 @@
-example1 = Label(root, text="Top left column")
-example1.grid(row=0, column=0)
-#Or
-example2 = Label(root, text="Middle right colum") .grid(row=1, column=1)
+import pygame, sys
+from pygame.locals import*
 
-#ColumnSpan
-example3 = Label(root, text="Bottom Row")
-example3.grid(row=2, columnspan=2)
+import os
+os.environ['SDL_VIDEODRIVER']='windlib'
 
-grids = [[0] * gridSize for _ in range(gridSize)]
+
+pygame.init()
+SCREENWIDTH = 800
+SCREENHEIGHT = 800
+RED = (255,0,0)
+screen = pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT))
+
+pygame.draw.rect(screen, RED, (400, 400, 20, 20),0)
+screen.fill(RED)
+
+pygame.display.update()
+
+# waint until user quits
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+pygame.quit()

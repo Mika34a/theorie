@@ -39,7 +39,7 @@ if platform.system() == "Windows":
 
                         for event in pygame.event.get():
                                 if event.type == pygame.QUIT:
-                                        running = False
+                                        return
 
                         pygame.display.update()
 
