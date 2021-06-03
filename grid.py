@@ -1,43 +1,46 @@
 import pygame
 import sys
 import random
+import platform
 
-pygame.init()
+if platform.system() == "Windows":
 
-width = 400 ; height = 400
-screen = pygame.display.set_mode((width, height))
+        pygame.init()
 
-pygame.display.set_caption("Grid of 10/10")
+        width = 400 ; height = 400
+        screen = pygame.display.set_mode((width, height))
 
-def draw_grid():
-        
-        row = col = 10
-        row_width = width // row
-        col_height = height // col
-        
-        x = 0; y = 0
+        pygame.display.set_caption("Grid of 10/10")
 
-	for i in range(row):
-		x += row_width
-		pygame.draw.line(screen, (255, 255, 255), (x, 0), (x, height))
+        def draw_grid():
+                
+                row = col = 10
+                row_width = width // row
+                col_height = height // col
 
-	for i in range(col):
-		y += col_height
-		pygame.draw.line(screen, (255, 255, 255), (0, y), (width, y))
+                x = 0; y = 0
 
-def main():
+                for i in range(row):
+                        x += row_width
+                        pygame.draw.line(screen, (255, 255, 255), (x, 0), (x, height))
 
-	while True:
+                for i in range(col):
+                        y += col_height
+                        pygame.draw.line(screen, (255, 255, 255), (0, y), (width, y))
 
-		screen.fill((0, 0, 0))
+        def main():
 
-		draw_grid()
+                while True:
 
-		for event in pygame.event.get():
-			if event.type == pygame.QUIT:
-				pygame.quit()
-				sys.exit()
+                        screen.fill((0, 0, 0))
 
-		pygame.display.update()
+                        draw_grid()
 
-main()
+                        for event in pygame.event.get():
+                                if event.type == pygame.QUIT:
+                                        pygame.quit()
+                                        sys.exit()
+
+                        pygame.display.update()
+
+        main()
