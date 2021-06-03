@@ -1,24 +1,43 @@
-# to start with, we will need matplotlib.pyplot
-from matplotlib import pyplot
-# next, i will set up a 8 x 8 2d matrix, with random bits as elements (0 or 1); 
-# for randomization of integers (0 or 1) I use the random module in Python;
-# for building each row in the 2d matrix I use list comprehension in Python
+import pygame
+import sys
 import random
 
-data = [[random.randint(a=0,b=1) for x in range(0,8)], # row 1
-        [random.randint(a=0,b=1) for x in range(0,8)], # row 2
-        [random.randint(a=0,b=1) for x in range(0,8)], # row 3
-        [random.randint(a=0,b=1) for x in range(0,8)], # row 4
-        [random.randint(a=0,b=1) for x in range(0,8)], # row 5
-        [random.randint(a=0,b=1) for x in range(0,8)], # row 6
-        [random.randint(a=0,b=1) for x in range(0,8)], # row 7
-        [random.randint(a=0,b=1) for x in range(0,8)]] # row 8
-# display the 2d data matrix
-data
+pygame.init()
 
+width = 400 ; height = 400
+screen = pygame.display.set_mode((width, height))
 
-# we will visualize the bits of this data matrix with matplot.pyplot; 
-# the .imshow function from Python can do the job
-pyplot.figure(figsize=(5,5))
-pyplot.imshow(data)
-pyplot.show()
+pygame.display.set_caption("Grid of 10/10")
+
+def draw_grid():
+        
+        row = col = 10
+        row_width = width // row
+        col_height = height // col
+        
+        x = 0; y = 0
+
+	for i in range(row):
+		x += row_width
+		pygame.draw.line(screen, (255, 255, 255), (x, 0), (x, height))
+
+	for i in range(col):
+		y += col_height
+		pygame.draw.line(screen, (255, 255, 255), (0, y), (width, y))
+
+def main():
+
+	while True:
+
+		screen.fill((0, 0, 0))
+
+		draw_grid()
+
+		for event in pygame.event.get():
+			if event.type == pygame.QUIT:
+				pygame.quit()
+				sys.exit()
+
+		pygame.display.update()
+
+main()
