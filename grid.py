@@ -1,13 +1,12 @@
 import pygame
 import sys
-import random
 import platform
 
 if platform.system() == "Windows":
 
         pygame.init()
 
-        width = 400 ; height = 400
+        width = 400; height = 400
         screen = pygame.display.set_mode((width, height))
 
         pygame.display.set_caption("Grid of 10/10")
@@ -30,7 +29,9 @@ if platform.system() == "Windows":
 
         def main():
 
-                while True:
+                running = True
+                
+                while running:
 
                         screen.fill((0, 0, 0))
 
@@ -38,8 +39,7 @@ if platform.system() == "Windows":
 
                         for event in pygame.event.get():
                                 if event.type == pygame.QUIT:
-                                        pygame.quit()
-                                        sys.exit()
+                                        running = False
 
                         pygame.display.update()
 
