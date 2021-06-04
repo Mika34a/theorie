@@ -5,10 +5,7 @@
 #
 # - Implements Connection class.
 
-# import classes 
-from .house import House
-from .battery import Battery
-
+# class Connections
 class Connection:
     def __init__(self, house, battery):
         """
