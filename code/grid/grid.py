@@ -1,46 +1,44 @@
-import pygame
-import sys
-import platform
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.pyplot import figure
+import csv
 
-if platform.system() == "Windows":
+plt.style.use('_classic_test_patch')
 
-        pygame.init()
+figure(figsize=(10, 10), dpi=150)
 
-        width = 400; height = 400
-        screen = pygame.display.set_mode((width, height))
+# see every step of grid and in graph
+tick_spacing = 1
+fig, ax = plt.subplots(1,1)
 
-        pygame.display.set_caption("Grid of 10/10")
+# major ticks every 10, minor ticks every 5
+major_ticks = np.arange(0, 51, 10)
+minor_ticks = np.arange(0, 51, 1)
 
-        def draw_grid():
-                
-                row = col = 10
-                row_width = width // row
-                col_height = height // col
+ax.set_xticks(major_ticks)
+ax.set_xticks(minor_ticks, minor=True)
+ax.set_yticks(major_ticks)
+ax.set_yticks(minor_ticks, minor=True)
 
-                x = 0; y = 0
+# background colour
+ax.set_facecolor('xkcd:charcoal')
 
-                for i in range(row):
-                        x += row_width
-                        pygame.draw.line(screen, (255, 255, 255), (x, 0), (x, height))
+# grid
+ax.grid(which='minor', alpha=0.2, color = 'w', linestyle = '-')
+ax.grid(which='major', alpha=0.5, color = 'w', linestyle = '-')
 
-                for i in range(col):
-                        y += col_height
-                        pygame.draw.line(screen, (255, 255, 255), (0, y), (width, y))
+# points set to always show full graph
+plt.plot(0, 0)
+plt.plot(50, 50)
 
-        def main():
+# loop for houses
+with open('database/district_1/district-1_houses.csv','r') as csvfile:
+    plots = csv.reader(csvfile, delimiter=',')
+    for row in plots:
+        plt.plot(row[0], row[1], 'o')
 
-                running = True
-                
-                while running:
 
-                        screen.fill((0, 0, 0))
 
-                        draw_grid()
 
-                        for event in pygame.event.get():
-                                if event.type == pygame.QUIT:
-                                        return
-
-                        pygame.display.update()
-
-        main()
+# save as image
+plt.savefig("grid")
