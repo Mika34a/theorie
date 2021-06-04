@@ -15,5 +15,4 @@ class House:
         self.y_coordinate = y_coordinate
         self.output = output
         self.connected = False
-
-    def     
+     

@@ -6,28 +6,29 @@
 # - Implements Connection class.
 
 # import classes 
-import House from house
-import Battery from battery
+from .house import House
+from .battery import Battery
 
 class Connection:
-    def __init__(self, house, battery, distance):
+    def __init__(self, house, battery):
         """
         Initializes Connection class.
         """
         # attributes 
         self.house = house
         self.battery = battery 
-        self.distance = distance
         self.points_x = []
         self.points_y = []
 
     def add_point(self):
-
+        """
+        Adds a point.
+        """
         # get coordinates from house and battery 
-        house_x = house.x_coordinate
-        house_y = house.y_coordinate
-        battery_x = battery.x_coordinate
-        battery_y = battery.y_coordinate
+        house_x = self.house.x_coordinate
+        house_y = self.house.y_coordinate
+        battery_x = self.battery.x_coordinate
+        battery_y = self.battery.y_coordinate
 
         # find manhatten distance
         vector = (abs(battery_x - house_x)) + (abs(battery_y - house_y))
