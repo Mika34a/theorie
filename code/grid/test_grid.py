@@ -2,12 +2,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+data = {'a': np.arange(50),
+        'c': np.random.randint(0, 50, 50),
+        'd': np.random.randn(50)}
+data['b'] = data['a'] + 10 * np.random.randn(50)
+data['d'] = np.abs(data['d']) * 100
 
-grid = []
-for row in range(50):
-    for col in range(50):
-        grid.append([row, col])
-
+plt.scatter('a', 'b', c='c', s='d', data=data)
+plt.xlabel('entry a')
+plt.ylabel('entry b')
 
 plt.grid(color = 'green', linestyle = '-', linewidth = 0.5)
 
