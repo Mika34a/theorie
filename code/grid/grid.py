@@ -2,6 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import figure
 import csv
+from code.classes.house import House
+from code.classes.battery import Battery
 
 plt.style.use('_classic_test_patch')
 
@@ -31,11 +33,23 @@ ax.grid(which='major', alpha=0.5, color = 'w', linestyle = '-')
 plt.plot(0, 0)
 plt.plot(50, 50)
 
+# make empty houses list
+houses_list = []
+
 # loop for houses
 with open('database/district_1/district-1_houses.csv','r') as csvfile:
     plots = csv.reader(csvfile, delimiter=',')
     for row in plots:
+
+        # plot
         plt.plot(row[0], row[1], 'o')
+
+        # make house
+        house = House(row[0], row[1], row[2], False)
+
+        # put house
+        houses_list
+        
 
 
 
