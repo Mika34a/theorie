@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import figure
+import csv
 
 plt.style.use('_classic_test_patch')
 
@@ -30,8 +31,11 @@ ax.grid(which='major', alpha=0.5, color = 'w', linestyle = '-')
 plt.plot(0, 0)
 plt.plot(50, 50)
 
-# set specific point
-plt.plot(34,47, 'bo')
+# loop for houses
+with open('database/district_1/district-1_houses.csv','r') as csvfile:
+    plots = csv.reader(csvfile, delimiter=',')
+    for row in plots:
+        plt.plot(row[0], row[1], 'bo')
 
 # save as image
 plt.savefig("grid")
