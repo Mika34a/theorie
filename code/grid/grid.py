@@ -35,7 +35,10 @@ plt.plot(50, 50)
 with open('database/district_1/district-1_houses.csv','r') as csvfile:
     plots = csv.reader(csvfile, delimiter=',')
     for row in plots:
-        plt.plot(row[0], row[1], 'bo')
+        plt.plot(row[0], row[1], 'o')
+
+
+
 
 # save as image
 plt.savefig("grid")
