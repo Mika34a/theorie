@@ -12,7 +12,7 @@ from .house import House
 from .battery import Battery
 from .connection import Connection
 
-def load():
+def load_house():
 
     # make empty houses dict
     houses_dict = {}
@@ -26,15 +26,17 @@ def load():
         for row in plots:
             
             # make house
-            house = House(row[0], row[1], row[2], False, id)
+            house = House(int(row[0]), int(row[1]), float(row[2]), False, id)
 
             # put house in dict
             houses_dict[house.id] = house
             id += 1
-            print(house)
+
+    return houses_dict
 
     # load batteries
 
+def load_bat():
     # make empty batteries dict
     batteries_dict = {}
     id = 0
@@ -50,15 +52,13 @@ def load():
 
             # get coordinates 
             coordinates = row[0].split(",")
-            print(coordinates)
 
             # make battery
-            battery = Battery(coordinates[0], coordinates[1], row[1], id)
+            battery = Battery(int(coordinates[0]), int(coordinates[1]), row[1], id)
 
             # put battery in dict
             batteries_dict[battery.id] = battery
             id += 1
-        print(batteries_dict)    
             
     # load connections
-    return houses_dict
+    return batteries_dict
