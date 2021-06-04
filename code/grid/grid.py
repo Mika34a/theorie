@@ -1,50 +1,37 @@
-import pygame
-import sys
-import platform
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.pyplot import figure
 
-if platform.system() == "Windows":
+plt.style.use('_classic_test_patch')
 
-        pygame.init()
+figure(figsize=(10, 10), dpi=150)
 
-        width = 800; height = 800
-        screen = pygame.display.set_mode((width, height))
+# see every step of grid and in graph
+tick_spacing = 1
+fig, ax = plt.subplots(1,1)
 
-        pygame.display.set_caption("Grid of 50/50")
+# major ticks every 10, minor ticks every 5
+major_ticks = np.arange(0, 51, 10)
+minor_ticks = np.arange(0, 51, 1)
 
-        def draw_grid():
-                        
-                row = col = 50
-                row_width = width // row
-                col_height = height // col
+ax.set_xticks(major_ticks)
+ax.set_xticks(minor_ticks, minor=True)
+ax.set_yticks(major_ticks)
+ax.set_yticks(minor_ticks, minor=True)
 
-                x = 0; y = 0
+# background colour
+ax.set_facecolor('xkcd:charcoal')
 
-                for i in range(row):
-                        x += row_width
-                        pygame.draw.line(screen, (255, 255, 255), (x, 0), (x, height))
+# grid
+ax.grid(which='minor', alpha=0.2, color = 'w', linestyle = '-')
+ax.grid(which='major', alpha=0.5, color = 'w', linestyle = '-')
 
-                for i in range(col):
-                        y += col_height
-                        pygame.draw.line(screen, (255, 255, 255), (0, y), (width, y))
+# points set to always show full graph
+plt.plot(0, 0)
+plt.plot(50, 50)
 
-        def main():
+# set specific point
+plt.plot(34,47, 'bo')
 
-                running = True
-                        
-                while running:
-
-                        screen.fill((0, 0, 0))
-
-                        draw_grid()
-
-                        for event in pygame.event.get():
-                                if event.type == pygame.QUIT:
-                                        running = False
-                                        sys.exit(0)
-
-                        pygame.display.update()
-
-        main()
-
-        pygame.image.save_extended("pygame test")
-
+# save as image
+plt.savefig("grid")
