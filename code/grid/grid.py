@@ -40,5 +40,12 @@ with open('database/district_1/district-1_houses.csv','r') as csvfile:
     for row in plots:
         plt.plot(int(row[0]), int(row[1]), 'o')
 
+with open('database/district_1/district-1_batteries.csv','r') as csvfile:
+    plots = csv.reader(csvfile, delimiter=',')
+    next(plots)
+    for row in plots:
+        x_cor, y_cor = row[0].split(',')
+        plt.plot(int(x_cor), int(y_cor), 'Pr')
+
 # save as image
 plt.savefig("grid")
