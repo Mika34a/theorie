@@ -37,6 +37,7 @@ with open('database/district_1/district-1_houses.csv','r') as csvfile:
     # skip first line
     next(plots)
     for row in plots:
+
         plt.plot(int(row[0]), int(row[1]), 'o')
 
 # loop for batteries, each battery own colour
@@ -59,6 +60,9 @@ with open('database/district_1/district-1_batteries.csv','r') as csvfile:
             plt.plot(int(x_cor), int(y_cor), 'Pb')
         elif battery == 4:
             plt.plot(int(x_cor), int(y_cor), 'Pw')
+
+        # plot
+        plt.plot(row[0], row[1], 'o')
 
 # save as image
 plt.savefig("grid")
