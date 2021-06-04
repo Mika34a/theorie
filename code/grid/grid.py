@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib.pyplot import figure
 import csv
 
-plt.style.use('_classic_test_patch')
+plt.style.use('seaborn-pastel')
 
 figure(figsize=(10, 10), dpi=150)
 
@@ -14,6 +14,8 @@ fig, ax = plt.subplots(1,1)
 # major ticks every 10, minor ticks every 5
 major_ticks = np.arange(0, 51, 10)
 minor_ticks = np.arange(0, 51, 1)
+
+ax.set_autoscale_on(False)
 
 ax.set_xticks(major_ticks)
 ax.set_xticks(minor_ticks, minor=True)
@@ -34,11 +36,9 @@ plt.plot(50, 50)
 # loop for houses
 with open('database/district_1/district-1_houses.csv','r') as csvfile:
     plots = csv.reader(csvfile, delimiter=',')
+    next(plots)
     for row in plots:
-        plt.plot(row[0], row[1], 'o')
-
-
-
+        plt.plot(int(row[0]), int(row[1]), 'o')
 
 # save as image
 plt.savefig("grid")
