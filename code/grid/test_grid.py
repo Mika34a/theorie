@@ -1,17 +1,32 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+from matplotlib.pyplot import figure
+
+plt.style.use('classic')
+
+figure(figsize=(8, 8), dpi=150)
 
 
-data = {'a': np.arange(50),
-        'c': np.random.randint(0, 50, 50),
-        'd': np.random.randn(50)}
-data['b'] = data['a'] + 10 * np.random.randn(50)
-data['d'] = np.abs(data['d']) * 100
+x = [0,10,20,30,40,50]
+y = [0,10,20,30,40,50]
 
-plt.scatter('a', 'b', c='c', s='d', data=data)
-plt.xlabel('entry a')
-plt.ylabel('entry b')
+tick_spacing = 1
 
-plt.grid(color = 'green', linestyle = '-', linewidth = 0.5)
+fig, ax = plt.subplots(1,1)
+
+# Major ticks every 20, minor ticks every 5
+major_ticks = np.arange(0, 51, 10)
+minor_ticks = np.arange(0, 51, 1)
+
+ax.set_xticks(major_ticks)
+ax.set_xticks(minor_ticks, minor=True)
+ax.set_yticks(major_ticks)
+ax.set_yticks(minor_ticks, minor=True)
+
+# And a corresponding grid
+ax.set_facecolor('xkcd:charcoal')
+ax.grid(which='minor', alpha=0.2)
+ax.grid(which='major', alpha=0.5)
 
 plt.savefig("test")
