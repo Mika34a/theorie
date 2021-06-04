@@ -29,4 +29,15 @@ ax.set_facecolor('xkcd:charcoal')
 ax.grid(which='minor', alpha=0.2)
 ax.grid(which='major', alpha=0.5)
 
+#add margins
+
+# points set to always show full graph
+plt.plot(0, 0)
+plt.plot(50, 50)
+
+# set specific point
+plt.plot(34,47, 'bo')
+
+
+
 plt.savefig("test")
