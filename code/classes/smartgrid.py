@@ -5,6 +5,8 @@
 #
 # - Implements Connection class.
 
+from .connection import Connection
+
 class Smartgrid():
 
     # functions
@@ -31,7 +33,16 @@ class Smartgrid():
         # costs for each battery is 5000, with each district having 5 batteries
         cost_grid = 9
         cost_battery = 5000
-        cost_cable = length * cost_grid
+        cost_cable_all = 0
+
+        for c in Connection:
+            cost_cable = connection.length * cost_grid
+
+            cost_cable_all = cost_cable_all + cost_cable
+
+
+        return cost_cable_all
+        
 
     def disc_houses(self):
         """
