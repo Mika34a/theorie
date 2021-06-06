@@ -5,7 +5,9 @@
 #
 # - Implements a random algorithm to connect houses to batteries with capacity. 
 
+# import 
 from  ..classes import *
+from code.classes import *
 
 def random_connections(houses_dict, batteries_dict):
 # dinctionary of connections

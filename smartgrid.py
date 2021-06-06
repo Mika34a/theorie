@@ -3,9 +3,13 @@
 # Programmeertheorie
 # Merel Florian, Michael Verdel, Joshua van Zanten
 #
-# - Implements Connection class.
+# - Implements smartgrid class.
 
-from .connection import Connection
+# from .connection import Connection
+# from .house import House
+# from .loader import *
+
+from code.classes import *
 
 class Smartgrid():
 
@@ -15,11 +19,12 @@ class Smartgrid():
     # - return houses if not connected
     # - return batteries with capacity left
 
-    def __init__(self):
+    def __init__(self, filename, filename2):
         """
         Initializes the Smartgrid class.
         """
-        pass
+        self.houses_dict= self.loader.load_house(filename)
+        self.batteries_dict = self.loader.load_batteries(filename2) 
 
     def connect(self, battery, house):
         connection = Connection(house, battery)
@@ -56,4 +61,27 @@ class Smartgrid():
         """
         pass
 
+if __name__ == "__main__":
 
+    from code.classes import loader
+    from code.grid import grid
+    from sys import argv
+
+    # check command line
+    if len(argv) != 2:
+        print("Usage: python3 smartgrid.py [district_number]")
+        exit(1)
+    # Load the requested files
+    if len(argv) == 2:
+        district_int = argv[1]
+
+    filename = f"database/district_{district_int}/district-{district_int}_houses.csv"
+    filename2 = f"database/district_{district_int}/district-{district_int}_batteries.csv"
+
+    print(filename)
+    print(filename2)
+
+    houses_dict = loader.load_house(filename)
+    batteries_dict = loader.load_bat(filename2)
+
+    grid.create_grid(houses_dict, batteries_dict)

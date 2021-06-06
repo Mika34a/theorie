@@ -12,14 +12,14 @@ from .house import House
 from .battery import Battery
 from .connection import Connection
 
-def load_house():
+def load_house(filename):
 
     # make empty houses dict
     houses_dict = {}
     id = 0
 
     # load houses
-    with open('database/district_1/district-1_houses.csv','r') as csvfile:
+    with open(filename,'r') as csvfile:
         plots = csv.reader(csvfile, delimiter=',')
         # skip first line
         next(plots)
@@ -36,12 +36,12 @@ def load_house():
 
     # load batteries
 
-def load_bat():
+def load_bat(filename2):
     # make empty batteries dict
     batteries_dict = {}
     id = 0
     
-    with open('database/district_1/district-1_batteries.csv','r') as csvfile:
+    with open(filename2,'r') as csvfile:
         plots = csv.reader(csvfile, delimiter=',')
 
         # skip first line
