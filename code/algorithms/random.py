@@ -8,7 +8,7 @@
 # import 
 from  ..classes import *
 from code.classes import *
-from smartgrid import *
+from ...smartgrid import Smartgrid
 
 def random_connections(houses_dict, batteries_dict):
     # dinctionary of connections
@@ -22,7 +22,7 @@ def random_connections(houses_dict, batteries_dict):
             
             # connect house to battery 
             if  house.output <= battery.capacity:
-                connection = connect(battery, house)
+                connection = Smartgrid.connect(battery, house)
 
                 # put connection in dict
                 connections_dict[connection.house] = connection
