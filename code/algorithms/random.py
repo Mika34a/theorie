@@ -10,10 +10,10 @@ from  ..classes import *
 from code.classes import *
 
 def random_connections(houses_dict, batteries_dict):
-# dinctionary of connections
-connections_dict = {}
+    # dinctionary of connections
+    connections_dict = {}
 
-# loop through houses
+    # loop through houses
     for house in houses_dict.values:
         
         # check if output of house still fits in capacity battery 

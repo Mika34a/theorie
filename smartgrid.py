@@ -10,6 +10,9 @@
 # from .loader import *
 
 from code.classes import *
+from code.classes.connection import Connection
+from code.classes.house import House
+from code.classes.battery import Battery
 
 class Smartgrid():
 
@@ -40,7 +43,7 @@ class Smartgrid():
         cost_battery = 5000
         cost_cable_all = 0
 
-        for c in Connection:
+        for c in connection:
             cost_cable = connection.length * cost_grid
 
             cost_cable_all = cost_cable_all + cost_cable
@@ -78,10 +81,14 @@ if __name__ == "__main__":
     filename = f"database/district_{district_int}/district-{district_int}_houses.csv"
     filename2 = f"database/district_{district_int}/district-{district_int}_batteries.csv"
 
-    print(filename)
-    print(filename2)
+    # print(filename)
+    # print(filename2)
 
-    houses_dict = loader.load_house(filename)
-    batteries_dict = loader.load_bat(filename2)
+    # load houses and batteries dict
+    Smartgrid.houses_dict = loader.load_house(filename)
+    Smartgrid.batteries_dict = loader.load_bat(filename2)
 
-    grid.create_grid(houses_dict, batteries_dict)
+    # Create grid picture
+    grid.create_grid(Smartgrid.houses_dict, Smartgrid.batteries_dict)
+
+    print(Smartgrid.houses_dict)
