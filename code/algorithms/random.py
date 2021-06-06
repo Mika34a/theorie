@@ -8,6 +8,7 @@
 # import 
 from  ..classes import *
 from code.classes import *
+from smartgrid import *
 
 def random_connections(houses_dict, batteries_dict):
     # dinctionary of connections
