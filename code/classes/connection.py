@@ -12,8 +12,8 @@ class Connection:
         Initializes Connection class.
         """
          # attributes 
-        self.house = house
-        self.battery = battery 
+        self.house_id = house
+        self.battery_id = battery 
         self.points_x = []
         self.points_y = []
         self.length = 0
@@ -23,17 +23,15 @@ class Connection:
         Adds a point and defines length of connection.
         """
         # get coordinates from house and battery 
-        house_x = self.house.x_coordinate
-        house_y = self.house.y_coordinate
-        battery_x = self.battery.x_coordinate
-        battery_y = self.battery.y_coordinate
+        house_x = self.house_id.x_coordinate
+        house_y = self.house_id.y_coordinate
+        battery_x = self.battery_id.x_coordinate
+        battery_y = self.battery_id.y_coordinate
 
         # find manhatten distance
         vector = (abs(battery_x - house_x)) + (abs(battery_y - house_y))
         x_vector = abs(battery_x - house_x) 
         y_vector = abs(battery_y - house_y)
-       
-        # put points between x and y in list
 
         # append x segments passed between a and b to list 
         for point_x in range (battery_x, house_x, 1):
@@ -43,32 +41,38 @@ class Connection:
         for point_y in range (battery_y, house_y, 1):
             self.points_y.append(point_y)
         # Set length for connection (Manhatten distance)
-        self.length = vector    
+        self.length = vector
+
+        # put points between x and y in list
+        points_list = zip(self.points_x, self.points_y)   
 
 
 # functions
-        def length(self):
-            """"
-            Returns length of connection.
-            """"
-            return self.length
+    def return_points(self): 
+        """
+        Returns all points of the grid that the connection crosses.
+        """
+        return self.return_points
 
-        def house(self):
-            """
-            Returns house of connection
-            """
-            return self.house
+    def length(self):
+        """
+        Returns length of connection.
+        """
+        return self.length
 
-        def battery(self):
-            """
-            Returns battery of connection
-            """   
-            return self.battery
+    def house(self):
+        """
+        Returns house of connection
+        """
+        return self.house_id
 
-        def return_points (self): 
-            """
-            Returns all points of the grid that the connection crosses.
-            """      
+    def battery(self):
+        """
+        Returns battery of connection
+        """   
+        return self.battery_id
+
+        
             
 
 # - return length

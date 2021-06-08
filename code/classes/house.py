@@ -16,4 +16,15 @@ class House:
         self.id = id
         self.output = output
         self.connected = False
-     
+    
+def check_connection(self):
+    """
+    Returns True if house isn't connected yet, otherwise False
+    """
+    return self.connected
+    
+def house_id(self):
+    """
+    Returns the house id as int
+    """
+    return self.id

@@ -18,7 +18,15 @@ class Battery:
         self.capacity_left = True
 
 
-# functions
-# - return left over capacity
-# - return if capacity is left(boolean)        
-# - return
+def check_capacity(self):
+    """
+    Returns True if battery still has capacity otherwise False
+    """
+    return self.capacity_left
+
+def bat_id(self):
+    """
+    Returns the id as int
+    """
+    # returns id of the battery
+    return self.id
