@@ -15,3 +15,10 @@ class Battery:
         self.y_coordinate = y_coordinate
         self.capacity = capacity
         self.id = id
+        self.capacity_left = True
+
+
+# functions
+# - return left over capacity
+# - return if capacity is left(boolean)        
+# - return

@@ -11,15 +11,16 @@ class Connection:
         """
         Initializes Connection class.
         """
-        # attributes 
+         # attributes 
         self.house = house
         self.battery = battery 
         self.points_x = []
         self.points_y = []
+        self.length = 0
 
     def add_point(self):
         """
-        Adds a point.
+        Adds a point and defines length of connection.
         """
         # get coordinates from house and battery 
         house_x = self.house.x_coordinate
@@ -41,5 +42,39 @@ class Connection:
         # append y segments passed between a and b to list 
         for point_y in range (battery_y, house_y, 1):
             self.points_y.append(point_y)
+        # Set length for connection (Manhatten distance)
+        self.length = vector    
+
+
+# functions
+        def length(self):
+            """"
+            Returns length of connection.
+            """"
+            return self.length
+
+        def house(self):
+            """
+            Returns house of connection
+            """
+            return self.house
+
+        def battery(self):
+            """
+            Returns battery of connection
+            """   
+            return self.battery
+
+        def return_points (self): 
+            """
+            Returns all points of the grid that the connection crosses.
+            """      
+            
+
+# - return length
+# - return house 
+# - return battery
+# - return all points in grid of connection (good for later stadium)            
+# - return total costs
             
 
