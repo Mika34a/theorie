@@ -45,8 +45,7 @@ class Connection:
 
         # put points between x and y in list
         points_list = zip(self.points_x, self.points_y)   
-
-
+        
 # functions
     def return_points(self): 
         """
