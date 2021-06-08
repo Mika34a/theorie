@@ -16,13 +16,6 @@ from code.classes.battery import Battery
 from code.algorithms import random
 
 class Smartgrid():
-
-    # functions
-    # - connect batteries with houses 
-    # - return total costs of connections and batteries 
-    # - return houses if not connected
-    # - return batteries with capacity left
-
     def __init__(self, filename, filename2):
         """
         Initializes the Smartgrid class.
@@ -48,10 +41,7 @@ class Smartgrid():
 
         for con in connections_dict.values():
             COST_CABLE = con.length * COST_GRID
-
             COST_CABLE_ALL = COST_CABLE_ALL + COST_CABLE
-
-
         return COST_CABLE_ALL
 
     def disc_houses(self):
@@ -65,6 +55,13 @@ class Smartgrid():
         Returns the batteries that still have leftover capacity.
         """
         pass
+    
+    def output_capacity(self, house, battery):
+        """
+        Substracts the output from the house from the battery capacity.
+        """
+        battery.capacity = battery.capacity - house.output
+
 
 if __name__ == "__main__":
 
@@ -83,9 +80,6 @@ if __name__ == "__main__":
     filename = f"database/district_{district_int}/district-{district_int}_houses.csv"
     filename2 = f"database/district_{district_int}/district-{district_int}_batteries.csv"
 
-    # print(filename)
-    # print(filename2)
-
     # load houses and batteries dict
     Smartgrid.houses_dict = loader.load_house(filename)
     Smartgrid.batteries_dict = loader.load_bat(filename2)
@@ -96,5 +90,5 @@ if __name__ == "__main__":
     # print total cost
     connections_dict = random.random_connections(Smartgrid.houses_dict, Smartgrid.batteries_dict)
     total_cost = Smartgrid.costs(Smartgrid, connections_dict)
-    print(total_cost)
+    print(f"Total cost: {total_cost} euros")
 

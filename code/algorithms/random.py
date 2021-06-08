@@ -23,7 +23,7 @@ def random_connections(houses_dict, batteries_dict):
             # connect house to battery 
             if  house.output <= battery.capacity:
                 connection = Smartgrid.connect(Smartgrid, battery, house)
-                battery.capacity = battery.capacity - house.output # make function in smartgrid
+                Smartgrid.output_capacity(Smartgrid, house, battery)# make function in smartgrid
 
                 # put connection in dict
                 connections_dict[connection.house] = connection

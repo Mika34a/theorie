@@ -75,10 +75,3 @@ class Connection:
         
             
 
-# - return length
-# - return house 
-# - return battery
-# - return all points in grid of connection (good for later stadium)            
-# - return total costs
-            
-
