@@ -45,8 +45,7 @@ class Connection:
 
         # put points between x and y in list
         points_list = zip(self.points_x, self.points_y)   
-
-
+        
 # functions
     def return_points(self): 
         """
@@ -73,12 +72,5 @@ class Connection:
         return self.battery_id
 
         
-            
-
-# - return length
-# - return house 
-# - return battery
-# - return all points in grid of connection (good for later stadium)            
-# - return total costs
             
 

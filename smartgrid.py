@@ -5,23 +5,14 @@
 #
 # - Implements smartgrid class.
 
-# from .connection import Connection
-# from .house import House
-# from .loader import *
-
 from code.classes import *
 from code.classes.connection import Connection
 from code.classes.house import House
 from code.classes.battery import Battery
+from code.algorithms import random
+from code.output import output
 
 class Smartgrid():
-
-    # functions
-    # - connect batteries with houses 
-    # - return total costs of connections and batteries 
-    # - return houses if not connected
-    # - return batteries with capacity left
-
     def __init__(self, filename, filename2):
         """
         Initializes the Smartgrid class.
@@ -31,26 +22,25 @@ class Smartgrid():
 
     def connect(self, battery, house):
         connection = Connection(house, battery)
+        connection.add_point()
+        house.connected = True
+        print(connection.length)
         return connection
 
-    def costs(self, connection):
+    def costs(self, connections_dict):
         """
         Returns the total costs of the combined cables.
         """
         # laying a cable costs 9 per grid
         # costs for each battery is 5000, with each district having 5 batteries
-        cost_grid = 9
-        cost_battery = 5000
-        cost_cable_all = 0
+        COST_GRID = 9
+        COST_BATTERY = 5000
+        COST_CABLE_ALL = 0
 
-        for c in connection:
-            cost_cable = connection.length * cost_grid
-
-            cost_cable_all = cost_cable_all + cost_cable
-
-
-        return cost_cable_all
-        
+        for con in connections_dict.values():
+            COST_CABLE = con.length * COST_GRID
+            COST_CABLE_ALL = COST_CABLE_ALL + COST_CABLE
+        return COST_CABLE_ALL
 
     def disc_houses(self):
         """
@@ -63,6 +53,14 @@ class Smartgrid():
         Returns the batteries that still have leftover capacity.
         """
         pass
+    
+    def output_capacity(self, house, battery):
+        """
+        Substracts the output from the house from the battery capacity.
+        """
+        battery.capacity = battery.capacity - house.output
+
+
 
 if __name__ == "__main__":
 
@@ -81,9 +79,6 @@ if __name__ == "__main__":
     filename = f"database/district_{district_int}/district-{district_int}_houses.csv"
     filename2 = f"database/district_{district_int}/district-{district_int}_batteries.csv"
 
-    # print(filename)
-    # print(filename2)
-
     # load houses and batteries dict
     Smartgrid.houses_dict = loader.load_house(filename)
     Smartgrid.batteries_dict = loader.load_bat(filename2)
@@ -91,4 +86,24 @@ if __name__ == "__main__":
     # Create grid picture
     grid.create_grid(Smartgrid.houses_dict, Smartgrid.batteries_dict)
 
-    print(Smartgrid.houses_dict)
+    # get info of case
+    connections_dict = random.random_connections(Smartgrid.houses_dict, Smartgrid.batteries_dict)
+    total_cost = Smartgrid.costs(Smartgrid, connections_dict)
+    print(total_cost)
+    
+    for connection in connections_dict.values:
+        battery_x = connection.battery.x_coordinate
+        battery_y = connection.battery.x_coordinate
+        capacity = connection.battery.y_coordinate
+        # houses 
+        print("Houses information-----------------")
+        house_x = connection.house.x_coordinate
+        house_y = connection.house.y_coordinate
+        print("output: ", connection.house.output)
+        # points (x,y)
+
+
+    # print total cost
+    
+    output(connections_dict, district_int, total_cost, )
+
