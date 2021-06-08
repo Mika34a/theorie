@@ -19,7 +19,7 @@ class House:
     
 def check_connection(self):
     """
-    Returns True if house isn't connected yet, otherwise False
+    Returns False if house isn't connected yet, otherwise True
     """
     return self.connected
     

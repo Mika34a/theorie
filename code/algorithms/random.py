@@ -12,26 +12,43 @@ from smartgrid import Smartgrid
 import random
 
 def random_connections(houses_dict, batteries_dict):
-    # dinctionary of connections
-    connections_dict = {}
+    valid = True
 
-    houses_list = []
-    for house in houses_dict.values():
-        houses_list.append(house)
-        random.shuffle(houses_list)
+    while valid == True:
+        # dinctionary of connections
+        connections_dict = {}
 
-    for house in houses_list:    
-        # check if output of house still fits in capacity battery 
+        houses_list = []
+        for house in houses_dict.values():
+            houses_list.append(house)
+            random.shuffle(houses_list)
+
+        batteries_list = []
         for battery in batteries_dict.values():
-            
-            # connect house to battery 
-            if  house.output <= battery.capacity:
-                connection = Smartgrid.connect(Smartgrid, battery, house)
-                Smartgrid.output_capacity(Smartgrid, house, battery)# make function in smartgrid
+            batteries_list.append(battery)
+            random.shuffle(batteries_list)
 
-                # put connection in dict
-                connections_dict[connection.house] = connection
-    return connections_dict             
+        for house in houses_list:    
+            # check if output of house still fits in capacity battery 
+            for battery in batteries_list:
+                
+                # connect house to battery 
+                if  house.output <= battery.capacity:
+                    connection = Smartgrid.connect(Smartgrid, battery, house)
+                    Smartgrid.output_capacity(Smartgrid, house, battery)# make function in smartgrid
+
+                    # put connection in dict
+                    connections_dict[connection.house] = connection
+    
+        for house in houses_list:
+            not_connected = []
+            if house.connected == False:
+                not_connected.append(house)
+
+        if len(not_connected) > 0:
+            continue
+        else:
+            return connections_dict       
 
 
 

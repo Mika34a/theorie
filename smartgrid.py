@@ -5,15 +5,12 @@
 #
 # - Implements smartgrid class.
 
-# from .connection import Connection
-# from .house import House
-# from .loader import *
-
 from code.classes import *
 from code.classes.connection import Connection
 from code.classes.house import House
 from code.classes.battery import Battery
 from code.algorithms import random
+from code.output import output
 
 class Smartgrid():
     def __init__(self, filename, filename2):
@@ -26,6 +23,7 @@ class Smartgrid():
     def connect(self, battery, house):
         connection = Connection(house, battery)
         connection.add_point()
+        house.connected = True
         print(connection.length)
         return connection
 
@@ -63,6 +61,7 @@ class Smartgrid():
         battery.capacity = battery.capacity - house.output
 
 
+
 if __name__ == "__main__":
 
     from code.classes import loader
@@ -87,8 +86,24 @@ if __name__ == "__main__":
     # Create grid picture
     grid.create_grid(Smartgrid.houses_dict, Smartgrid.batteries_dict)
 
-    # print total cost
+    # get info of case
     connections_dict = random.random_connections(Smartgrid.houses_dict, Smartgrid.batteries_dict)
     total_cost = Smartgrid.costs(Smartgrid, connections_dict)
-    print(f"Total cost: {total_cost} euros")
+    print(total_cost)
+    
+    for connection in connections_dict.values:
+        battery_x = connection.battery.x_coordinate
+        battery_y = connection.battery.x_coordinate
+        capacity = connection.battery.y_coordinate
+        # houses 
+        print("Houses information-----------------")
+        house_x = connection.house.x_coordinate
+        house_y = connection.house.y_coordinate
+        print("output: ", connection.house.output)
+        # points (x,y)
+
+
+    # print total cost
+    
+    output(connections_dict, district_int, total_cost, )
 
