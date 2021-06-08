@@ -54,7 +54,7 @@ def load_bat(filename2):
             coordinates = row[0].split(",")
 
             # make battery
-            battery = Battery(int(coordinates[0]), int(coordinates[1]), row[1], id)
+            battery = Battery(int(coordinates[0]), int(coordinates[1]), float(row[1]), id)
 
             # put battery in dict
             batteries_dict[battery.id] = battery

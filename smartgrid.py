@@ -13,6 +13,7 @@ from code.classes import *
 from code.classes.connection import Connection
 from code.classes.house import House
 from code.classes.battery import Battery
+from code.algorithms import random
 
 class Smartgrid():
 
@@ -31,26 +32,27 @@ class Smartgrid():
 
     def connect(self, battery, house):
         connection = Connection(house, battery)
+        connection.add_point()
+        print(connection.length)
         return connection
 
-    def costs(self, connection):
+    def costs(self, connections_dict):
         """
         Returns the total costs of the combined cables.
         """
         # laying a cable costs 9 per grid
         # costs for each battery is 5000, with each district having 5 batteries
-        cost_grid = 9
-        cost_battery = 5000
-        cost_cable_all = 0
+        COST_GRID = 9
+        COST_BATTERY = 5000
+        COST_CABLE_ALL = 0
 
-        for c in connection:
-            cost_cable = connection.length * cost_grid
+        for con in connections_dict.values():
+            COST_CABLE = con.length * COST_GRID
 
-            cost_cable_all = cost_cable_all + cost_cable
+            COST_CABLE_ALL = COST_CABLE_ALL + COST_CABLE
 
 
-        return cost_cable_all
-        
+        return COST_CABLE_ALL
 
     def disc_houses(self):
         """
@@ -91,4 +93,8 @@ if __name__ == "__main__":
     # Create grid picture
     grid.create_grid(Smartgrid.houses_dict, Smartgrid.batteries_dict)
 
-    print(Smartgrid.houses_dict)
+    # print total cost
+    connections_dict = random.random_connections(Smartgrid.houses_dict, Smartgrid.batteries_dict)
+    total_cost = Smartgrid.costs(Smartgrid, connections_dict)
+    print(total_cost)
+
