@@ -61,7 +61,26 @@ class Smartgrid():
         Substracts the output from the house from the battery capacity.
         """
         battery.capacity = battery.capacity - house.output
-
+        
+    def output(self, connections_dict, total_cost):
+        """
+        Gives output information about solution.
+        """
+        # district number
+        print("Case information---------------------")
+        print("district ", argv[1])
+        # costs
+        print(f"Total costs: {total_cost}")
+        # battery location (x,y)
+        print("Battery information-----------------")
+        for connection in connections_dict.values():
+            print("Location: ", connection.battery.x_coordinate, connection.battery.y_coordinate) 
+            print("Capacity: ", connection.battery.capacity)
+            # houses 
+            print("Houses information-----------------")
+            print("Location: ", connection.house.x_coordinate, connection.house.y_coordinate)
+            print("output: ", connection.house.output)
+            # points (x,y)
 
 
 if __name__ == "__main__":
@@ -92,6 +111,8 @@ if __name__ == "__main__":
     connections_dict = random.random_connections(Smartgrid.houses_dict, Smartgrid.batteries_dict)
     total_cost = Smartgrid.costs(Smartgrid, connections_dict, Smartgrid.batteries_dict)
     print(total_cost)
+    
+    #Smartgrid.output(Smartgrid, connections_dict, total_cost)
     
     # for connection in connections_dict.values:
     #     battery_x = connection.battery.x_coordinate
