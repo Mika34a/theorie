@@ -44,7 +44,7 @@ class Connection:
         self.length = vector
 
         # put points between x and y in list
-        points_list = zip(self.points_x, self.points_y)   
+        
         
 # functions
     def return_points(self): 
@@ -61,15 +61,37 @@ class Connection:
 
     def house(self):
         """
-        Returns house of connection
+        Returns house id of connection
         """
-        return self.house_id
+        return self.house_id.id
 
     def battery(self):
         """
-        Returns battery of connection
+        Returns battery id of connection
         """   
-        return self.battery_id
+        return self.battery_id.id
+    
+    def bat_y_coordinate(self):
+        return self.battery_id.y_coordinate     
+
+    def bat_x_coordinate(self):
+        return self.battery_id.x_coordinate
+    
+    def start_capacity(self):
+        return self.battery_id.start_capacity
+    
+    def house_x_coordinate(self):
+        return self.house_id.x_coordinate
+
+    def house_y_coordinate(self):
+        return self.house_id.y_coordinate
+
+    def output(self):
+        return self.house_id.output
+
+    def points_list(self):
+        points_list = zip(self.points_x, self.points_y)
+        return points_list   
 
         
             

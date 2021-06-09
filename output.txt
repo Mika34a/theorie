@@ -1,0 +1,625 @@
+
+            Case information-------------------------
+            District 1
+            Shared costs: 77002
+            
+                Battery ------------------------
+                Location: 38, 12
+                Capacity: 1507.0
+                
+                            Location: 9, 44
+                            Output: 44.14228862
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 24, 36
+                            Output: 63.12900053
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 48, 50
+                            Output: 35.97663002
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 43, 14
+                            Output: 59.68412189
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 16, 41
+                            Output: 34.78697213
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 15, 44
+                            Output: 53.08761347
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 25, 40
+                            Output: 67.70113184
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 16, 48
+                            Output: 29.83002147
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 21, 37
+                            Output: 53.84443114
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 19, 33
+                            Output: 66.97873982
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 2, 12
+                            Output: 75.8473443
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 43, 39
+                            Output: 30.57764452
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 28, 15
+                            Output: 37.81128037
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 50, 35
+                            Output: 54.25835415
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 3, 9
+                            Output: 53.27408283
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 12, 5
+                            Output: 74.15296092
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 5, 15
+                            Output: 52.08494864
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 18, 37
+                            Output: 70.21473166
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 42, 40
+                            Output: 41.46231813
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 18, 28
+                            Output: 55.75694271
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 18, 32
+                            Output: 32.63123071
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 28, 37
+                            Output: 55.74063546
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 34, 50
+                            Output: 41.71675352
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 27, 13
+                            Output: 72.11411933
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 11, 4
+                            Output: 44.75870431
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 31, 15
+                            Output: 39.85726456
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 18, 33
+                            Output: 64.25056806
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 38, 21
+                            Output: 33.56390131
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 22, 46
+                            Output: 62.43058175
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                Battery ------------------------
+                Location: 43, 13
+                Capacity: 1507.0
+                
+                            Location: 41, 36
+                            Output: 60.96696147
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 5, 13
+                            Output: 57.19809379
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 21, 29
+                            Output: 45.33453242
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 2, 50
+                            Output: 29.93133051
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 26, 37
+                            Output: 33.96614241
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 22, 17
+                            Output: 66.78438663
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 34, 47
+                            Output: 53.97543253
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 21, 48
+                            Output: 71.35472201
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 30, 37
+                            Output: 61.05026554
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 27, 3
+                            Output: 57.11814462
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 47, 16
+                            Output: 31.4973607
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 40, 39
+                            Output: 40.72933179
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 25, 5
+                            Output: 55.93567156
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 18, 15
+                            Output: 57.15314373
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 19, 3
+                            Output: 70.34144168
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 37, 35
+                            Output: 29.26065385
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 39, 14
+                            Output: 49.16852893
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 46, 42
+                            Output: 66.07952654
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 9, 37
+                            Output: 63.19785578
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 21, 42
+                            Output: 65.6434655
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 26, 30
+                            Output: 62.0133643
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 33, 11
+                            Output: 66.45865072
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 20, 14
+                            Output: 45.14508246
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 39, 19
+                            Output: 64.25603513
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 47, 6
+                            Output: 41.78571625
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 44, 33
+                            Output: 51.84271486
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 1, 24
+                            Output: 54.40644245
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 24, 24
+                            Output: 52.07076394
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                Battery ------------------------
+                Location: 42, 3
+                Capacity: 1507.0
+                
+                            Location: 44, 27
+                            Output: 28.73871494
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 26, 27
+                            Output: 56.65609954
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 28, 3
+                            Output: 29.90737428
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 17, 11
+                            Output: 62.14055349
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 30, 12
+                            Output: 66.05341632
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 21, 27
+                            Output: 38.69411298
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 11, 10
+                            Output: 63.87594515
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 19, 40
+                            Output: 60.03957103
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 33, 0
+                            Output: 39.13247939
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 10, 47
+                            Output: 70.68631843
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 0, 16
+                            Output: 48.15325636
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 15, 46
+                            Output: 63.30973309
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 4, 38
+                            Output: 28.04976611
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 37, 47
+                            Output: 26.27681146
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 45, 24
+                            Output: 31.97506792
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 24, 18
+                            Output: 38.3766668
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 31, 18
+                            Output: 38.85647001
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 27, 22
+                            Output: 29.92408755
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 21, 44
+                            Output: 46.65642768
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 30, 31
+                            Output: 33.30314048
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 10, 39
+                            Output: 46.25506287
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 20, 3
+                            Output: 67.12368936
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 11, 38
+                            Output: 74.82543524
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 3, 7
+                            Output: 58.40033018
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 45, 1
+                            Output: 59.63813712
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 4, 33
+                            Output: 38.13617191
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 37, 28
+                            Output: 60.40913294
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 15, 50
+                            Output: 47.17876571
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 13, 28
+                            Output: 56.14106998
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 23, 10
+                            Output: 29.34726889
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 5, 9
+                            Output: 38.37311881
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 2, 8
+                            Output: 27.78076375
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                Battery ------------------------
+                Location: 49, 23
+                Capacity: 1507.0
+                
+                            Location: 24, 30
+                            Output: 76.1538049
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 22, 10
+                            Output: 72.88165705
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 50, 49
+                            Output: 38.24420236
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 30, 16
+                            Output: 49.93687743
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 1, 18
+                            Output: 45.25994244
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 19, 12
+                            Output: 53.03976583
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 33, 7
+                            Output: 39.45690812
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 47, 40
+                            Output: 71.42208448
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 0, 34
+                            Output: 74.53947279
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 37, 23
+                            Output: 51.94608562
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 5, 37
+                            Output: 68.63304898
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 49, 44
+                            Output: 39.82123377
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 23, 1
+                            Output: 37.23961036
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 33, 24
+                            Output: 74.26615041
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 4, 3
+                            Output: 45.9393011
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 9, 50
+                            Output: 38.5524821
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 38, 18
+                            Output: 69.53106382
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 29, 7
+                            Output: 60.8375359
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 21, 11
+                            Output: 47.29043731
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 23, 48
+                            Output: 57.77286486
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 48, 4
+                            Output: 58.90934923
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 38, 22
+                            Output: 59.91115918
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 20, 11
+                            Output: 40.20336825
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 8, 3
+                            Output: 31.03872389
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 47, 50
+                            Output: 70.41480105
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 39, 43
+                            Output: 39.37298309
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 34, 8
+                            Output: 41.23924682
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 37, 6
+                            Output: 30.41692196
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                Battery ------------------------
+                Location: 3, 45
+                Capacity: 1507.0
+                
+                            Location: 16, 3
+                            Output: 33.61818802
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 30, 2
+                            Output: 60.7690834
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 9, 23
+                            Output: 29.43663895
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 9, 48
+                            Output: 41.7880369
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 32, 9
+                            Output: 32.56142196
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 4, 0
+                            Output: 29.86780761
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 21, 50
+                            Output: 38.71047582
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 31, 41
+                            Output: 68.6532457
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 28, 23
+                            Output: 38.72179636
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 43, 32
+                            Output: 46.63929091
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 46, 38
+                            Output: 73.40226925
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 10, 27
+                            Output: 26.19979919
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 19, 4
+                            Output: 52.43116675
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 16, 38
+                            Output: 65.00367928
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 15, 4
+                            Output: 70.02856894
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 4, 5
+                            Output: 43.28587772
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 50, 3
+                            Output: 60.5787997
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 39, 35
+                            Output: 26.81272998
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 38, 24
+                            Output: 50.53984719
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 19, 38
+                            Output: 46.4333204
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 42, 34
+                            Output: 43.0013272
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 36, 41
+                            Output: 29.1671214
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 30, 25
+                            Output: 63.13649746
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 29, 22
+                            Output: 56.03511409
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 22, 14
+                            Output: 42.32972013
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 8, 6
+                            Output: 30.48448777
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 20, 34
+                            Output: 44.9319234
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 42, 47
+                            Output: 26.65336877
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 29, 30
+                            Output: 62.33504063
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 13, 27
+                            Output: 37.28002017
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 24, 22
+                            Output: 66.13020717
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 7, 25
+                            Output: 38.50460131
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            
+                            Location: 30, 4
+                            Output: 29.51140333
+                            Connection points: <zip object at 0x7fc41bf1f240>
+                            

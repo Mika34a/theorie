@@ -28,3 +28,6 @@ def house_id(self):
     Returns the house id as int
     """
     return self.id
+
+def output(self):
+    return self.output

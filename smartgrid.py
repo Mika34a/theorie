@@ -64,24 +64,33 @@ class Smartgrid():
         
     def output(self, connections_dict, total_cost):
         """
-        Gives output information about solution.
+        Prints output information about solution.
         """
-        # district number
-        print("Case information---------------------")
-        print("district ", argv[1])
-        # costs
-        print(f"Total costs: {total_cost}")
-        # battery location (x,y)
-        print("Battery information-----------------")
-        for connection in connections_dict.values():
-            print("Location: ", connection.battery.x_coordinate, connection.battery.y_coordinate) 
-            print("Capacity: ", connection.battery.capacity)
-            # houses 
-            print("Houses information-----------------")
-            print("Location: ", connection.house.x_coordinate, connection.house.y_coordinate)
-            print("output: ", connection.house.output)
-            # points (x,y)
-
+        with open('output.txt', 'w') as f:
+            f.write(
+            f'''
+            Case information-------------------------
+            District {argv[1]}
+            Shared costs: {total_cost}
+            ''')
+            
+            for battery in Smartgrid.batteries_dict.values():
+                f.write(
+                f'''
+                Battery ------------------------
+                Location: {battery.x_coordinate}, {battery.y_coordinate}
+                Capacity: {battery.start_capacity}
+                ''')
+                for connection in connections_dict.values():
+                    if connection.battery() == battery.id:
+                        f.write(
+                            f'''
+                            Location: {connection.house_x_coordinate()}, {connection.house_y_coordinate()}
+                            Output: {connection.output()}
+                            Connection points: {connection.points_list()}
+                            '''
+                            )
+            f.close()
 
 if __name__ == "__main__":
 
@@ -112,21 +121,7 @@ if __name__ == "__main__":
     total_cost = Smartgrid.costs(Smartgrid, connections_dict, Smartgrid.batteries_dict)
     print(total_cost)
     
-    #Smartgrid.output(Smartgrid, connections_dict, total_cost)
+    # export output to txt file
+    Smartgrid.output(Smartgrid, connections_dict, total_cost)
     
-    # for connection in connections_dict.values:
-    #     battery_x = connection.battery.x_coordinate
-    #     battery_y = connection.battery.x_coordinate
-    #     capacity = connection.battery.y_coordinate
-    #     # houses 
-    #     print("Houses information-----------------")
-    #     house_x = connection.house.x_coordinate
-    #     house_y = connection.house.y_coordinate
-    #     print("output: ", connection.house.output)
-    #     # points (x,y)
-
-
-    # # print total cost
-    
-    # output(connections_dict, district_int, total_cost, )
 

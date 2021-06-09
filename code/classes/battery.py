@@ -31,3 +31,7 @@ def bat_id(self):
     """
     # returns id of the battery
     return self.id
+
+def start_capacity(self):
+    return self.start_capacity
+   
