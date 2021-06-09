@@ -11,6 +11,7 @@ from code.classes.house import House
 from code.classes.battery import Battery
 from code.algorithms import random
 from code.output import output
+import time
 
 class Smartgrid():
     def __init__(self, filename, filename2):
@@ -62,7 +63,7 @@ class Smartgrid():
         """
         battery.capacity = battery.capacity - house.output
         
-    def output(self, connections_dict, total_cost):
+    def output(self, connections_dict, total_cost, runtime):
         """
         Prints output information about solution.
         """
@@ -70,6 +71,7 @@ class Smartgrid():
             f.write(
             f'''
             Case information-------------------------
+            Runtime: {runtime} seconds
             District {argv[1]}
             Shared costs: {total_cost}
             ''')
@@ -87,10 +89,12 @@ class Smartgrid():
                             f'''
                             Location: {connection.house_x_coordinate()}, {connection.house_y_coordinate()}
                             Output: {connection.output()}
-                            Connection points: {connection.points_list()}
+                            Connection points: {connection.points_list}
                             '''
                             )
             f.close()
+
+runtime = time.time()
 
 if __name__ == "__main__":
 
@@ -120,8 +124,11 @@ if __name__ == "__main__":
     connections_dict = random.random_connections(Smartgrid.houses_dict, Smartgrid.batteries_dict)
     total_cost = Smartgrid.costs(Smartgrid, connections_dict, Smartgrid.batteries_dict)
     print(total_cost)
+    for connection in connections_dict.values():
+        print(connection.points_list)
+    
     
     # export output to txt file
-    Smartgrid.output(Smartgrid, connections_dict, total_cost)
+    Smartgrid.output(Smartgrid, connections_dict, total_cost, (time.time()-runtime))
     
 

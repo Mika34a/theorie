@@ -11,11 +11,10 @@ class Connection:
         """
         Initializes Connection class.
         """
-         # attributes 
+        # attributes 
         self.house_id = house
         self.battery_id = battery 
-        self.points_x = []
-        self.points_y = []
+        self.points_list = []
         self.length = 0
 
     def add_point(self):
@@ -33,18 +32,13 @@ class Connection:
         x_vector = abs(battery_x - house_x) 
         y_vector = abs(battery_y - house_y)
 
-        # append x segments passed between a and b to list 
-        for point_x in range (battery_x, house_x, 1):
-            self.points_x.append(point_x)
-        
-        # append y segments passed between a and b to list 
+        # append x & y segments passed between a and b to list 
         for point_y in range (battery_y, house_y, 1):
-            self.points_y.append(point_y)
+            for point_x in range (battery_x, house_x, 1):
+                self.points_list.append((point_x, point_y))
+        
         # Set length for connection (Manhatten distance)
         self.length = vector
-
-        # put points between x and y in list
-        
         
 # functions
     def return_points(self): 
@@ -90,9 +84,7 @@ class Connection:
         return self.house_id.output
 
     def points_list(self):
-        points_list = zip(self.points_x, self.points_y)
-        return points_list   
-
+        return self.points_list
         
             
 
