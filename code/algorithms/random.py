@@ -39,15 +39,19 @@ def random_connections(houses_dict, batteries_dict):
 
                     # put connection in dict
                     connections_dict[connection.house] = connection
-    
+                    
+
         for house in houses_list:
             not_connected = []
             if house.connected == False:
                 not_connected.append(house)
 
-        if len(not_connected) > 0:
+        if len(not_connected) != 0:
+            for house in houses_list:
+                    house.connected = False
             continue
         else:
+            print(f"dict len: {len(connections_dict)}") 
             return connections_dict       
 
 

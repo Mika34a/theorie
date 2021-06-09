@@ -24,23 +24,25 @@ class Smartgrid():
         connection = Connection(house, battery)
         connection.add_point()
         house.connected = True
-        print(connection.length)
         return connection
 
-    def costs(self, connections_dict):
+    def costs(self, connections_dict, battery_dict):
         """
         Returns the total costs of the combined cables.
         """
         # laying a cable costs 9 per grid
-        # costs for each battery is 5000, with each district having 5 batteries
+        # costs for each battery is 5000
         COST_GRID = 9
         COST_BATTERY = 5000
-        COST_CABLE_ALL = 0
+        cost_cable_all = 0
 
         for con in connections_dict.values():
-            COST_CABLE = con.length * COST_GRID
-            COST_CABLE_ALL = COST_CABLE_ALL + COST_CABLE
-        return COST_CABLE_ALL
+            cost_cable = con.length * COST_GRID
+            cost_cable_all = cost_cable_all + cost_cable
+
+        cost_battery_all = COST_BATTERY * len(battery_dict)
+        cost_all = cost_cable_all + cost_battery_all
+        return cost_all
 
     def disc_houses(self):
         """
@@ -88,22 +90,22 @@ if __name__ == "__main__":
 
     # get info of case
     connections_dict = random.random_connections(Smartgrid.houses_dict, Smartgrid.batteries_dict)
-    total_cost = Smartgrid.costs(Smartgrid, connections_dict)
+    total_cost = Smartgrid.costs(Smartgrid, connections_dict, Smartgrid.batteries_dict)
     print(total_cost)
     
-    for connection in connections_dict.values:
-        battery_x = connection.battery.x_coordinate
-        battery_y = connection.battery.x_coordinate
-        capacity = connection.battery.y_coordinate
-        # houses 
-        print("Houses information-----------------")
-        house_x = connection.house.x_coordinate
-        house_y = connection.house.y_coordinate
-        print("output: ", connection.house.output)
-        # points (x,y)
+    # for connection in connections_dict.values:
+    #     battery_x = connection.battery.x_coordinate
+    #     battery_y = connection.battery.x_coordinate
+    #     capacity = connection.battery.y_coordinate
+    #     # houses 
+    #     print("Houses information-----------------")
+    #     house_x = connection.house.x_coordinate
+    #     house_y = connection.house.y_coordinate
+    #     print("output: ", connection.house.output)
+    #     # points (x,y)
 
 
-    # print total cost
+    # # print total cost
     
-    output(connections_dict, district_int, total_cost, )
+    # output(connections_dict, district_int, total_cost, )
 
