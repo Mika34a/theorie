@@ -14,6 +14,7 @@ class Battery:
         self.x_coordinate = x_coordinate
         self.y_coordinate = y_coordinate
         self.capacity = capacity
+        self.start_capacity = capacity
         self.id = id
         self.capacity_left = True
 
