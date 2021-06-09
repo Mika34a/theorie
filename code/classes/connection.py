@@ -29,12 +29,10 @@ class Connection:
 
         # find manhatten distance
         vector = (abs(battery_x - house_x)) + (abs(battery_y - house_y))
-        x_vector = abs(battery_x - house_x) 
-        y_vector = abs(battery_y - house_y)
 
         # append x & y segments passed between a and b to list 
-        for point_y in range (battery_y, house_y, 1):
-            for point_x in range (battery_x, house_x, 1):
+        for point_y in range (house_y, (battery_y + 1)):
+            for point_x in range (house_x, (battery_x + 1)):
                 self.points_list.append((point_x, point_y))
         
         # Set length for connection (Manhatten distance)
