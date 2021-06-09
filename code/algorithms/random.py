@@ -34,21 +34,30 @@ def random_connections(houses_dict, batteries_dict):
                 
                 # connect house to battery 
                 if  house.output <= battery.capacity:
-                    connection = Smartgrid.connect(Smartgrid, battery, house)
-                    Smartgrid.output_capacity(Smartgrid, house, battery)# make function in smartgrid
+                    # check if house is already connected
+                    if house.connected == False:
+                        connection = Smartgrid.connect(Smartgrid, battery, house)
+                        # update battery capacity
+                        Smartgrid.output_capacity(Smartgrid, house, battery)
 
-                    # put connection in dict
-                    connections_dict[connection.house] = connection
-    
+                        # put connection in dict
+                        connections_dict[connection.house] = connection
+                    
+        not_connected = []
         for house in houses_list:
-            not_connected = []
             if house.connected == False:
                 not_connected.append(house)
+        print(not_connected)
 
-        if len(not_connected) > 0:
-            continue
+        if not_connected == []:
+            print(f"dict len: {len(connections_dict)}") 
+            return connections_dict
         else:
-            return connections_dict       
+            for house in houses_list:
+                house.connected = False
+            for battery in batteries_list:
+                battery.capacity = battery.start_capacity
+            continue   
 
 
 

@@ -14,6 +14,7 @@ class Battery:
         self.x_coordinate = x_coordinate
         self.y_coordinate = y_coordinate
         self.capacity = capacity
+        self.start_capacity = capacity
         self.id = id
         self.capacity_left = True
 
@@ -30,3 +31,7 @@ def bat_id(self):
     """
     # returns id of the battery
     return self.id
+
+def start_capacity(self):
+    return self.start_capacity
+   

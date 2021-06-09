@@ -11,11 +11,10 @@ class Connection:
         """
         Initializes Connection class.
         """
-         # attributes 
+        # attributes 
         self.house_id = house
         self.battery_id = battery 
-        self.points_x = []
-        self.points_y = []
+        self.points_list = []
         self.length = 0
 
     def add_point(self):
@@ -30,21 +29,14 @@ class Connection:
 
         # find manhatten distance
         vector = (abs(battery_x - house_x)) + (abs(battery_y - house_y))
-        x_vector = abs(battery_x - house_x) 
-        y_vector = abs(battery_y - house_y)
 
-        # append x segments passed between a and b to list 
-        for point_x in range (battery_x, house_x, 1):
-            self.points_x.append(point_x)
+        # append x & y segments passed between a and b to list 
+        for point_y in range (house_y, (battery_y + 1)):
+            for point_x in range (house_x, (battery_x + 1)):
+                self.points_list.append((point_x, point_y))
         
-        # append y segments passed between a and b to list 
-        for point_y in range (battery_y, house_y, 1):
-            self.points_y.append(point_y)
         # Set length for connection (Manhatten distance)
         self.length = vector
-
-        # put points between x and y in list
-        points_list = zip(self.points_x, self.points_y)   
         
 # functions
     def return_points(self): 
@@ -61,16 +53,36 @@ class Connection:
 
     def house(self):
         """
-        Returns house of connection
+        Returns house id of connection
         """
-        return self.house_id
+        return self.house_id.id
 
     def battery(self):
         """
-        Returns battery of connection
+        Returns battery id of connection
         """   
-        return self.battery_id
+        return self.battery_id.id
+    
+    def bat_y_coordinate(self):
+        return self.battery_id.y_coordinate     
 
+    def bat_x_coordinate(self):
+        return self.battery_id.x_coordinate
+    
+    def start_capacity(self):
+        return self.battery_id.start_capacity
+    
+    def house_x_coordinate(self):
+        return self.house_id.x_coordinate
+
+    def house_y_coordinate(self):
+        return self.house_id.y_coordinate
+
+    def output(self):
+        return self.house_id.output
+
+    def points_list(self):
+        return self.points_list
         
             
 
