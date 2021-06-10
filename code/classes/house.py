@@ -31,3 +31,7 @@ def house_id(self):
 
 def output(self):
     return self.output
+
+def reset(self):
+    self.connected = False
+    return

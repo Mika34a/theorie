@@ -11,7 +11,7 @@ from code.classes import *
 from smartgrid import Smartgrid
 import random
 
-def random_connections(houses_dict, batteries_dict):
+def run(houses_dict, batteries_dict):
     valid = True
 
     while valid == True:
@@ -26,7 +26,7 @@ def random_connections(houses_dict, batteries_dict):
         batteries_list = []
         for battery in batteries_dict.values():
             batteries_list.append(battery)
-            random.shuffle(batteries_list)
+            random.shuffle(batteries_list) 
 
         for house in houses_list:    
             # check if output of house still fits in capacity battery 
@@ -37,26 +37,22 @@ def random_connections(houses_dict, batteries_dict):
                     # check if house is already connected
                     if house.connected == False:
                         connection = Smartgrid.connect(Smartgrid, battery, house)
+
                         # update battery capacity
                         Smartgrid.output_capacity(Smartgrid, house, battery)
 
                         # put connection in dict
                         connections_dict[connection.house] = connection
-                    
-        not_connected = []
-        for house in houses_list:
-            if house.connected == False:
-                not_connected.append(house)
-        print(not_connected)
 
-        if not_connected == []:
+        # all_connected                
+        if Smartgrid.all_connected(Smartgrid, houses_list, connections_dict):
             print(f"dict len: {len(connections_dict)}") 
             return connections_dict
         else:
             for house in houses_list:
-                house.connected = False
+                house.reset()
             for battery in batteries_list:
-                battery.capacity = battery.start_capacity
+                battery.reset()
             continue   
 
 

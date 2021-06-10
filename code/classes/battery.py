@@ -34,4 +34,7 @@ def bat_id(self):
 
 def start_capacity(self):
     return self.start_capacity
-   
+
+def reset(self):
+    self.capacity = self.start_capacity
+    return

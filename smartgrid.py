@@ -94,6 +94,11 @@ class Smartgrid():
                             )
             f.close()
 
+    def all_connected(self, houses_list, connections_dict):
+        if len(connections_dict) == len(houses_list):
+            return True
+        return False  
+
 runtime = time.time()
 
 if __name__ == "__main__":
@@ -121,7 +126,7 @@ if __name__ == "__main__":
     grid.create_grid(Smartgrid.houses_dict, Smartgrid.batteries_dict)
 
     # get info of case
-    connections_dict = random.random_connections(Smartgrid.houses_dict, Smartgrid.batteries_dict)
+    connections_dict = random.run(Smartgrid.houses_dict, Smartgrid.batteries_dict)
     total_cost = Smartgrid.costs(Smartgrid, connections_dict, Smartgrid.batteries_dict)
     print(total_cost)
     for connection in connections_dict.values():
