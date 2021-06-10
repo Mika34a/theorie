@@ -29,8 +29,10 @@ class Connection:
     	
         point_x = house_x 
         point_y = house_y
+        # save the starting points
         self.points_list.append((point_x, point_y))
 
+        # loop through all the points and append
         while True:
             if point_y < battery_y:
                 point_y += 1
@@ -43,7 +45,6 @@ class Connection:
             else:
                 break
             self.points_list.append((point_x, point_y))
-            print(point_x, point_y)
 
         # find manhatten distance
         self.length = (abs(battery_x - house_x)) + (abs(battery_y - house_y))

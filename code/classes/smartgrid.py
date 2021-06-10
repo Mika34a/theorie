@@ -10,7 +10,6 @@ from code.classes.connection import Connection
 from code.classes.house import House
 from code.classes.battery import Battery
 from code.algorithms import random
-from code.output import output
 import time
 from code.classes import loader
 
@@ -68,7 +67,7 @@ class Smartgrid():
         """
         Prints output information about solution.
         """
-        with open('output.txt', 'w') as f:
+        with open('output/output_random.txt', 'w') as f:
             f.write(
             f'''
             Case information-------------------------
