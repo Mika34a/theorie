@@ -17,21 +17,22 @@ class House:
         self.output = output
         self.connected = False
     
-def check_connection(self):
-    """
-    Returns False if house isn't connected yet, otherwise True
-    """
-    return self.connected
-    
-def house_id(self):
-    """
-    Returns the house id as int
-    """
-    return self.id
+    def check_connection(self):
+        """
+        Returns False if house isn't connected yet, otherwise True
+        """
+        return self.connected
 
-def output(self):
-    return self.output
+    def reset(self):
+        self.connected = False
+        return 
+        
+    def house_id(self):
+        """
+        Returns the house id as int
+        """
+        return self.id
 
-def reset(self):
-    self.connected = False
-    return
+    def output(self):
+        return self.output
+

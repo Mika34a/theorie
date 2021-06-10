@@ -36,7 +36,7 @@ def load_house(filename):
 
     # load batteries
 
-def load_bat(filename2):
+def load_batteries(filename2):
     # make empty batteries dict
     batteries_dict = {}
     id = 0

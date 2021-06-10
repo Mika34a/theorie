@@ -5,13 +5,9 @@
 #
 # - Implements a random algorithm to connect houses to batteries with capacity. 
 
-# import 
-from  ..classes import *
-from code.classes import *
-from smartgrid import Smartgrid
 import random
 
-def run(houses_dict, batteries_dict):
+def run(smartgrid):
     valid = True
 
     while valid == True:
@@ -19,12 +15,12 @@ def run(houses_dict, batteries_dict):
         connections_dict = {}
 
         houses_list = []
-        for house in houses_dict.values():
+        for house in smartgrid.houses_dict.values():
             houses_list.append(house)
             random.shuffle(houses_list)
 
         batteries_list = []
-        for battery in batteries_dict.values():
+        for battery in smartgrid.batteries_dict.values():
             batteries_list.append(battery)
             random.shuffle(batteries_list) 
 
@@ -36,23 +32,24 @@ def run(houses_dict, batteries_dict):
                 if  house.output <= battery.capacity:
                     # check if house is already connected
                     if house.connected == False:
-                        connection = Smartgrid.connect(Smartgrid, battery, house)
+                        connection = smartgrid.connect(battery, house)
 
                         # update battery capacity
-                        Smartgrid.output_capacity(Smartgrid, house, battery)
+                        smartgrid.output_capacity(house, battery)
 
                         # put connection in dict
                         connections_dict[connection.house] = connection
 
         # all_connected                
-        if Smartgrid.all_connected(Smartgrid, houses_list, connections_dict):
+        if smartgrid.all_connected(houses_list, connections_dict):
             print(f"dict len: {len(connections_dict)}") 
             return connections_dict
         else:
-            for house in houses_list:
-                house.reset()
+            print("again!------------------")
             for battery in batteries_list:
                 battery.reset()
+            for house in houses_list:
+                house.reset()
             continue   
 
 
