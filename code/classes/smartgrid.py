@@ -10,16 +10,16 @@ from code.classes.connection import Connection
 from code.classes.house import House
 from code.classes.battery import Battery
 from code.algorithms import random
-from code.output import output
 import time
+from code.classes import loader
 
 class Smartgrid():
     def __init__(self, filename, filename2):
         """
         Initializes the Smartgrid class.
         """
-        self.houses_dict= self.loader.load_house(filename)
-        self.batteries_dict = self.loader.load_batteries(filename2) 
+        self.houses_dict= loader.load_house(filename)
+        self.batteries_dict = loader.load_batteries(filename2) 
 
     def connect(self, battery, house):
         connection = Connection(house, battery)
@@ -63,20 +63,20 @@ class Smartgrid():
         """
         battery.capacity = battery.capacity - house.output
         
-    def output(self, connections_dict, total_cost, runtime):
+    def output(self, connections_dict, total_cost, runtime, main):
         """
         Prints output information about solution.
         """
-        with open('output.txt', 'w') as f:
+        with open('output/output_random.txt', 'w') as f:
             f.write(
             f'''
             Case information-------------------------
             Runtime: {runtime} seconds
-            District {argv[1]}
+            District {main}
             Shared costs: {total_cost}
             ''')
             
-            for battery in Smartgrid.batteries_dict.values():
+            for battery in self.batteries_dict.values():
                 f.write(
                 f'''
                 Battery ------------------------
@@ -94,41 +94,7 @@ class Smartgrid():
                             )
             f.close()
 
-runtime = time.time()
-
-if __name__ == "__main__":
-
-    from code.classes import loader
-    from code.grid import grid
-    from sys import argv
-
-    # check command line
-    if len(argv) != 2:
-        print("Usage: python3 smartgrid.py [district_number]")
-        exit(1)
-    # Load the requested files
-    if len(argv) == 2:
-        district_int = argv[1]
-
-    filename = f"database/district_{district_int}/district-{district_int}_houses.csv"
-    filename2 = f"database/district_{district_int}/district-{district_int}_batteries.csv"
-
-    # load houses and batteries dict
-    Smartgrid.houses_dict = loader.load_house(filename)
-    Smartgrid.batteries_dict = loader.load_bat(filename2)
-
-    # Create grid picture
-    grid.create_grid(Smartgrid.houses_dict, Smartgrid.batteries_dict)
-
-    # get info of case
-    connections_dict = random.random_connections(Smartgrid.houses_dict, Smartgrid.batteries_dict)
-    total_cost = Smartgrid.costs(Smartgrid, connections_dict, Smartgrid.batteries_dict)
-    print(total_cost)
-    for connection in connections_dict.values():
-        print(connection.points_list)
-    
-    
-    # export output to txt file
-    Smartgrid.output(Smartgrid, connections_dict, total_cost, (time.time()-runtime))
-    
-
+    def all_connected(self, houses_list, connections_dict):
+        if len(connections_dict) == len(houses_list):
+            return True
+        return False  

@@ -26,17 +26,28 @@ class Connection:
         house_y = self.house_id.y_coordinate
         battery_x = self.battery_id.x_coordinate
         battery_y = self.battery_id.y_coordinate
+    	
+        point_x = house_x 
+        point_y = house_y
+        # save the starting points
+        self.points_list.append((point_x, point_y))
+
+        # loop through all the points and append
+        while True:
+            if point_y < battery_y:
+                point_y += 1
+            elif point_y > battery_y:
+                point_y -= 1
+            elif point_x < battery_x:
+                point_x += 1
+            elif point_x > battery_x:
+                point_x -= 1        
+            else:
+                break
+            self.points_list.append((point_x, point_y))
 
         # find manhatten distance
-        vector = (abs(battery_x - house_x)) + (abs(battery_y - house_y))
-
-        # append x & y segments passed between a and b to list 
-        for point_y in range (house_y, (battery_y + 1)):
-            for point_x in range (house_x, (battery_x + 1)):
-                self.points_list.append((point_x, point_y))
-        
-        # Set length for connection (Manhatten distance)
-        self.length = vector
+        self.length = (abs(battery_x - house_x)) + (abs(battery_y - house_y))
         
 # functions
     def return_points(self): 
