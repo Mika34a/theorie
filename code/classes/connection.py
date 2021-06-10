@@ -27,15 +27,49 @@ class Connection:
         battery_x = self.battery_id.x_coordinate
         battery_y = self.battery_id.y_coordinate
 
+        if house_y > battery_y:
+            for point_y in range(house_y, (battery_y - 1), -1):
+                if house_x > battery_x:
+                    for point_x in range(house_x, (battery_x - 1), -1):
+                           self.points_list.append((point_x, point_y))
+                elif house_x < battery_x:
+                    for point_x in range(house_x, (battery_x + 1), 1):
+                        self.points_list.append((point_x, point_y))
+                else:
+                    point_x = house_x
+                    self.points_list.append((point_x, point_y))
+        elif house_y < battery_y:
+            for point_y in range(house_y, (battery_y + 1), 1):
+                if house_x > battery_x:
+                    for point_x in range(house_x, (battery_x - 1), -1):
+                        self.points_list.append((point_x, point_y))
+                elif house_x < battery_x:
+                    for point_x in range(house_x, (battery_x + 1), 1):
+                        self.points_list.append((point_x, point_y))
+                else:
+                    point_x = house_x 
+                    self.points_list.append((point_x, point_y))                     
+        else:
+            point_y = house_y 
+            if house_x > battery_x:
+                for point_x in range(house_x, (battery_x - 1), -1):
+                    self.points_list.append((point_x, point_y))
+            elif house_x < battery_x:
+                for point_x in range(house_x, (battery_x + 1), 1):
+                    self.points_list.append((point_x, point_y))
+            else:
+                point_x = house_x
+                self.points_list.append((point_x, point_y))
+
         # find manhatten distance
         self.length = (abs(battery_x - house_x)) + (abs(battery_y - house_y))
 
         # append x & y segments passed between a and b to list
-        for point_y in range (house_y, (battery_y + 1)):
-            for point_x in range (house_x, (battery_x + 1)):
-                self.points_list.append((point_x, point_y))
+        # for point_y in range (house_y, (battery_y + 1)):
+        #     for point_x in range (house_x, (battery_x + 1)):
+        #         self.points_list.append((point_x, point_y))
 
-        assert len(self.points_list) > 0, f"{house_y}, {battery_y}, {house_x}, {battery_x}"
+        # assert len(self.points_list) > 0, f"{house_y}, {battery_y}, {house_x}, {battery_x}"
         
 # functions
     def return_points(self): 
