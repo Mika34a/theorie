@@ -16,6 +16,7 @@ class House:
         self.id = id
         self.output = output
         self.connected = False
+        self.batteries = []
     
     def check_connection(self):
         """

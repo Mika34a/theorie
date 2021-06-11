@@ -26,18 +26,11 @@ def run(smartgrid):
             batteries_list.append(battery)
 
         for house in houses_list:    
-
-            batteries_closest = []
             # a list of batteries based on proximity
             batteries_closest = smartgrid.proximity(house, batteries_list)   
 
-
             # first loop through batteries to find the closest one
             for battery in batteries_closest:
-
-                # function that orders the batteries in a list based on distance
-
-                
                 # connect house to battery 
                 if  house.output <= battery.capacity:
                     # check if house is already connected
