@@ -119,16 +119,17 @@ class Smartgrid():
 
                 #hij loop eerst door Y coordinaten en dan door x coordinaten
     
-    def proximity(self, house, batteries_list):
+    def proximity(self, house, batteries_dict):
         
-        distances = []
+        distances = {}
 
-        for battery in batteries_list:
+        for battery in batteries_dict.values():
             
-            battery.distance = (abs(battery.battery_x - house.house_x)) + (abs(battery.battery_y - house.house_y))
+            distance = (abs(battery.x_coordinate - house.x_coordinate)) + (abs(battery.y_coordinate - house.y_coordinate))
             
-            distances.append(battery.distance)
+            distances[battery.id] = distance
 
-        sorted_distances = sorted(distances)
-
-        return sorted_distances
+        sorted_batteries = {k: v for k, v in sorted(distances.items(), key=lambda item: item[1])}
+        print(distances)
+        print(sorted_batteries)
+        return sorted_batteries
