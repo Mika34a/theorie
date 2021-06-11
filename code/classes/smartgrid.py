@@ -127,9 +127,7 @@ class Smartgrid():
             
             distance = (abs(battery.x_coordinate - house.x_coordinate)) + (abs(battery.y_coordinate - house.y_coordinate))
             
-            distances[battery.id] = distance
+            distances[battery] = distance
 
         sorted_batteries = {k: v for k, v in sorted(distances.items(), key=lambda item: item[1])}
-        print(distances)
-        print(sorted_batteries)
         return sorted_batteries

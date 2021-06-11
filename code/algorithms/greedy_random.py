@@ -23,10 +23,6 @@ def run(smartgrid):
         for house in houses_list:    
             # a dictionary of batteries based on proximity
             batteries_closest = smartgrid.proximity(house, smartgrid.batteries_dict)
-            
-            # batteries_list = []
-            # for key in batteries_closest:
-            #     batteries_list.append(key)
                     
             # first loop through batteries starting closest one
             for battery in batteries_closest:
@@ -48,7 +44,7 @@ def run(smartgrid):
             return connections_dict
         else:
             # if not reset everything and re-iterate
-            for battery in batteries_list:
+            for battery in batteries_closest:
                 battery.reset()
             for house in houses_list:
                 house.reset()
