@@ -110,8 +110,7 @@ class Smartgrid():
                     for point in connection.points_list:
                         for point2 in connection2.points_list:
                             if point == point2:
-                                return True
-
+                                return connection
 
             # if batterij is zelfde
             # loop door points of geselecteerde connectie
@@ -119,13 +118,3 @@ class Smartgrid():
                 # als punten matchen: return True (length is dan gelijk aan lengte over y as)
 
                 #hij loop eerst door Y coordinaten en dan door x coordinaten
-
-        for 
-
-        for connection in self.connections_dict.values():
-            if connection.battery == battery:
-                for match in connection.points_list:
-                    if match == point:
-                        return True
-
-    
