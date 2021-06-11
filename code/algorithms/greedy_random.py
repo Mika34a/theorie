@@ -44,8 +44,6 @@ def run(smartgrid):
                         # put connection in dict
                         connections_dict[connection.house] = connection
         
-
-
         # check if all houses are connected               
         if smartgrid.all_connected(houses_list, connections_dict):
             print(f"dict len: {len(connections_dict)}") 
