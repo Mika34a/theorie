@@ -51,14 +51,8 @@ class Connection:
                 break
             self.points_list.append((point_x, point_y))
 
-        self.length = (abs(battery_x - house_x)) + (abs(battery_y - house_y))    
-                
-    # def calculate_new_length(self):   
-    #     # check if this connection is used as overall connection.
-    #     # get coordinates from house and battery 
-    #     self.length = (abs(self.battery_y - self.house_y))
+        self.length = (abs(battery_x - house_x)) + (abs(battery_y - house_y))
     
-            
 # functions
     def return_points(self): 
         """

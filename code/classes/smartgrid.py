@@ -151,7 +151,10 @@ class Smartgrid():
                 #hij loop eerst door Y coordinaten en dan door x coordinaten
     
     def proximity(self, house, batteries_dict):
-        
+        """
+        Takes a house and the dictionary of batteries and generates a dictionary
+        of batteries in ascending order of the distance between house and battery.
+        """        
         distances = {}
 
         for battery in batteries_dict.values():
