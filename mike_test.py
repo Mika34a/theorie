@@ -33,4 +33,4 @@ if __name__ == "__main__":
     print(total_cost)
 
     # export output to txt file
-    smartgrid.output(connections_dict, total_cost, (time.time()-runtime), argv[1])
+    smartgrid.output_greedy(connections_dict, total_cost, (time.time()-runtime), argv[1])

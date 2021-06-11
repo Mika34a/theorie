@@ -93,6 +93,37 @@ class Smartgrid():
                             '''
                             )
             f.close()
+    
+    def output_greedy(self, connections_dict, total_cost, runtime, main):
+        """
+        Prints output information about solution.
+        """
+        with open('output/output_greedy.txt', 'w') as f:
+            f.write(
+            f'''
+            Case information-------------------------
+            Runtime: {runtime} seconds
+            District {main}
+            Shared costs: {total_cost}
+            ''')
+            
+            for battery in self.batteries_dict.values():
+                f.write(
+                f'''
+                Battery ------------------------
+                Location: {battery.x_coordinate}, {battery.y_coordinate}
+                Capacity: {battery.start_capacity}
+                ''')
+                for connection in connections_dict.values():
+                    if connection.battery() == battery.id:
+                        f.write(
+                            f'''
+                            Location: {connection.house_x_coordinate()}, {connection.house_y_coordinate()}
+                            Output: {connection.output()}
+                            Connection points: {connection.points_list}
+                            '''
+                            )
+            f.close()
 
     def all_connected(self, houses_list, connections_dict):
         if len(connections_dict) == len(houses_list):
