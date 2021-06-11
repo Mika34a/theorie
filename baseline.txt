@@ -1,0 +1,14 @@
+Baseline - Smartgrid
+Michael Verdel, Joshua van Zanten en Merel Florian 
+
+We made a random algorithm that connects houses to batteries with capacity, 
+if they still have capacity left. It is random because the list 
+of houses and the list of batteries that are used to loop through are 
+randomly ordered every time the algorithm is run. 
+The algorithm will run untill a combination of connenctions is
+found that leaves no houses unconnected. We believe that our algorithm is mostly without bias. 
+
+The only thing that we assume, is that every house can be connected with the
+Manhattan distance one way or another. This means that we did not yet implement the correct 
+x and y coordinates for our connection points. Now the connection travels x steps 
+to the side and y steps up or down.

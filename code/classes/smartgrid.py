@@ -98,3 +98,34 @@ class Smartgrid():
         if len(connections_dict) == len(houses_list):
             return True
         return False  
+
+    def match_point(self):
+        # loop door connecties (def geselecteerde connectie)
+        for connection in self.connections_dict.values():
+        # wat is de batterij? 
+            battery = connection.battery
+            # loop connecties zonder geselecteerde connectie 
+            for connection2 in self.connections_dict.values():
+                if connection is not connection2 and connection.battery is connection2.battery:
+                    for point in connection.points_list:
+                        for point2 in connection2.points_list:
+                            if point == point2:
+                                return True
+
+
+            # if batterij is zelfde
+            # loop door points of geselecteerde connectie
+            # loop door points other conneciton
+                # als punten matchen: return True (length is dan gelijk aan lengte over y as)
+
+                #hij loop eerst door Y coordinaten en dan door x coordinaten
+
+        for 
+
+        for connection in self.connections_dict.values():
+            if connection.battery == battery:
+                for match in connection.points_list:
+                    if match == point:
+                        return True
+
+    
