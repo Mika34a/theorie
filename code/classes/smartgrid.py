@@ -118,3 +118,10 @@ class Smartgrid():
                 # als punten matchen: return True (length is dan gelijk aan lengte over y as)
 
                 #hij loop eerst door Y coordinaten en dan door x coordinaten
+    
+    def proximity(self, house, batteries_list):
+        batteries_closest = []
+
+        
+
+        return batteries_closest
