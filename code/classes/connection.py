@@ -21,6 +21,11 @@ class Connection:
         """
         Adds a point and defines length of connection.
         """
+        # loop through connections that connect to the relevant battery
+        # see if points(x,y) of new connection match with one of these connections
+        # len(list) = length of priced connection (first half)
+        # copy/append last half of list of points to new connection
+
         # get coordinates from house and battery 
         house_x = self.house_id.x_coordinate
         house_y = self.house_id.y_coordinate
@@ -44,11 +49,14 @@ class Connection:
                 point_x -= 1        
             else:
                 break
-            self.points_list.append((point_x, point_y))
-
-        # find manhatten distance
-        self.length = (abs(battery_x - house_x)) + (abs(battery_y - house_y))
-        
+        self.length = (abs(battery_x - house_x)) + (abs(battery_y - house_y))    
+                
+    def calculate_new_length(self):   
+        # check if first
+        # get coordinates from house and battery 
+        self.length = (abs(self.battery_y - self.house_y))
+    
+            
 # functions
     def return_points(self): 
         """
