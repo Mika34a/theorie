@@ -47,5 +47,4 @@ def run(smartgrid):
             for battery in batteries_closest:
                 battery.reset()
             for house in houses_list:
-                house.reset()
-            continue   
+                house.res

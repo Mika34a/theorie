@@ -1,7 +1,7 @@
 from code.classes.smartgrid import Smartgrid
 from code.classes import loader
 from code.grid import grid
-from code.algorithms import random
+from code.algorithms import greedy_random, random, greedy_random_shared
 from sys import argv
 import time
 
@@ -27,7 +27,7 @@ if __name__ == "__main__":
     grid.create_grid(smartgrid.houses_dict, smartgrid.batteries_dict)
 
     # get info of case
-    connections_dict = random.run(smartgrid)
+    connections_dict = greedy_random_shared.run(smartgrid)
     total_cost = smartgrid.costs(connections_dict, smartgrid.batteries_dict)
     print(total_cost)
     # for connection in connections_dict.values():
