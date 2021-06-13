@@ -37,10 +37,11 @@ class Smartgrid():
         COST_GRID = 9
         COST_BATTERY = 5000
         cost_cable_all = 0
+        house_cable = 1
 
         for con in connections_dict.values():
-            cost_cable = con.length * COST_GRID
-            cost_cable_all = cost_cable_all + cost_cable
+            cost_cable = (con.length + house_cable) * COST_GRID
+            cost_cable_all = cost_cable_all + cost_cable 
 
         cost_battery_all = COST_BATTERY * len(battery_dict)
         cost_all = cost_cable_all + cost_battery_all

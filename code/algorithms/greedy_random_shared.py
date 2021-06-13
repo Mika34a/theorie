@@ -42,8 +42,11 @@ def run(smartgrid):
                     if  house.output <= battery.capacity:
                     # check if house is already connected
                         if house.connected == False:
+                            # connect house to connection if connection is closer
                             if dist_connection < dist_battery:
+                                
                                 connection = smartgrid.connect(x_connect, y_connect, battery, house)
+                                print(connection)
                             else:
                                 connection = smartgrid.connect(battery.x_coordinate, battery.y_coordinate, battery, house)          
                 else:
@@ -58,14 +61,13 @@ def run(smartgrid):
 
             # put connection in dict
             connections_dict[connection.house] = connection
-            print(len(connections_dict))
         
         # check if all houses are connected               
         if smartgrid.all_connected(houses_list, connections_dict):
             print(f"dict len: {len(connections_dict)}") 
             return connections_dict
         else:
-            print("False")
+
             # if not reset everything and re-iterate
             for battery in batteries_closest:
                 battery.reset()
