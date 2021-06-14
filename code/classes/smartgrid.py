@@ -67,6 +67,9 @@ class Smartgrid():
         battery.capacity = battery.capacity - house.output
         
     def output(self, connections_dict, total_cost, runtime, main):
+        """
+        Prints output information about solution.
+        """
         total_list = []
         i = 1
 
@@ -91,88 +94,33 @@ class Smartgrid():
         
         out_file.close()
 
+    def output_greedy(self, connections_dict, total_cost, runtime, main):
+        """
+        Prints output information about solution.
+        """
+        total_list = []
+        i = 1
 
-        # total_list = [
-        #     {
-        #         "district": int(main),
-        #         "own-costs": total_cost,
-        #     },         
-        #     {
-        #         "location": str({battery.x_coordinate}, {battery.y_coordinate}),
-        #         "capacity": str({battery.start_capacity}),
-        #         "houses": [                       
-        #                     {
-        #                         "location": str({connection.house_x_coordinate()}, {connection.house_y_coordinate()}),
-        #                         "output": str({connection.output()}),
-        #                         "cables": [str({point}) for point in connection.points_list]
-        #                     }
-        #         for connection in connections_dict.values() if connection.battery() == battery.id]
-        #     for battery in self.batteries_dict.values()} 
-        # ] 
+        total_list.append({"district": int(main), "own-costs": total_cost})
 
-    # the json file where the output must be stored
+        for battery in self.batteries_dict.values():
+            houses = []
+            total_list.append({"location": f"{battery.x_coordinate}, {battery.y_coordinate}", "capacity": battery.start_capacity, "houses": houses })
+            
+            for connection in connections_dict.values():
+                if connection.battery == battery.id:
+                    cables = []
+
+                    for point in connection.points_list:
+                        cables.append(f"{point}")
+
+                    houses.append({"location": f"{connection.house_x_coordinate()}, {connection.house_y_coordinate()}", "output": f"{connection.output()}", "cables": cables})
+
+        out_file = open("output/random_output.json", "w")
     
-            
-    
-    # def output(self, connections_dict, total_cost, runtime, main):
-    #     """
-    #     Prints output information about solution.
-    #     """
-    #     with open('output/output_random.json', 'w') as f:
-    #         f.write(
-    #         f'''
-    #         Runtime: {runtime} seconds
-    #         District {main}
-    #         Own-costs: {total_cost}
-    #         ''')
-            
-    #         for battery in self.batteries_dict.values():
-    #             f.write(
-    #             f'''
-    #             location: {battery.x_coordinate}, {battery.y_coordinate}
-    #             capacity: {battery.start_capacity}
-    #             ''')
-    #             for connection in connections_dict.values():
-    #                 if connection.battery() == battery.id:
-    #                     f.write(
-    #                         f'''
-    #                         location: {connection.house_x_coordinate()}, {connection.house_y_coordinate()}
-    #                         output: {connection.output()}
-    #                         connection points: {connection.points_list}
-    #                         '''
-    #                         )
-    #         f.close()
-
-    # def output_greedy(self, connections_dict, total_cost, runtime, main):
-    #     """
-    #     Prints output information about solution.
-    #     """
-    #     with open('output/output_greedy.txt', 'w') as f:
-    #         f.write(
-    #         f'''
-    #         Case information-------------------------
-    #         Runtime: {runtime} seconds
-    #         District {main}
-    #         Shared costs: {total_cost}
-    #         ''')
-            
-    #         for battery in self.batteries_dict.values():
-    #             f.write(
-    #             f'''
-    #             Battery ------------------------
-    #             Location: {battery.x_coordinate}, {battery.y_coordinate}
-    #             Capacity: {battery.start_capacity}
-    #             ''')
-    #             for connection in connections_dict.values():
-    #                 if connection.battery() == battery.id:
-    #                     f.write(
-    #                         f'''
-    #                         Location: {connection.house_x_coordinate()}, {connection.house_y_coordinate()}
-    #                         Output: {connection.output()}
-    #                         Connection points: {connection.points_list}
-    #                         '''
-    #                         )
-    #         f.close()
+        json.dump(total_list, out_file, indent = 6)
+        
+        out_file.close()
 
     def all_connected(self, houses_list, connections_dict):
         if len(connections_dict) == len(houses_list):
