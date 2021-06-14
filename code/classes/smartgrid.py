@@ -121,7 +121,54 @@ class Smartgrid():
                             )
             f.close()
 
+    def output_greedy(self, connections_dict, total_cost, runtime, main):
+        """
+        Prints output information about solution.
+        """
+        with open('output/output_greedy.txt', 'w') as f:
+            f.write(
+            f'''
+            Case information-------------------------
+            Runtime: {runtime} seconds
+            District {main}
+            Shared costs: {total_cost}
+            ''')
+            
+            for battery in self.batteries_dict.values():
+                f.write(
+                f'''
+                Battery ------------------------
+                Location: {battery.x_coordinate}, {battery.y_coordinate}
+                Capacity: {battery.start_capacity}
+                ''')
+                for connection in connections_dict.values():
+                    if connection.battery() == battery.id:
+                        f.write(
+                            f'''
+                            Location: {connection.house_x_coordinate()}, {connection.house_y_coordinate()}
+                            Output: {connection.output()}
+                            Connection points: {connection.points_list}
+                            '''
+                            )
+            f.close()
+
     def all_connected(self, houses_list, connections_dict):
         if len(connections_dict) == len(houses_list):
             return True
         return False  
+
+    def proximity(self, house, batteries_dict):
+        """
+        Takes a house and the dictionary of batteries and generates a dictionary
+        of batteries in ascending order of the distance between house and battery.
+        """        
+        distances = {}
+
+        for battery in batteries_dict.values():
+            
+            distance = (abs(battery.x_coordinate - house.x_coordinate)) + (abs(battery.y_coordinate - house.y_coordinate))
+            
+            distances[battery] = distance
+
+        sorted_batteries = {k: v for k, v in sorted(distances.items(), key=lambda item: item[1])}
+        return sorted_batteries

@@ -20,18 +20,12 @@ def run(smartgrid):
             houses_list.append(house)
             random.shuffle(houses_list)
 
-        # initialise randomised list of batteries
-        batteries_list = []
-        for battery in smartgrid.batteries_dict.values():
-            batteries_list.append(battery)
-            random.shuffle(batteries_list)
-
         for house in houses_list:    
-            # first loop through batteries to find the closest one
-            for battery in batteries_list:
-
-                # function that orders the batteries in a list 
-                
+            # a dictionary of batteries based on proximity
+            batteries_closest = smartgrid.proximity(house, smartgrid.batteries_dict)
+                    
+            # first loop through batteries starting closest one
+            for battery in batteries_closest:
                 # connect house to battery 
                 if  house.output <= battery.capacity:
                     # check if house is already connected
@@ -50,7 +44,7 @@ def run(smartgrid):
             return connections_dict
         else:
             # if not reset everything and re-iterate
-            for battery in batteries_list:
+            for battery in batteries_closest:
                 battery.reset()
             for house in houses_list:
                 house.reset()
