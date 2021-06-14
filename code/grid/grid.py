@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib.pyplot import figure
 import csv
 
-def create_grid(houses, batteries):
+def create_grid(houses, batteries, connections):
     plt.style.use('seaborn-pastel')
 
     figure(figsize=(9, 9), dpi=150)
@@ -35,20 +35,55 @@ def create_grid(houses, batteries):
     for house in houses.values():
         plt.plot(house.x_coordinate, house.y_coordinate, 'o')
 
-    battery = 0
-
     for bat in batteries.values():
-        if battery == 0:
+        if bat.id == 0:
+            
+            for connection in connections.values():
+                if connection.battery_id == bat:
+                    for point in connection.points_list:
+                        plt.plot(point[0], point[1], "^r")
+            
             plt.plot(bat.x_coordinate, bat.y_coordinate, 'Pr')
-        elif battery == 1:
+        elif bat.id == 1:
+            
+            for connection in connections.values():
+                if connection.battery_id == bat:
+                    for point in connection.points_list:
+                        plt.plot(point[0], point[1], "^m")
+            
             plt.plot(bat.x_coordinate, bat.y_coordinate, 'Pm')
-        elif battery == 2:
+        elif bat.id == 2:
+            
+            for connection in connections.values():
+                if connection.battery_id == bat:
+                    for point in connection.points_list:
+                        plt.plot(point[0], point[1], "^g")
+            
             plt.plot(bat.x_coordinate, bat.y_coordinate, 'Pg')
-        elif battery == 3:
+        elif bat.id == 3:
+            
+            for connection in connections.values():
+                if connection.battery_id == bat:
+                    for point in connection.points_list:
+                        plt.plot(point[0], point[1], "^b")
+            
             plt.plot(bat.x_coordinate, bat.y_coordinate, 'Pb')
-        elif battery == 4:
+        elif bat.id == 4:
+            
+            for connection in connections.values():
+                if connection.battery_id == bat:
+                    for point in connection.points_list:
+                        plt.plot(point[0], point[1], "^w")
+            
             plt.plot(bat.x_coordinate, bat.y_coordinate, 'Pw')
-        battery += 1
+
+    # loop through every connection
+    # save all the points of a connection and make them invisible
+    # plot lines between each connection, based on battery colour
+    # draw the lines
+    # for connection in connections.values():
+    #             for point in connection.points_list:
+    #                 plt.plot(point[0], point[1], ",r")
 
     # save as image
-    plt.savefig("code/grid/grid.png")
+    plt.savefig("code/grid/gridtest.png")
