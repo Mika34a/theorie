@@ -18,7 +18,7 @@ class Connection:
         self.length = 0
         self.connected_houses = []
 
-    def add_point(self):
+    def add_point(self, x, y):
         """
         Adds a point and defines length of connection.
         """
@@ -31,8 +31,8 @@ class Connection:
         house = self.house_id
         house_x = self.house_id.x_coordinate
         house_y = self.house_id.y_coordinate
-        battery_x = self.battery_id.x_coordinate
-        battery_y = self.battery_id.y_coordinate
+        battery_x = x
+        battery_y = y
     	
         point_x = house_x 
         point_y = house_y
