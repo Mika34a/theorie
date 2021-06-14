@@ -16,6 +16,8 @@ class Connection:
         self.battery_id = battery 
         self.points_list = []
         self.length = 0
+        self.points_x = []
+        self.points_y = []
 
     def add_point(self):
         """
@@ -50,6 +52,9 @@ class Connection:
             else:
                 break
             self.points_list.append((point_x, point_y))
+            self.points_x.append(point_x)
+            self.points_y.append(point_y)
+            
         self.length = (abs(battery_x - house_x)) + (abs(battery_y - house_y))    
                 
     

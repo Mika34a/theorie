@@ -31,51 +31,49 @@ def create_grid(houses, batteries, connections):
     # points set to always show full graph
     plt.plot(0, 0)
     plt.plot(50, 50)
-
-    for house in houses.values():
-        plt.plot(house.x_coordinate, house.y_coordinate, 'o')
+    
+    # zip the point lists
+    
 
     for bat in batteries.values():
         if bat.id == 0:
             
             for connection in connections.values():
                 if connection.battery_id == bat:
-                    for point in connection.points_list:
-                        plt.plot(point[0], point[1], "^r")
+                    plt.plot(connection.points_x, connection.points_y, "r")
             
-            plt.plot(bat.x_coordinate, bat.y_coordinate, 'Pr')
+            plt.plot(bat.x_coordinate, bat.y_coordinate, 'sr')
         elif bat.id == 1:
             
             for connection in connections.values():
                 if connection.battery_id == bat:
-                    for point in connection.points_list:
-                        plt.plot(point[0], point[1], "^m")
+                    plt.plot(connection.points_x, connection.points_y, "m")
             
-            plt.plot(bat.x_coordinate, bat.y_coordinate, 'Pm')
+            plt.plot(bat.x_coordinate, bat.y_coordinate, 'sm')
         elif bat.id == 2:
             
             for connection in connections.values():
                 if connection.battery_id == bat:
-                    for point in connection.points_list:
-                        plt.plot(point[0], point[1], "^g")
+                    plt.plot(connection.points_x, connection.points_y, "g")
             
-            plt.plot(bat.x_coordinate, bat.y_coordinate, 'Pg')
+            plt.plot(bat.x_coordinate, bat.y_coordinate, 'sg')
         elif bat.id == 3:
             
             for connection in connections.values():
                 if connection.battery_id == bat:
-                    for point in connection.points_list:
-                        plt.plot(point[0], point[1], "^b")
+                    plt.plot(connection.points_x, connection.points_y, "b")
             
-            plt.plot(bat.x_coordinate, bat.y_coordinate, 'Pb')
+            plt.plot(bat.x_coordinate, bat.y_coordinate, 'sb')
         elif bat.id == 4:
             
             for connection in connections.values():
                 if connection.battery_id == bat:
-                    for point in connection.points_list:
-                        plt.plot(point[0], point[1], "^w")
+                    plt.plot(connection.points_x, connection.points_y, "w")
             
-            plt.plot(bat.x_coordinate, bat.y_coordinate, 'Pw')
+            plt.plot(bat.x_coordinate, bat.y_coordinate, 'sw')
+    
+    for house in houses.values():
+        plt.plot(house.x_coordinate, house.y_coordinate, 'o')
 
     # loop through every connection
     # save all the points of a connection and make them invisible
