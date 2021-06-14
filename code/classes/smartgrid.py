@@ -5,6 +5,7 @@
 #
 # - Implements smartgrid class.
 
+from django.db import connection
 from code.classes import *
 from code.classes.connection import Connection
 from code.classes.house import House
@@ -22,9 +23,9 @@ class Smartgrid():
         self.houses_dict= loader.load_house(filename)
         self.batteries_dict = loader.load_batteries(filename2) 
 
-    def connect(self, battery, house):
+    def connect(self, x, y, battery, house):
         connection = Connection(house, battery)
-        connection.add_point()
+        connection.add_point(x,y)
         house.connected = True
         return connection
 
@@ -37,10 +38,11 @@ class Smartgrid():
         COST_GRID = 9
         COST_BATTERY = 5000
         cost_cable_all = 0
+        house_cable = 1
 
         for con in connections_dict.values():
-            cost_cable = con.length * COST_GRID
-            cost_cable_all = cost_cable_all + cost_cable
+            cost_cable = (con.length + house_cable) * COST_GRID
+            cost_cable_all = cost_cable_all + cost_cable 
 
         cost_battery_all = COST_BATTERY * len(battery_dict)
         cost_all = cost_cable_all + cost_battery_all
@@ -64,93 +66,113 @@ class Smartgrid():
         """
         battery.capacity = battery.capacity - house.output
         
-    # def output(self, connections_dict, total_cost, runtime, main):
-    #     total_list = [
-    #         {
-    #             "district": int(main),
-    #             "own-costs": total_cost,
-    #         },         
-    #         {
-    #             "location": str({battery.x_coordinate}, {battery.y_coordinate}),
-    #             "capacity": str({battery.start_capacity}),
-    #             "houses": [                       
-    #                         {
-    #                             "location": str({connection.house_x_coordinate()}, {connection.house_y_coordinate()}),
-    #                             "output": str({connection.output()}),
-    #                             "cables": [str({point}) for point in connection.points_list]
-    #                         }
-    #             for connection in connections_dict.values() if connection.battery() == battery.id]
-    #         for battery in self.batteries_dict.values()} 
-    #     ] 
-
-    # # the json file where the output must be stored
-    # out_file = open("random_output.json", "w")
-    
-    # json.dump(total_list, out_file, indent = 1)
-    
-    # out_file.close()
-
-            
-    
     def output(self, connections_dict, total_cost, runtime, main):
-        """
-        Prints output information about solution.
-        """
-        with open('output/output_random.json', 'w') as f:
-            f.write(
-            f'''
-            Runtime: {runtime} seconds
-            District {main}
-            Own-costs: {total_cost}
-            ''')
-            
-            for battery in self.batteries_dict.values():
-                f.write(
-                f'''
-                location: {battery.x_coordinate}, {battery.y_coordinate}
-                capacity: {battery.start_capacity}
-                ''')
-                for connection in connections_dict.values():
-                    if connection.battery() == battery.id:
-                        f.write(
-                            f'''
-                            location: {connection.house_x_coordinate()}, {connection.house_y_coordinate()}
-                            output: {connection.output()}
-                            connection points: {connection.points_list}
-                            '''
-                            )
-            f.close()
+        total_list = []
+        i = 1
 
-    def output_greedy(self, connections_dict, total_cost, runtime, main):
-        """
-        Prints output information about solution.
-        """
-        with open('output/output_greedy.txt', 'w') as f:
-            f.write(
-            f'''
-            Case information-------------------------
-            Runtime: {runtime} seconds
-            District {main}
-            Shared costs: {total_cost}
-            ''')
+        total_list.append({"district": int(main), "own-costs": total_cost})
+
+        for battery in self.batteries_dict.values():
+            houses = []
+            total_list.append({"location": f"{battery.x_coordinate}, {battery.y_coordinate}", "capacity": battery.start_capacity, "houses": houses })
             
-            for battery in self.batteries_dict.values():
-                f.write(
-                f'''
-                Battery ------------------------
-                Location: {battery.x_coordinate}, {battery.y_coordinate}
-                Capacity: {battery.start_capacity}
-                ''')
-                for connection in connections_dict.values():
-                    if connection.battery() == battery.id:
-                        f.write(
-                            f'''
-                            Location: {connection.house_x_coordinate()}, {connection.house_y_coordinate()}
-                            Output: {connection.output()}
-                            Connection points: {connection.points_list}
-                            '''
-                            )
-            f.close()
+            for connection in connections_dict.values():
+                if connection.battery == battery.id:
+                    cables = []
+
+                    for point in connection.points_list:
+                        cables.append(f"{point}")
+
+                    houses.append({"location": f"{connection.house_x_coordinate()}, {connection.house_y_coordinate()}", "output": f"{connection.output()}", "cables": cables})
+
+        out_file = open("output/random_output.json", "w")
+    
+        json.dump(total_list, out_file, indent = 6)
+        
+        out_file.close()
+
+
+        # total_list = [
+        #     {
+        #         "district": int(main),
+        #         "own-costs": total_cost,
+        #     },         
+        #     {
+        #         "location": str({battery.x_coordinate}, {battery.y_coordinate}),
+        #         "capacity": str({battery.start_capacity}),
+        #         "houses": [                       
+        #                     {
+        #                         "location": str({connection.house_x_coordinate()}, {connection.house_y_coordinate()}),
+        #                         "output": str({connection.output()}),
+        #                         "cables": [str({point}) for point in connection.points_list]
+        #                     }
+        #         for connection in connections_dict.values() if connection.battery() == battery.id]
+        #     for battery in self.batteries_dict.values()} 
+        # ] 
+
+    # the json file where the output must be stored
+    
+            
+    
+    # def output(self, connections_dict, total_cost, runtime, main):
+    #     """
+    #     Prints output information about solution.
+    #     """
+    #     with open('output/output_random.json', 'w') as f:
+    #         f.write(
+    #         f'''
+    #         Runtime: {runtime} seconds
+    #         District {main}
+    #         Own-costs: {total_cost}
+    #         ''')
+            
+    #         for battery in self.batteries_dict.values():
+    #             f.write(
+    #             f'''
+    #             location: {battery.x_coordinate}, {battery.y_coordinate}
+    #             capacity: {battery.start_capacity}
+    #             ''')
+    #             for connection in connections_dict.values():
+    #                 if connection.battery() == battery.id:
+    #                     f.write(
+    #                         f'''
+    #                         location: {connection.house_x_coordinate()}, {connection.house_y_coordinate()}
+    #                         output: {connection.output()}
+    #                         connection points: {connection.points_list}
+    #                         '''
+    #                         )
+    #         f.close()
+
+    # def output_greedy(self, connections_dict, total_cost, runtime, main):
+    #     """
+    #     Prints output information about solution.
+    #     """
+    #     with open('output/output_greedy.txt', 'w') as f:
+    #         f.write(
+    #         f'''
+    #         Case information-------------------------
+    #         Runtime: {runtime} seconds
+    #         District {main}
+    #         Shared costs: {total_cost}
+    #         ''')
+            
+    #         for battery in self.batteries_dict.values():
+    #             f.write(
+    #             f'''
+    #             Battery ------------------------
+    #             Location: {battery.x_coordinate}, {battery.y_coordinate}
+    #             Capacity: {battery.start_capacity}
+    #             ''')
+    #             for connection in connections_dict.values():
+    #                 if connection.battery() == battery.id:
+    #                     f.write(
+    #                         f'''
+    #                         Location: {connection.house_x_coordinate()}, {connection.house_y_coordinate()}
+    #                         Output: {connection.output()}
+    #                         Connection points: {connection.points_list}
+    #                         '''
+    #                         )
+    #         f.close()
 
     def all_connected(self, houses_list, connections_dict):
         if len(connections_dict) == len(houses_list):
@@ -173,3 +195,39 @@ class Smartgrid():
         # sort batteries ascending by distance value 
         sorted_batteries = {k: v for k, v in sorted(distances.items(), key=lambda item: item[1])}
         return sorted_batteries
+    
+    def distance(self, x, y, house):
+        """
+        Returns manhatten distance between a coordinate and a house.
+        """   
+        distance = (abs(x - house.x_coordinate)) + (abs(y - house.y_coordinate))   
+        return distance
+
+    def near_connection(self, house, battery, connections_dict):
+        """
+        Loops through coordinates of all connections for a battery and calculates distance to house. 
+        Returns coordinate with smallest distance to house.
+        """     
+        count = 0
+        minimum = False
+        # loop through connections
+        for connection in connections_dict.values():    
+            # if battery is battery
+            if connection.battery_id == battery:
+                # loop through points_list
+                for coordinate in connection.points_list:
+                    # check distance for connection.points_list
+                    x = coordinate[0]
+                    y = coordinate[1]
+
+                    distance = (abs(x- house.x_coordinate)) + (abs(y - house.y_coordinate))
+                    if count == 0:
+                        minimum = coordinate
+                        minimum_dist = distance
+                        count += 1
+                    else:
+                        if distance < minimum_dist:
+                            mimimum = coordinate                     
+        return minimum 
+
+    

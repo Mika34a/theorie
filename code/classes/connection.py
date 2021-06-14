@@ -19,7 +19,8 @@ class Connection:
         self.points_x = []
         self.points_y = []
 
-    def add_point(self):
+
+    def add_point(self, x, y):
         """
         Adds a point and defines length of connection.
         """
@@ -29,14 +30,16 @@ class Connection:
         # copy/append last half of list of points to new connection
 
         # get coordinates from house and battery 
+        house = self.house_id
         house_x = self.house_id.x_coordinate
         house_y = self.house_id.y_coordinate
-        battery_x = self.battery_id.x_coordinate
-        battery_y = self.battery_id.y_coordinate
+        battery_x = x
+        battery_y = y
     	
         point_x = house_x 
         point_y = house_y
-        # save the starting points
+
+        self.connected_houses.append(house)
         self.points_list.append((point_x, point_y))
 
         # loop through all the points and append
