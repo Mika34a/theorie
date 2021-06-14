@@ -22,9 +22,9 @@ class Smartgrid():
         self.houses_dict= loader.load_house(filename)
         self.batteries_dict = loader.load_batteries(filename2) 
 
-    def connect(self, battery, house):
+    def connect(self, x, y, battery, house):
         connection = Connection(house, battery)
-        connection.add_point()
+        connection.add_point(x,y)
         house.connected = True
         return connection
 
@@ -37,10 +37,11 @@ class Smartgrid():
         COST_GRID = 9
         COST_BATTERY = 5000
         cost_cable_all = 0
+        house_cable = 1
 
         for con in connections_dict.values():
-            cost_cable = con.length * COST_GRID
-            cost_cable_all = cost_cable_all + cost_cable
+            cost_cable = (con.length + house_cable) * COST_GRID
+            cost_cable_all = cost_cable_all + cost_cable 
 
         cost_battery_all = COST_BATTERY * len(battery_dict)
         cost_all = cost_cable_all + cost_battery_all
@@ -172,3 +173,39 @@ class Smartgrid():
 
         sorted_batteries = {k: v for k, v in sorted(distances.items(), key=lambda item: item[1])}
         return sorted_batteries
+    
+    def distance(self, x, y, house):
+        """
+        Returns manhatten distance between a coordinate and a house.
+        """   
+        distance = (abs(x - house.x_coordinate)) + (abs(y - house.y_coordinate))   
+        return distance
+
+    def near_connection(self, house, battery, connections_dict):
+        """
+        Loops through coordinates of all connections for a battery and calculates distance to house. 
+        Returns coordinate with smallest distance to house.
+        """     
+        count = 0
+        minimum = False
+        # loop through connections
+        for connection in connections_dict.values():    
+            # if battery is battery
+            if connection.battery_id == battery:
+                # loop through points_list
+                for coordinate in connection.points_list:
+                    # check distance for connection.points_list
+                    x = coordinate[0]
+                    y = coordinate[1]
+
+                    distance = (abs(x- house.x_coordinate)) + (abs(y - house.y_coordinate))
+                    if count == 0:
+                        minimum = coordinate
+                        minimum_dist = distance
+                        count += 1
+                    else:
+                        if distance < minimum_dist:
+                            mimimum = coordinate                     
+        return minimum 
+
+    

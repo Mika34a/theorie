@@ -30,7 +30,7 @@ def run(smartgrid):
                 if  house.output <= battery.capacity:
                     # check if house is already connected
                     if house.connected == False:
-                        connection = smartgrid.connect(battery, house)
+                        connection = smartgrid.connect(battery.x_coordinate, battery.y_coordinate, battery, house)
 
                         # update battery capacity
                         smartgrid.output_capacity(house, battery)
@@ -47,5 +47,4 @@ def run(smartgrid):
             for battery in batteries_closest:
                 battery.reset()
             for house in houses_list:
-                house.reset()
-            continue   
+                house.resest()
