@@ -42,7 +42,7 @@ class Smartgrid():
 
         for con in connections_dict.values():
             cost_cable = (con.length + house_cable) * COST_GRID
-            cost_cable_all = cost_cable_all + cost_cable 
+            cost_cable_all = cost_cable_all + cost_cable
 
         cost_battery_all = COST_BATTERY * len(battery_dict)
         cost_all = cost_cable_all + cost_battery_all
@@ -68,29 +68,29 @@ class Smartgrid():
         
     def output(self, connections_dict, total_cost, runtime, main):
         """
-        Prints output information about solution.
+        Gives the output of the algorithm in json format.
         """
         total_list = []
-        i = 1
 
-        total_list.append({"district": int(main), "own-costs": total_cost})
+        total_list.append({"district": int(main), "costs-own": (total_cost)})
 
         for battery in self.batteries_dict.values():
             houses = []
-            total_list.append({"location": f"{battery.x_coordinate}, {battery.y_coordinate}", "capacity": battery.start_capacity, "houses": houses })
+            total_list.append({"location": f"{battery.x_coordinate},{battery.y_coordinate}", "capacity": battery.start_capacity, "houses": houses })
             
             for connection in connections_dict.values():
-                if connection.battery == battery.id:
+                if connection.battery() == battery.id:
                     cables = []
-
                     for point in connection.points_list:
-                        cables.append(f"{point}")
+                        x,y = point
+                        cables.append(f"{x},{y}")
 
-                    houses.append({"location": f"{connection.house_x_coordinate()}, {connection.house_y_coordinate()}", "output": f"{connection.output()}", "cables": cables})
+                    houses.append({"location": f"{connection.house_x_coordinate()},{connection.house_y_coordinate()}", "output": connection.output(), "cables": cables})
 
-        out_file = open("output/random_output.json", "w")
-    
-        json.dump(total_list, out_file, indent = 6)
+        # the json file where the output must be stored
+        out_file = open("output/output.json", "w")
+               
+        json.dump(total_list, out_file, indent = 2)
         
         out_file.close()
 
@@ -99,26 +99,26 @@ class Smartgrid():
         Prints output information about solution.
         """
         total_list = []
-        i = 1
 
-        total_list.append({"district": int(main), "own-costs": total_cost})
+        total_list.append({"district": int(main), "costs-own": (total_cost)})
 
         for battery in self.batteries_dict.values():
             houses = []
-            total_list.append({"location": f"{battery.x_coordinate}, {battery.y_coordinate}", "capacity": battery.start_capacity, "houses": houses })
+            total_list.append({"location": f"{battery.x_coordinate},{battery.y_coordinate}", "capacity": battery.start_capacity, "houses": houses })
             
             for connection in connections_dict.values():
-                if connection.battery == battery.id:
+                if connection.battery() == battery.id:
                     cables = []
-
                     for point in connection.points_list:
-                        cables.append(f"{point}")
+                        x,y = point
+                        cables.append(f"{x},{y}")
 
-                    houses.append({"location": f"{connection.house_x_coordinate()}, {connection.house_y_coordinate()}", "output": f"{connection.output()}", "cables": cables})
+                    houses.append({"location": f"{connection.house_x_coordinate()},{connection.house_y_coordinate()}", "output": connection.output(), "cables": cables})
 
-        out_file = open("output/random_output.json", "w")
-    
-        json.dump(total_list, out_file, indent = 6)
+        # the json file where the output must be stored
+        out_file = open("output/greedy_output.json", "w")
+               
+        json.dump(total_list, out_file, indent = 2)
         
         out_file.close()
 
@@ -139,11 +139,11 @@ class Smartgrid():
             distance = (abs(battery.x_coordinate - house.x_coordinate)) + (abs(battery.y_coordinate - house.y_coordinate))
             
             distances[battery] = distance
-        
+
         # sort batteries ascending by distance value 
         sorted_batteries = {k: v for k, v in sorted(distances.items(), key=lambda item: item[1])}
         return sorted_batteries
-    
+
     def distance(self, x, y, house):
         """
         Returns manhatten distance between a coordinate and a house.
