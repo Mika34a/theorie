@@ -76,12 +76,13 @@ class Smartgrid():
             total_list.append({"location": f"{battery.x_coordinate}, {battery.y_coordinate}", "capacity": battery.start_capacity, "houses": houses })
             
             for connection in connections_dict.values():
-                cables = []
+                if connection.battery == battery.id:
+                    cables = []
 
-                for point in connection.points_list:
-                    cables.append(f"{point}")
+                    for point in connection.points_list:
+                        cables.append(f"{point}")
 
-                houses.append({"location": f"{connection.house_x_coordinate()}, {connection.house_y_coordinate()}", "output": f"{connection.output()}", "cables": cables})
+                    houses.append({"location": f"{connection.house_x_coordinate()}, {connection.house_y_coordinate()}", "output": f"{connection.output()}", "cables": cables})
 
         out_file = open("output/random_output.json", "w")
     
