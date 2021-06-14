@@ -12,6 +12,7 @@ from code.classes.battery import Battery
 from code.algorithms import random
 import time
 from code.classes import loader
+import json
 
 class Smartgrid():
     def __init__(self, filename, filename2):
@@ -63,33 +64,59 @@ class Smartgrid():
         """
         battery.capacity = battery.capacity - house.output
         
+    # def output(self, connections_dict, total_cost, runtime, main):
+    #     total_list = [
+    #         {
+    #             "district": int(main),
+    #             "own-costs": total_cost,
+    #         },         
+    #         {
+    #             "location": str({battery.x_coordinate}, {battery.y_coordinate}),
+    #             "capacity": str({battery.start_capacity}),
+    #             "houses": [                       
+    #                         {
+    #                             "location": str({connection.house_x_coordinate()}, {connection.house_y_coordinate()}),
+    #                             "output": str({connection.output()}),
+    #                             "cables": [str({point}) for point in connection.points_list]
+    #                         }
+    #             for connection in connections_dict.values() if connection.battery() == battery.id]
+    #         for battery in self.batteries_dict.values()} 
+    #     ] 
+
+    # # the json file where the output must be stored
+    # out_file = open("random_output.json", "w")
+    
+    # json.dump(total_list, out_file, indent = 1)
+    
+    # out_file.close()
+
+            
+    
     def output(self, connections_dict, total_cost, runtime, main):
         """
         Prints output information about solution.
         """
-        with open('output/output_random.txt', 'w') as f:
+        with open('output/output_random.json', 'w') as f:
             f.write(
             f'''
-            Case information-------------------------
             Runtime: {runtime} seconds
             District {main}
-            Shared costs: {total_cost}
+            Own-costs: {total_cost}
             ''')
             
             for battery in self.batteries_dict.values():
                 f.write(
                 f'''
-                Battery ------------------------
-                Location: {battery.x_coordinate}, {battery.y_coordinate}
-                Capacity: {battery.start_capacity}
+                location: {battery.x_coordinate}, {battery.y_coordinate}
+                capacity: {battery.start_capacity}
                 ''')
                 for connection in connections_dict.values():
                     if connection.battery() == battery.id:
                         f.write(
                             f'''
-                            Location: {connection.house_x_coordinate()}, {connection.house_y_coordinate()}
-                            Output: {connection.output()}
-                            Connection points: {connection.points_list}
+                            location: {connection.house_x_coordinate()}, {connection.house_y_coordinate()}
+                            output: {connection.output()}
+                            connection points: {connection.points_list}
                             '''
                             )
             f.close()
@@ -98,23 +125,3 @@ class Smartgrid():
         if len(connections_dict) == len(houses_list):
             return True
         return False  
-
-    def match_point(self):
-        # loop door connecties (def geselecteerde connectie)
-        for connection in self.connections_dict.values():
-        # wat is de batterij? 
-            battery = connection.battery
-            # loop connecties zonder geselecteerde connectie 
-            for connection2 in self.connections_dict.values():
-                if connection is not connection2 and connection.battery is connection2.battery:
-                    for point in connection.points_list:
-                        for point2 in connection2.points_list:
-                            if point == point2:
-                                return connection
-
-            # if batterij is zelfde
-            # loop door points of geselecteerde connectie
-            # loop door points other conneciton
-                # als punten matchen: return True (length is dan gelijk aan lengte over y as)
-
-                #hij loop eerst door Y coordinaten en dan door x coordinaten

@@ -1,0 +1,5 @@
+pip3 install numpy
+
+matplotlib for grid visualisation
+python3 -m pip install -U pip
+python3 -m pip install -U matplotlib
