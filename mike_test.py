@@ -21,17 +21,32 @@ if __name__ == "__main__":
     filename = f"database/district_{district_int}/district-{district_int}_houses.csv"
     filename2 = f"database/district_{district_int}/district-{district_int}_batteries.csv"
 
-    # load houses and batteries dict
-    smartgrid = Smartgrid(filename, filename2)
+    N = 30
+    cheapest = 100000
+    total = 0
 
-    # get info of case
-    connections_dict = greedy.run(smartgrid)
-    total_cost = smartgrid.costs(connections_dict, smartgrid.batteries_dict)
-    
-    # Create grid picture
-    grid.create_grid(smartgrid.houses_dict, smartgrid.batteries_dict, connections_dict)
-    
-    print(total_cost)
+    for n in range(N):
+        # load houses and batteries dict
+        smartgrid = Smartgrid(filename, filename2)
 
-    # export output to txt file
-    smartgrid.output_greedy(connections_dict, total_cost, (time.time()-runtime), argv[1])
+        # get info of case
+        connections_dict = greedy.run(smartgrid)
+        new_cost = smartgrid.costs(connections_dict, smartgrid.batteries_dict)
+
+        # save results if current run is the cheapest
+        if new_cost < cheapest:
+            cheapest = new_cost
+
+            # export output to txt file
+            smartgrid.output_greedy(connections_dict, cheapest, (time.time()-runtime), argv[1])
+
+            # Create grid picture
+            grid.create_grid(smartgrid.houses_dict, smartgrid.batteries_dict, connections_dict)
+
+        total = total + new_cost
+        
+    print(cheapest)
+    average_cost = total / N
+    print(average_cost)
+
+    

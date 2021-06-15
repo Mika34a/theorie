@@ -40,7 +40,6 @@ def run(smartgrid):
         
         # check if all houses are connected               
         if smartgrid.all_connected(houses_list, connections_dict):
-            print(f"dict len: {len(connections_dict)}") 
             return connections_dict
         else:
             # if not reset everything and re-iterate
