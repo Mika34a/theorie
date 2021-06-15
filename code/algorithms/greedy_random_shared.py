@@ -33,7 +33,7 @@ def run(smartgrid):
 
                     # find closest coordinate of connection to battery
                     close_connection_coordinate = smartgrid.near_connection(house, battery, connections_dict)
-                    print(close_connection_coordinate)
+                    # print(close_connection_coordinate)
                     # calculate distance connection from house
                     x_connect = close_connection_coordinate[0]
                     y_connect =  close_connection_coordinate[1]
