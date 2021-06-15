@@ -28,7 +28,7 @@ if __name__ == "__main__":
     grid.create_grid(smartgrid.houses_dict, smartgrid.batteries_dict)
 
     # get info of case
-    connections_dict = greedy_random.run(smartgrid)
+    connections_dict = greedy_random_shared.run(smartgrid)
     total_cost = smartgrid.costs(connections_dict, smartgrid.batteries_dict)
     print(total_cost)
 

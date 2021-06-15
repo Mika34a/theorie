@@ -29,8 +29,11 @@ class Connection:
         # get coordinates from house and battery 
         house_x = self.house_id.x_coordinate
         house_y = self.house_id.y_coordinate
-        battery_x = x
-        battery_y = y
+        battery_x = self.battery_id.x_coordinate
+        battery_y = self.battery_id.y_coordinate
+
+        connect_x = x
+        connect_y = y
     	
         point_x = house_x 
         point_y = house_y
@@ -50,7 +53,7 @@ class Connection:
             else:
                 break
             self.points_list.append((point_x, point_y))
-        self.length = (abs(battery_x - house_x)) + (abs(battery_y - house_y))    
+        self.length = (abs(connect_x - house_x)) + (abs(connect_y - house_y))    
                 
     
             
