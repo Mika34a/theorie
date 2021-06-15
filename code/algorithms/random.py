@@ -41,7 +41,7 @@ def run(smartgrid):
 
         # all_connected                
         if smartgrid.all_connected(houses_list, connections_dict):
-            print(f"dict len: {len(connections_dict)}") 
+            # print(f"dict len: {len(connections_dict)}") 
             return connections_dict
         else:
             for battery in batteries_list:
