@@ -16,6 +16,9 @@ class Connection:
         self.battery_id = battery 
         self.points_list = []
         self.length = 0
+        self.points_x = []
+        self.points_y = []
+
 
     def add_point(self, x, y):
         """
@@ -39,6 +42,8 @@ class Connection:
         point_y = house_y
         # save the starting points
         self.points_list.append((point_x, point_y))
+        self.points_x.append(point_x)
+        self.points_y.append(point_y)
 
         # loop through all the points and append
         while True:
@@ -53,9 +58,11 @@ class Connection:
             else:
                 break
             self.points_list.append((point_x, point_y))
-        self.length = (abs(connect_x - house_x)) + (abs(connect_y - house_y))    
-                
-    
+            self.points_x.append(point_x)
+            self.points_y.append(point_y)
+        
+        # Manhattan distance, with +1 because of ending location
+        self.length = (abs(connect_x - house_x)) + (abs(connect_y - house_y)) + 1
             
 # functions
     def return_points(self): 

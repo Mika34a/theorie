@@ -1,7 +1,7 @@
 from code.classes.smartgrid import Smartgrid
 from code.classes import loader
 from code.grid import grid
-from code.algorithms import random
+from code.algorithms import greedy_random_shared, random
 from code.algorithms import greedy_random as greedy
 from sys import argv
 import time
@@ -24,12 +24,13 @@ if __name__ == "__main__":
     # load houses and batteries dict
     smartgrid = Smartgrid(filename, filename2)
 
-    # Create grid picture
-    grid.create_grid(smartgrid.houses_dict, smartgrid.batteries_dict)
-
     # get info of case
     connections_dict = greedy.run(smartgrid)
     total_cost = smartgrid.costs(connections_dict, smartgrid.batteries_dict)
+    
+    # Create grid picture
+    grid.create_grid(smartgrid.houses_dict, smartgrid.batteries_dict, connections_dict)
+    
     print(total_cost)
 
     # export output to txt file
