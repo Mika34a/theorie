@@ -32,8 +32,11 @@ class Connection:
         # get coordinates from house and battery 
         house_x = self.house_id.x_coordinate
         house_y = self.house_id.y_coordinate
-        battery_x = x
-        battery_y = y
+        battery_x = self.battery_id.x_coordinate
+        battery_y = self.battery_id.y_coordinate
+
+        connect_x = x
+        connect_y = y
     	
         point_x = house_x 
         point_y = house_y
@@ -58,8 +61,8 @@ class Connection:
             self.points_x.append(point_x)
             self.points_y.append(point_y)
         
-        # Manhattan distance
-        self.length = (abs(battery_x - house_x)) + (abs(battery_y - house_y)) + 1   
+        # Manhattan distance, with +1 because of ending location
+        self.length = (abs(connect_x - house_x)) + (abs(connect_y - house_y)) + 1
             
 # functions
     def return_points(self): 

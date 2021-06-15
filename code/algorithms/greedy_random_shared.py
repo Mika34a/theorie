@@ -29,9 +29,11 @@ def run(smartgrid):
             for battery in batteries_closest:
 
                 if smartgrid.near_connection(house, battery, connections_dict) != False:
+
                     # find closest coordinate of connection to battery
                     close_connection_coordinate = smartgrid.near_connection(house, battery, connections_dict)
                     
+                    # calculate distance connection from house
                     x_connect = close_connection_coordinate[0]
                     y_connect =  close_connection_coordinate[1]
 
@@ -44,7 +46,6 @@ def run(smartgrid):
                         if house.connected == False:
                             # connect house to connection if connection is closer
                             if dist_connection < dist_battery:
-                                
                                 connection = smartgrid.connect(x_connect, y_connect, battery, house)
                             else:
                                 connection = smartgrid.connect(battery.x_coordinate, battery.y_coordinate, battery, house)          
