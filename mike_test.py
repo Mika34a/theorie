@@ -4,6 +4,7 @@ from code.grid import grid
 from code.algorithms import greedy_random_shared, random
 from code.algorithms import greedy_random as greedy
 from sys import argv
+import statistics
 import time
 
 runtime = time.time()
@@ -23,7 +24,7 @@ if __name__ == "__main__":
 
     N = 30
     cheapest = 100000
-    total = 0
+    total = []
 
     for n in range(N):
         # load houses and batteries dict
@@ -43,10 +44,12 @@ if __name__ == "__main__":
             # Create grid picture
             grid.create_grid(smartgrid.houses_dict, smartgrid.batteries_dict, connections_dict)
 
-        total = total + new_cost
+        total.append(new_cost)
+    
+    average_cost = sum(total) / N
         
     print(cheapest)
-    average_cost = total / N
+    print(statistics.stdev(total))
     print(average_cost)
 
     
