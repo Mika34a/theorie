@@ -1,7 +1,7 @@
 from code.classes.smartgrid import Smartgrid
 from code.classes import loader
 from code.grid import grid
-from code.algorithms import random
+from code.algorithms import greedy_random_shared, random
 from code.algorithms import greedy_random as greedy
 from sys import argv
 import time

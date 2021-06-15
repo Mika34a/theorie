@@ -39,6 +39,8 @@ class Connection:
         point_y = house_y
         # save the starting points
         self.points_list.append((point_x, point_y))
+        self.points_x.append(point_x)
+        self.points_y.append(point_y)
 
         # loop through all the points and append
         while True:
@@ -55,10 +57,9 @@ class Connection:
             self.points_list.append((point_x, point_y))
             self.points_x.append(point_x)
             self.points_y.append(point_y)
-            
-        self.length = (abs(battery_x - house_x)) + (abs(battery_y - house_y))    
-                
-    
+        
+        # Manhattan distance
+        self.length = (abs(battery_x - house_x)) + (abs(battery_y - house_y)) + 1   
             
 # functions
     def return_points(self): 

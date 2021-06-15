@@ -46,7 +46,6 @@ def run(smartgrid):
                             if dist_connection < dist_battery:
                                 
                                 connection = smartgrid.connect(x_connect, y_connect, battery, house)
-                                print(connection)
                             else:
                                 connection = smartgrid.connect(battery.x_coordinate, battery.y_coordinate, battery, house)          
                 else:

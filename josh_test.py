@@ -23,16 +23,14 @@ if __name__ == "__main__":
     # load houses and batteries dict
     smartgrid = Smartgrid(filename, filename2)
 
-    # Create grid picture
-    grid.create_grid(smartgrid.houses_dict, smartgrid.batteries_dict)
-
     # get info of case
-    connections_dict = greedy_random_shared.run(smartgrid)
+    connections_dict = random.run(smartgrid)
     total_cost = smartgrid.costs(connections_dict, smartgrid.batteries_dict)
+    # Create grid picture
+    grid.create_grid(smartgrid.houses_dict, smartgrid.batteries_dict, connections_dict)
     print(total_cost)
     # for connection in connections_dict.values():
     #     print(connection.points_list)
-    
     
     # export output to txt file
     smartgrid.output(connections_dict, total_cost, (time.time()-runtime), argv[1])
