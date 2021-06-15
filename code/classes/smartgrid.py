@@ -5,7 +5,6 @@
 #
 # - Implements smartgrid class.
 
-from django.db import connection
 from code.classes import *
 from code.classes.connection import Connection
 from code.classes.house import House
@@ -99,7 +98,7 @@ class Smartgrid():
         """
         total_list = []
 
-        total_list.append({"district": int(main), "costs-own": (total_cost)})
+        total_list.append({"district": int(main), "costs-shared": (total_cost)})
 
         for battery in self.batteries_dict.values():
             houses = []
@@ -174,7 +173,7 @@ class Smartgrid():
                         count += 1
                     else:
                         if distance < minimum_dist:
-                            mimimum = coordinate                     
+                            minimum = coordinate                     
         return minimum 
 
     
