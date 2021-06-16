@@ -37,7 +37,6 @@ class Smartgrid():
         COST_GRID = 9
         COST_BATTERY = 5000
         cost_cable_all = 0
-        coordinates_set = set()
 
         if shared == False: 
             for con in connections_dict.values():
@@ -48,11 +47,17 @@ class Smartgrid():
         else:
             for con in connections_dict.values():
                 for coordinate in con.points_list:
-                    coordinates_set.add(coordinate)
-            print(coordinates_set)
+                    for battery in self.batteries_dict.values():            
+                        set_coordinates = set()
+                        if con.battery_id == battery:
+                            set_coordinates.add(coordinate)
+                    amount_segments_battery = len(set_coordinates)
+                    amount_segments_total = amount_segments_battery + amount_segments_total
+                        
 
-            amount_segments = len(coordinates_set) - 150
-            cost_cable_all = COST_GRID * amount_segments
+        print(amount_segments_total)
+
+        cost_cable_all = COST_GRID * (amount_segments_total - 150)
         
         cost_battery_all = COST_BATTERY * len(battery_dict)
         cost_all = cost_cable_all + cost_battery_all          
@@ -127,7 +132,7 @@ class Smartgrid():
                     houses.append({"location": f"{connection.house_x_coordinate()},{connection.house_y_coordinate()}", "output": connection.output(), "cables": cables})
 
         # the json file where the output must be stored
-        out_file = open("output_greedy.json", "w")
+        out_file = open("output.json", "w")
                
         json.dump(total_list, out_file, indent = 2)
         
