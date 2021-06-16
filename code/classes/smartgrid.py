@@ -127,7 +127,7 @@ class Smartgrid():
                     houses.append({"location": f"{connection.house_x_coordinate()},{connection.house_y_coordinate()}", "output": connection.output(), "cables": cables})
 
         # the json file where the output must be stored
-        out_file = open("output.json", "w")
+        out_file = open("output_greedy.json", "w")
                
         json.dump(total_list, out_file, indent = 2)
         
