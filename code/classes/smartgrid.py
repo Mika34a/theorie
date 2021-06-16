@@ -45,7 +45,7 @@ class Smartgrid():
                 cost_cable_all = cost_cable_all + cost_cable
 
         else:
-            amount_segments_total = -150
+            amount_segments_total = 0
 
             #for every battery
             for battery in self.batteries_dict.values():
@@ -56,10 +56,10 @@ class Smartgrid():
                     if con.battery_id == battery:
                         # loop through points_list and add to set
                         for coordinate in con.points_list:
-                            set_coordinates.add(coordinate)
-                print(set_coordinates)        
+                            set_coordinates.add(coordinate)       
                 amount_segments_battery = len(set_coordinates)
                 amount_segments_total = amount_segments_battery + amount_segments_total
+                print(amount_segments_total)
             cost_cable_all = COST_GRID * amount_segments_total
 
             
@@ -92,7 +92,7 @@ class Smartgrid():
         """
         total_list = []
 
-        total_list.append({"district": int(main), "costs-own": (total_cost)})
+        total_list.append({"district": int(main), "costs-shared": (total_cost)})
 
         for battery in self.batteries_dict.values():
             houses = []
