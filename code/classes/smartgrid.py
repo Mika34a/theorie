@@ -44,18 +44,27 @@ class Smartgrid():
                 cost_cable = con.length * COST_GRID
                 cost_cable_all = cost_cable_all + cost_cable
 
-
         else:
-            for con in connections_dict.values():
-                for coordinate in con.points_list:
-                    coordinates_set.add(coordinate)
-            print(coordinates_set)
+            amount_segments_total = -150
 
-            amount_segments = len(coordinates_set) - 150
-            cost_cable_all = COST_GRID * amount_segments
-        
+            #for every battery
+            for battery in self.batteries_dict.values():
+                # make empty set
+                set_coordinates = set() 
+                # for every connection with same battery
+                for con in connections_dict.values():
+                    if con.battery_id == battery:
+                        # loop through points_list and add to set
+                        for coordinate in con.points_list:
+                            set_coordinates.add(coordinate)
+                print(set_coordinates)        
+                amount_segments_battery = len(set_coordinates)
+                amount_segments_total = amount_segments_battery + amount_segments_total
+            cost_cable_all = COST_GRID * amount_segments_total
+
+            
         cost_battery_all = COST_BATTERY * len(battery_dict)
-        cost_all = cost_cable_all + cost_battery_all          
+        cost_all = cost_cable_all + cost_battery_all       
                   
         return cost_all
 
