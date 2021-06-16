@@ -25,8 +25,8 @@ if __name__ == "__main__":
     smartgrid = Smartgrid(filename, filename2)
 
     # get info of case
-    connections_dict = greedy_random_shared.run(smartgrid)
-    total_cost = smartgrid.costs(connections_dict, smartgrid.batteries_dict)
+    connections_dict = greedy_random.run(smartgrid)
+    total_cost = smartgrid.costs(connections_dict, smartgrid.batteries_dict, shared = True)
     # Create grid picture
     grid.create_grid(smartgrid.houses_dict, smartgrid.batteries_dict, connections_dict)
     print(total_cost)

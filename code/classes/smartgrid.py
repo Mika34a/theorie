@@ -22,13 +22,13 @@ class Smartgrid():
         self.houses_dict= loader.load_house(filename)
         self.batteries_dict = loader.load_batteries(filename2) 
 
-    def connect(self, x, y, battery, house):
+    def connect(self, battery, house):
         connection = Connection(house, battery)
-        connection.add_point(x,y)
+        connection.add_point()
         house.connected = True
         return connection
 
-    def costs(self, connections_dict, battery_dict):
+    def costs(self, connections_dict, battery_dict, shared):
         """
         Returns the total costs of the combined cables.
         """
@@ -37,13 +37,26 @@ class Smartgrid():
         COST_GRID = 9
         COST_BATTERY = 5000
         cost_cable_all = 0
+        coordinates_set = set()
 
-        for con in connections_dict.values():
-            cost_cable = con.length * COST_GRID
-            cost_cable_all = cost_cable_all + cost_cable
+        if shared == False: 
+            for con in connections_dict.values():
+                cost_cable = con.length * COST_GRID
+                cost_cable_all = cost_cable_all + cost_cable
 
+
+        else:
+            for con in connections_dict.values():
+                for coordinate in con.points_list:
+                    coordinates_set.add(coordinate)
+            print(coordinates_set)
+
+            amount_segments = len(coordinates_set) - 150
+            cost_cable_all = COST_GRID * amount_segments
+        
         cost_battery_all = COST_BATTERY * len(battery_dict)
-        cost_all = cost_cable_all + cost_battery_all
+        cost_all = cost_cable_all + cost_battery_all          
+                  
         return cost_all
 
     def disc_houses(self):

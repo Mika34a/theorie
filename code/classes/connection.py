@@ -20,7 +20,7 @@ class Connection:
         self.points_y = []
 
 
-    def add_point(self, x, y):
+    def add_point(self):
         """
         Adds a point and defines length of connection.
         """
@@ -34,9 +34,6 @@ class Connection:
         house_y = self.house_id.y_coordinate
         battery_x = self.battery_id.x_coordinate
         battery_y = self.battery_id.y_coordinate
-
-        connect_x = x
-        connect_y = y
     	
         point_x = house_x 
         point_y = house_y
@@ -62,7 +59,7 @@ class Connection:
             self.points_y.append(point_y)
         
         # Manhattan distance, with +1 because of ending location
-        self.length = (abs(connect_x - house_x)) + (abs(connect_y - house_y)) + 1
+        self.length = (abs(battery_x - house_x)) + (abs(battery_y - house_y)) + 1
             
 # functions
     def return_points(self): 
