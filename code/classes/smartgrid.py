@@ -43,24 +43,26 @@ class Smartgrid():
                 cost_cable = con.length * COST_GRID
                 cost_cable_all = cost_cable_all + cost_cable
 
-
         else:
-            for con in connections_dict.values():
-                for coordinate in con.points_list:
-                    for battery in self.batteries_dict.values():            
-                        set_coordinates = set()
-                        if con.battery_id == battery:
-                            set_coordinates.add(coordinate)
-                    amount_segments_battery = len(set_coordinates)
-                    amount_segments_total = amount_segments_battery + amount_segments_total
-                        
+            amount_segments_total = 0
 
-        print(amount_segments_total)
+            #for every battery
+            for battery in self.batteries_dict.values():
+                # make empty set
+                set_coordinates = set() 
+                # for every connection with same battery
+                for con in connections_dict.values():
+                    if con.battery_id == battery:
+                        # loop through points_list and add to set
+                        for coordinate in con.points_list:
+                            set_coordinates.add(coordinate)       
+                amount_segments_battery = len(set_coordinates)
+                amount_segments_total = amount_segments_battery + amount_segments_total
+                print(amount_segments_total)
+            cost_cable_all = COST_GRID * amount_segments_total
 
-        cost_cable_all = COST_GRID * (amount_segments_total - 150)
-        
         cost_battery_all = COST_BATTERY * len(battery_dict)
-        cost_all = cost_cable_all + cost_battery_all          
+        cost_all = cost_cable_all + cost_battery_all       
                   
         return cost_all
 
@@ -88,7 +90,7 @@ class Smartgrid():
         """
         total_list = []
 
-        total_list.append({"district": int(main), "costs-own": (total_cost)})
+        total_list.append({"district": int(main), "costs-shared": (total_cost)})
 
         for battery in self.batteries_dict.values():
             houses = []
