@@ -1,7 +1,7 @@
 from code.classes.smartgrid import Smartgrid
 from code.classes import loader
 from code.grid import grid
-from code.algorithms import greedy_random, random, greedy_random_shared
+from code.algorithms import greedy_random, random, greedy_random_shared, sim_annealing
 from sys import argv
 import time
 import statistics
@@ -25,21 +25,22 @@ if __name__ == "__main__":
     smartgrid = Smartgrid(filename, filename2)
 
     # get info of case
-    all_costs = []
-    all_runtimes = []
-    N = 1000
+    # all_costs = []
+    # all_runtimes = []
+    # N = 1000
 
-    for n in range(N):
-        connections_dict = random.run(smartgrid)
-        total_cost = smartgrid.costs(connections_dict, smartgrid.batteries_dict)
+    # for n in range(N):                                                                                                                                                                                     
+    connections_dict = random.run(smartgrid)
+    connections_dict = sim_annealing.run(smartgrid, connections_dict)
+    total_cost = smartgrid.costs(connections_dict, smartgrid.batteries_dict)
         # print(total_cost)
         # print(time.time()-runtime)
-        all_costs.append(total_cost)
+        # all_costs.append(total_cost)
         # all_runtimes.append(time.time()-runtime)
 
-    average_costs  = sum(all_costs) / N
-    # average_runtime = sum(all_runtimes) / N
-    print(average_costs, statistics.stdev(all_costs))
+    # average_costs  = sum(all_costs) / N
+    # # average_runtime = sum(all_runtimes) / N
+    # print(average_costs, statistics.stdev(all_costs))
 
     # Create grid picture
     grid.create_grid(smartgrid.houses_dict, smartgrid.batteries_dict, connections_dict)

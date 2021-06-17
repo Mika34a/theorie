@@ -13,6 +13,8 @@ from code.algorithms import random
 import time
 from code.classes import loader
 import json
+import random
+import copy
 
 class Smartgrid():
     def __init__(self, filename, filename2):
@@ -83,6 +85,10 @@ class Smartgrid():
         Substracts the output from the house from the battery capacity.
         """
         battery.capacity = battery.capacity - house.output
+    
+    def output_capacity_refill(self, house, battery):
+        battery.capacity = battery.capacity + house.output
+
         
     def output(self, connections_dict, total_cost, runtime, main):
         """
@@ -195,5 +201,85 @@ class Smartgrid():
                         if distance < minimum_dist:
                             minimum = coordinate                     
         return minimum 
+
+    def random_connect(self, connections_dict):   
+        """
+        Make new connections for disconnected houses and return new dict.
+        """
+        while True:   
+            to_connect_house = [] 
+            houses_list = []                      
+            for house in self.houses_dict.values():
+                houses_list.append(house)
+                random.shuffle(houses_list)
+            
+            batteries_list = []
+            # make random of batteries
+            for battery in self.batteries_dict.values():
+                batteries_list.append(battery)
+                random.shuffle(batteries_list)     
+
+            # loop through houses
+            for house_key in houses_list:
+                if house.connected == False:
+                    # put house in list
+                    to_connect_house.append(house)
+                # loop through batteries
+                    for battery in batteries_list:
+                    # connect house to battery if capacity 
+                        if battery.capacity >= house.output:
+                            connection = self.connect(battery, house)
+                            # update battery capacity
+                            self.output_capacity(house, battery)
+
+                            # put connection in dict
+                            connections_dict[connection.house] = connection
+                
+            # all_connected                
+            if self.all_connected(houses_list, connections_dict):
+                # print(f"dict len: {len(connections_dict)}") 
+                return connections_dict
+            else:
+                for battery in batteries_list:
+                    if battery.house in to_connect_house:
+                        battery.output_capacity_refill(house)
+                for house in to_connect_house:
+                    house.reset()
+                continue    
+
+    def random_adjust(self, connections_dict):
+        """
+        Make a random adjustment.
+        """
+        PART_ADJUST = int(len(connections_dict) / 10)
+                                                                                                                                        
+        # make copy of connections dict for new dict
+        connections_dict_copy = copy.deepcopy(connections_dict)
+
+        # remove part of connections
+        for i in range(PART_ADJUST):
+            # make new connections_dict
+            connections_list = list(connections_dict_copy.keys())
+            # print(connections_list)
+            random_connection = random.choice(connections_list)
+
+            # refill battery capacity
+            random_connection_value = connections_dict_copy[random_connection]
+            # .battery_id.output_capacity_refill(random_connection.house, random_connection.battery)
+            random_connection_value.house_id.reset()
+            
+            # remove connection from connections_dict_copy
+            del(connections_dict_copy[random_connection])
+
+        # make new connections and put in dict
+        new_con_dict = self.random_connect(connections_dict_copy)      
+
+        print(len(new_con_dict))                                
+
+        return new_con_dict
+
+   
+
+
 
     

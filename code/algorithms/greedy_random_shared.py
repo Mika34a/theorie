@@ -1,4 +1,3 @@
-
 # greedy_random_shared.py
 #
 # Programmeertheorie
