@@ -18,7 +18,7 @@ def run(smartgrid, connections_dict):
     start_T = 285
     final_T = .1
     T = start_T
-    cooling = .5
+    cooling = 1
     chance = 0.2
     
     # Repeat N times
