@@ -17,32 +17,31 @@ class SimulatedAnnealing(Hillclimber):
     Each improvement or equivalent solution is kept for the next iteration.
     Also sometimes accepts solutions that are worse, depending on the current temperature.
     """
-def cost_diff():
-    
-def run(smartgrid, connections_dict):
-    # Choose a random start state
-    start_state = connections_dict
-    
-    # Choose starting temperature
-    start_T = 285
-    final_T = .1
-    T = start_T
-    cooling = 1
-    chance = 0.2
-    
-    # Repeat N times
-    while T > final_T:
-        # smaller random adjustment
-        new_state = smartgrid.random_adjust(start_state)
-        cost_diff = smartgrid.costs(start_state) - smartgrid.costs(new_state)
-        
-        if cost_diff > 0:
-            start_state = new_state
-        else:
-            # If random()<chance(old, new, temp):
-            if random.random() < math.exp(cost_diff / T):
-                start_state = new_state
-        # decrease temperature        
-        T -= cooling
+    def __init__(self, smartgrid, connections_dict, temp=1):
+        super().__init__(smartgrid, connections_dict)
 
-    return new_state
+        self.T0 = temp
+        self.T = temp
+
+    def update_temp(self):
+        """
+        Linear cooling scheme, with temperature becoming zero
+        after all iterations.
+        """
+        self.T = self.T - (self.T0 / self.iterations)
+
+    def check_solution(self, new_connections_dict):
+        """
+        """
+        # calculate costs of new grid
+        new_costs = self.grid.costs(new_connections_dict, self.batteries_dict, shared = False)
+        old_costs = self.cost
+        
+        costdif = new_costs - old_costs
+        chance = math.exp(-costdif / self.T)
+
+        if random.random() < chance:
+            self.grid = new_connections_dict
+            self.cost = new_costs
+
+        self.update_temp()
