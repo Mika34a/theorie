@@ -17,7 +17,7 @@ class SimulatedAnnealing(Hillclimber):
     Each improvement or equivalent solution is kept for the next iteration.
     Also sometimes accepts solutions that are worse, depending on the current temperature.
     """
-    def __init__(self, smartgrid, connections_dict, temp=1):
+    def __init__(self, smartgrid, connections_dict, temp=285):
         super().__init__(smartgrid, connections_dict)
 
         self.T0 = temp
@@ -32,6 +32,7 @@ class SimulatedAnnealing(Hillclimber):
 
     def check_solution(self, new_connections_dict):
         """
+        Compares the costs of the old and new connections.
         """
         # calculate costs of new grid
         new_costs = self.grid.costs(new_connections_dict, self.batteries_dict, shared = False)
