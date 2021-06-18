@@ -9,7 +9,16 @@
 
 import random
 import math
+from .hillclimber import Hillclimber
 
+class SimulatedAnnealing(Hillclimber):
+    """
+    The SimulatedAnnealing class that changes random connections in the grid.
+    Each improvement or equivalent solution is kept for the next iteration.
+    Also sometimes accepts solutions that are worse, depending on the current temperature.
+    """
+def cost_diff():
+    
 def run(smartgrid, connections_dict):
     # Choose a random start state
     start_state = connections_dict

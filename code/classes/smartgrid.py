@@ -25,6 +25,9 @@ class Smartgrid():
         self.batteries_dict = loader.load_batteries(filename2) 
 
     def connect(self, battery, house):
+        """
+        Creates a connection between houses and batteries.
+        """
         connection = Connection(house, battery)
         connection.add_point()
         house.connected = True
@@ -44,7 +47,6 @@ class Smartgrid():
             for con in connections_dict.values():
                 cost_cable = con.length * COST_GRID
                 cost_cable_all = cost_cable_all + cost_cable
-
         else:
             amount_segments_total = 0
 
@@ -197,97 +199,6 @@ class Smartgrid():
                         if distance < minimum_dist:
                             minimum = coordinate                     
         return minimum 
-
-    def random_connect(self, connections_dict_copy, removed_houses, connections_dict):   
-        """
-        Make new connections for disconnected houses and return new dict.
-        """
-        while True:   
-            
-            to_connect_house = []                    
-            for house in removed_houses.values():
-                to_connect_house.append(house.house_id)
-                random.shuffle(to_connect_house)
-
-            #print(len(to_connect_house))
-
-            batteries_list = []
-            # make random of batteries
-            for battery in removed_houses.values():
-                if battery.battery_id not in batteries_list:
-                    batteries_list.append(battery.battery_id)
-                    random.shuffle(batteries_list)
-            #print(len(batteries_list))
-
-            # loop through houses
-            for house in to_connect_house:
-                #print("checking house")
-                if house.connected == False:
-                    #print("house is false")
-                # loop through batteries
-                    for battery in batteries_list:
-                        #print("checking a new battery")
-                        #print(battery.capacity)
-                    # connect house to battery if capacity 
-                        if house.output <= battery.capacity:
-                            #print("there is capacity")
-                            connection = self.connect(battery, house)
-                            # update battery capacity
-                            self.output_capacity(house, battery)
-
-                            # put connection in dict
-                            connections_dict_copy[connection.house] = connection
-                            #print("connections_dict_copy")
-                
-            # all_connected                
-            if self.all_connected(connections_dict, connections_dict_copy):
-                # print(f"dict len: {len(connections_dict_copy)}") 
-                print("True")
-                return connections_dict_copy
-                
-            else:
-                for house in to_connect_house:
-                    house.reset()
-                for battery in batteries_list:
-                    battery.output_capacity_refill(house)
-                print("False")
-                continue    
-
-    def random_adjust(self, connections_dict):
-        """
-        Make a random adjustment.
-        """
-        PART_ADJUST = int(len(connections_dict) / 10)
-                                                                                                                                        
-        # make copy of connections dict for new dict
-        connections_dict_copy = copy.deepcopy(connections_dict)
-
-        removed_houses = {}
-        opened_up_batteries = {}
-
-        # remove part of connections
-        for i in range(PART_ADJUST):
-            # make new connections_dict
-            connections_list = list(connections_dict_copy.keys())
-            # print(connections_list)
-            random_connection = random.choice(connections_list)
-
-            # refill battery capacity
-            random_connection_value = connections_dict_copy[random_connection]
-            random_connection_value.battery_id.output_capacity_refill(random_connection_value.house_id)
-            random_connection_value.house_id.reset()
-            
-            # add house to dictionary of removed
-            removed_houses[random_connection] = random_connection_value
-
-            # remove connection from connections_dict_copy
-            del(connections_dict_copy[random_connection])
-
-        # make new connections and put in dict
-        new_con_dict = self.random_connect(connections_dict_copy, removed_houses, connections_dict)   
-        print(len(new_con_dict))
-        return new_con_dict
-
    
 
 

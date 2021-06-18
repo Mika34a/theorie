@@ -8,15 +8,16 @@ class Hillclimber:
     """
 
     def __init__(self, smartgrid, connections_dict):
-        # beste score
-        # beste 
+        """
+        Initializes Hillclimber attributes.
+        """
         self.grid = copy.deepcopy(smartgrid)
         self.connections_dict = copy.deepcopy(connections_dict)
         self.cost = self.grid.costs(connections_dict, self.batteries_dict, shared = False)
 
     def remove_connections(self, part_adjust, new_connections_dict):
         """
-        removes subset of connections from connections dict
+        Removes subset of connections from connections dict.
         """
         PART_ADJUST = part_adjust
 
@@ -25,16 +26,17 @@ class Hillclimber:
             # make new connections_dict
             connections_list = list(new_connections_dict.keys())
             random_connection = random.choice(connections_list)
-
             # refill battery capacity, reset house connection
             random_pick = new_connections_dict[random_connection]
             random_pick.battery_id.output_capacity_refill(random_pick.house_id)
             random_pick.house_id.reset()
-
             # remove connection from new_connections_dict
             del(new_connections_dict[random_connection])   
 
     def disconnected_houses(self):
+        """
+        Makes a list of houses that are not connected.
+        """
         to_connect = []
         for house in self.grid.houses_dict.values():
             if house.check_connection == False:
@@ -42,7 +44,9 @@ class Hillclimber:
         return to_connect
 
     def add_new_connections(self, new_connections_dict):
-        
+        """
+        Reconnects the disconnected houses randomly.
+        """
         # list of houses to connect
         to_connect_house = self.disconnected_houses()                 
         random.shuffle(to_connect_house)
@@ -53,7 +57,6 @@ class Hillclimber:
             batteries_list.append(battery.battery_id)
             random.shuffle(batteries_list)
             
-
         # loop through houses
         for house in to_connect_house:
             #print("checking house")
@@ -69,13 +72,14 @@ class Hillclimber:
                         connection = self.grid.connect(battery, house)
                         # update battery capacity
                         self.grid.output_capacity(house, battery)
-
                         # put connection in dict
                         new_connections_dict[connection.house] = connection
-        
         return new_connections_dict  
 
     def check_solution(self, new_connections_dict):
+        """
+        Compares the costs of the old and new connections.
+        """
         # calculate costs of new grid
         new_costs = self.grid.costs(new_connections_dict, self.batteries_dict, shared = False)
         old_costs = self.cost
@@ -85,23 +89,30 @@ class Hillclimber:
             self.cost = new_costs
     
     def check_all_connections(self, new_connections_dict):
+        """
+        returns true if all houses are connected, else resets battery capacity and house.connected
+        """
         # all_connected                
         if len(new_connections_dict) == len(self.connections_dict):
             # if all houses connected
             return True    
         
         # if not all houses connected
+        # loop through houses that have been recently added
+        # reset THOSE values
+        house.reset()
+        battery.output_capacity_refill(house)
+        # return False
+        return Fal
         for house in to_connect_house:
         # loop through the houses in the to connect list
             for battery in batteries_list:
                 if house.battery_id == battery.bat_id():
                     battery.output_capacity_refill(house)
-            house.reset()
-        for battery in batteries_list:
-            battery.output_capacity_refill(house)
-        return False
             
-    
+        for battery in batteries_list:
+            
+        return False
     
     def run(self, iterations, mutate_connections_number = 5):   
         """
