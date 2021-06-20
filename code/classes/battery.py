@@ -38,3 +38,6 @@ class Battery:
     def reset(self):
         self.capacity = self.start_capacity
         return
+    
+    def output_capacity_refill(self, house):
+        self.capacity = self.capacity + house.output

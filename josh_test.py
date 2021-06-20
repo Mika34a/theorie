@@ -1,7 +1,8 @@
 from code.classes.smartgrid import Smartgrid
 from code.classes import loader
+from code.algorithms.hillclimber import Hillclimber
 from code.grid import grid
-from code.algorithms import greedy_random, random, greedy_random_shared, sim_annealing
+from code.algorithms import greedy_random, random, greedy_random_shared, sim_annealing, hillclimber
 from sys import argv
 import time
 import statistics
@@ -31,7 +32,8 @@ if __name__ == "__main__":
 
     # for n in range(N):                                                                                                                                                                                     
     connections_dict = random.run(smartgrid)
-    connections_dict = sim_annealing.run(smartgrid, connections_dict)
+    climber = Hillclimber(smartgrid, connections_dict)
+    climber.run(5)
     total_cost = smartgrid.costs(connections_dict, smartgrid.batteries_dict)
         # print(total_cost)
         # print(time.time()-runtime)
