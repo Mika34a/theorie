@@ -15,6 +15,7 @@ class Hillclimber:
         self.grid = copy.deepcopy(smartgrid)
         self.connections_dict = connections_dict
         self.cost = self.grid.costs(connections_dict, self.grid.batteries_dict, shared = False)
+        self.new_connections_dict = {}
 
     def remove_connections(self, part_adjust, new_connections_dict):
         """
@@ -31,7 +32,10 @@ class Hillclimber:
             random_connection = random.choice(connections_list)
             # refill battery capacity, reset house connection
             random_pick = new_connections_dict[random_connection]
+            # print(random_pick.battery_id.capacity)
             random_pick.battery_id.output_capacity_refill(random_pick.house_id)
+            # print(random_pick.battery_id.capacity)
+            # print("break") Lijkt te werken/ capaciteit toe te voegen 
             random_pick.house_id.reset()
 
             to_connect.append(random_pick.house_id)
@@ -67,21 +71,25 @@ class Hillclimber:
             
         # loop through houses
         for house in to_connect_house:
-            print("checking house")
             if house.connected == False:
-                print("house is false")
+                # print("True") #Er zijn steeds 5 huizen die hierin meegaan dus dat klopt
             # loop through batteries
                 for battery in batteries_list:
-                    print("checking a new battery")
-                    print(battery.capacity)
+                    # print("checking a new battery")
+                    # print(battery.capacity)
                 # connect house to battery if capacity 
                     if house.output <= battery.capacity:
-                        print("there is capacity")
+                        print("True") # output house past nooit in capacity!
+                        # print("there is capacity")
                         connection = self.grid.connect(battery, house)
+                        # if house.connected == False:
+                        #     print("True") alle huizen staan nu op true 
+
                         # update battery capacity
                         self.grid.output_capacity(house, battery)
                         # put connection in dict
                         new_connections_dict[connection.house] = connection 
+        return new_connections_dict
 
     def check_solution(self, new_connections_dict):
         """
@@ -115,22 +123,28 @@ class Hillclimber:
             
             while True:
                 # Create a copy of the solution to simulate the change
-                new_connections_dict = copy.deepcopy(self.connections_dict)
+                self.new_connections_dict = copy.deepcopy(self.connections_dict)
 
                 # remove connections from new connections dict
-                to_connect = self.remove_connections(mutate_connections_number, new_connections_dict)
+                to_connect = self.remove_connections(mutate_connections_number, self.new_connections_dict)
+                # for battery in self.grid.batteries_dict.values():
+                #     print(battery.capacity)
                 
                 # add new random connections to new connections dict
-                self.add_new_connections(new_connections_dict, to_connect)
+                self.new_connections_dict = self.add_new_connections(self.new_connections_dict, to_connect)
+                
 
-                if self.check_all_connections(new_connections_dict) == True:
-                    print("Check")
+                # print(len(self.new_connections_dict))
+                # print(len(self.connections_dict))
+
+                if self.check_all_connections(self.new_connections_dict) == True:
+                    # print("Check")
                     break
-                else:
-                    print(len(new_connections_dict))
+                # else:
+                #     print(len(self.new_connections_dict))
 
             # Accept it if it is better
-            self.check_solution(new_connections_dict)
+            self.check_solution(self.new_connections_dict)
 
 
   
