@@ -32,7 +32,7 @@ if __name__ == "__main__":
     N = 30
 
     for n in range(N):                                                                                                                                                                                     
-        connections_dict = random.run(smartgrid)
+        connections_dict = greedy_random.run(smartgrid)
         # climber = Hillclimber(smartgrid, connections_dict)
         # climber.run(10000)
         s_annealing = SimulatedAnnealing(smartgrid, connections_dict)

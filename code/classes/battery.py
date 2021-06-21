@@ -48,5 +48,10 @@ class Battery:
     def __eq__(self, o: object) -> bool:
         return self.id == o.id
     
+    def __hash__(self) -> int:
+        return id(self)
+    
     def __ne__(self, o: object) -> bool:
         return self.id != o.id
+
+
