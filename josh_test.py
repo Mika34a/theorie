@@ -33,19 +33,19 @@ if __name__ == "__main__":
     # for n in range(N):                                                                                                                                                                                     
     connections_dict = random.run(smartgrid)
     climber = Hillclimber(smartgrid, connections_dict)
-    climber.run(5)
-    total_cost = smartgrid.costs(connections_dict, smartgrid.batteries_dict)
-        # print(total_cost)
-        # print(time.time()-runtime)
-        # all_costs.append(total_cost)
-        # all_runtimes.append(time.time()-runtime)
+    climber.run(1000)
+    total_cost = smartgrid.costs(climber.connections_dict, smartgrid.batteries_dict, shared = False)
+    print(total_cost)
+    print(time.time()-runtime)
+    # all_costs.append(total_cost)
+    # all_runtimes.append(time.time()-runtime)
 
     # average_costs  = sum(all_costs) / N
-    # # average_runtime = sum(all_runtimes) / N
-    # print(average_costs, statistics.stdev(all_costs))
+    # average_runtime = sum(all_runtimes) / N
+    # print(average_costs, statistics.stdev(all_cost  s    ))
 
-    # Create grid picture
-    grid.create_grid(smartgrid.houses_dict, smartgrid.batteries_dict, connections_dict)
+    # Create grid pict  ure
+    grid.create_grid    (smartgrid.houses_dict, smartgrid.batteries_dict, connections_dict)
     # print(total_cost)
     # for connection in connections_dict.values():
     #     print(connection.points_list)
