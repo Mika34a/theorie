@@ -27,26 +27,25 @@ if __name__ == "__main__":
     smartgrid = Smartgrid(filename, filename2)
 
     # get info of case
-    # all_costs = []
-    # all_runtimes = []
-    # N = 1000
+    all_costs = []
+    all_runtimes = []
+    N = 30
 
-    # for n in range(N):                                                                                                                                                                                     
-    connections_dict = random.run(smartgrid)
-    # climber = Hillclimber(smartgrid, connections_dict)
-    # climber.run(10000)
-    s_annealing = SimulatedAnnealing(smartgrid, connections_dict)
-    final_connections_dict = s_annealing.run(500)
-    print(final_connections_dict)
-    total_cost = smartgrid.costs(s_annealing.connections_dict, smartgrid.batteries_dict, shared = False)
-    print(total_cost)
-    print(time.time()-runtime)
-    # all_costs.append(total_cost)
-    # all_runtimes.append(time.time()-runtime)
+    for n in range(N):                                                                                                                                                                                     
+        connections_dict = random.run(smartgrid)
+        # climber = Hillclimber(smartgrid, connections_dict)
+        # climber.run(10000)
+        s_annealing = SimulatedAnnealing(smartgrid, connections_dict)
+        final_connections_dict = s_annealing.run(10000)
+        total_cost = smartgrid.costs(s_annealing.connections_dict, smartgrid.batteries_dict, shared = False)
+        print(total_cost)
+        print(time.time()-runtime)
+        all_costs.append(total_cost)
+        all_runtimes.append(time.time()-runtime)
 
-    # average_costs  = sum(all_costs) / N
-    # average_runtime = sum(all_runtimes) / N
-    # print(average_costs, statistics.stdev(all_cost  s    ))
+    average_costs  = sum(all_costs) / N
+    average_runtime = sum(all_runtimes) / N
+    print(average_costs, statistics.stdev(all_costs))
 
     # Create grid picture
     grid.create_grid    (smartgrid.houses_dict, smartgrid.batteries_dict, final_connections_dict)
