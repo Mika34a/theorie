@@ -30,8 +30,7 @@ def create_grid(houses, batteries, connections):
 
     # points set to always show full graph
     plt.plot(0, 0)
-    plt.plot(50, 50)
-    
+    plt.plot(50, 50)    
     # zip the point lists
     
 

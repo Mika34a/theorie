@@ -41,3 +41,12 @@ class Battery:
     
     def output_capacity_refill(self, house):
         self.capacity = self.capacity + house.output
+
+    def __str__(self) -> str:
+        return f"Battery: {self.id}"
+
+    def __eq__(self, o: object) -> bool:
+        return self.id == o.id
+    
+    def __ne__(self, o: object) -> bool:
+        return self.id != o.id

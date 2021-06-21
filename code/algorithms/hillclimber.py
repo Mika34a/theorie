@@ -47,17 +47,6 @@ class Hillclimber:
         
         return to_connect
 
-    # def disconnected_houses(self):
-    #     """
-    #     Makes a list of houses that are not connected.
-    #     """
-    #     to_connect = []
-    #     for house in self.houses_dict.values():
-    #         if house.check_connection == False:
-    #             print("False")
-    #             to_connect.append(house)
-    #     return to_connect
-
     def add_new_connections(self, to_connect):
         """
         Reconnects the disconnected houses randomly.
@@ -75,21 +64,22 @@ class Hillclimber:
             
         # loop through houses
         for house in to_connect_house:
-            if house.connected == False:
             # loop through batteries
                 for battery in batteries_list:
 
                 # connect house to battery if capacity 
                     if house.output <= battery.capacity:
-                        connection = self.grid.connect(battery, house)
-            
-                        # update battery capacity
-                        self.grid.output_capacity(house, battery)
-                        # put connection in dict
-                        self.new_connections_dict[connection.house] = connection
+                        if house.connected == False:
+                            connection = self.grid.connect(battery, house)
+                            # update battery capacity
+                            self.grid.output_capacity(house, battery)
+                            # put connection in dict
+                            self.new_connections_dict[connection.house] = connection
+                            # print(len(self.new_connections_dict))
+        # print(len(to_connect_house))
             
 
-    def check_solution(self):
+    def check_solution(self, new_connections_dict):
         """
         Compares the costs of the old and new connections.
         """
@@ -98,16 +88,16 @@ class Hillclimber:
         old_costs = self.cost
         # compare costs of old and new grids
         if new_costs <= old_costs:
-            self.connections_dict = self.new_connections_dict
+            self.connections_dict = self.new_connections_dict # weten we zeker dat deze 150 lang is??
             self.cost = new_costs
         #print(self.cost)
     
     def check_all_connections(self):
         """
         Returns true if all houses are connected, else is False.
-        """        
+        """
+    
         if len(self.new_connections_dict) == len(self.connections_dict):
-            # if all houses connected
             return True    
         return False
     
@@ -119,20 +109,30 @@ class Hillclimber:
 
         for i in range(iterations):
             
-            print(f'Iteration {i}/{iterations}, current value: {self.cost}') if i % 100 == 0 else None
-            # Create a copy of the solution to simulate the change
-            self.new_connections_dict = copy.deepcopy(self.connections_dict)
+            print(f'Iteration {i}/{iterations}, current value: {self.cost}') if i % 1000 == 0 else None
+            
+            while True:
+                
+                #self.new_connections_dict = {}
+                # Create a copy of the solution to simulate the change
+                self.new_connections_dict = copy.deepcopy(self.connections_dict)  
+               
 
-            # remove connections from new connections dict
-            to_connect = self.remove_connections(mutate_connections_number)
-            # for battery in self.grid.batteries_dict.values():
+                # remove connections from new connections dict
+                to_connect = self.remove_connections(mutate_connections_number) # gaat goed
+                # for battery in self.grid.batteries_dict.values():
 
-            # add new random connections to new connections dict
-            self.add_new_connections(to_connect)
-
-            # print(self.new_cost)        
+                # add new random connections to new connections dict
+                self.add_new_connections(to_connect)
+                
+                if self.check_all_connections() == True:
+                    print(f'Iteration {i}/{iterations}: {len(self.new_connections_dict)}') if i % 1000 == 0 else None
+                    break
+            
             # Accept it if it is better
-            self.check_solution()
-
+            self.check_solution(self.new_connections_dict)
+        
+        return self.connections_dict
+                
 
   

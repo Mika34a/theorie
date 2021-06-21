@@ -30,7 +30,7 @@ class SimulatedAnnealing(Hillclimber):
         """
         self.T = self.T - (self.T0 / self.iterations)
 
-    def check_solution(self, new_connections_dict):
+    def check_solution_sim(self, new_connections_dict):
         """
         Compares the costs of the old and new connections.
         """

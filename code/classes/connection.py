@@ -106,6 +106,9 @@ class Connection:
 
     def points_list(self):
         return self.points_list
+    
+    def __repr__(self) -> str:
+        return f"{self.points_list}"
         
             
 

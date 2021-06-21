@@ -144,8 +144,8 @@ class Smartgrid():
         
         out_file.close()
 
-    def all_connected(self, houses_list, connections_dict):
-        if len(connections_dict) == len(houses_list):
+    def all_connected(self, connections_dict):
+        if len(connections_dict) == 150:
             return True
         return False  
 
