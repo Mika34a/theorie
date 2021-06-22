@@ -104,7 +104,7 @@ class Hillclimber:
 
         for i in range(iterations):
             
-            print(f'Iteration {i}/{iterations}, current value: {self.cost}') if i % 10 == 0 else None
+            print(f'Iteration {i}/{iterations}, current value: {self.cost}') if i % 1000 == 0 else None
             
             while True:
                 

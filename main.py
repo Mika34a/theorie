@@ -47,7 +47,7 @@ if __name__ == "__main__":
     all_costs = []
     all_runtimes = []
     # amount of times algorithm needs to run
-    N = 5
+    N = 30
     # amount of iterations
     IT = 10000
 
