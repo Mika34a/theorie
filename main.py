@@ -4,16 +4,14 @@
 # Merel Florian, Michael Verdel, Joshua van Zanten
 #
 # - Implements several algorithms to connect houses to batteries with capacity. 
-# - Comment out algorithms that you don't wish to use.
-# - Use one algorithm at a time.
 
+from code.algorithms.random_greedy2 import RandomGreedy
 from code.classes.smartgrid import Smartgrid
 from code.algorithms.hillclimber import Hillclimber
 from code.algorithms.sim_annealing import SimulatedAnnealing
-from code.algorithms.random2 import Random
-# from code.algorithms.random_greedy2 import RandomGreedy
+from code.algorithms.random import Random
+from code.algorithms.random_greedy2 import RandomGreedy
 from code.grid import grid
-from code.algorithms import greedy_random, random
 from sys import argv
 import time
 import statistics
@@ -23,19 +21,22 @@ runtime = time.time()
 if __name__ == "__main__":
 
     # check command line
-    if len(argv) != 3:
-        print("Usage: python3 smartgrid.py [district_number] shared:y/n")
+    if len(argv) != 4:
+        print("Usage: python3 smartgrid.py [district_number] random/greedy/climber/sim shared:y/n")
         exit(1)
     # Load the requested files
-    if len(argv) == 3:
+    if len(argv) == 4:
         district_int = argv[1]
-        shared = argv[2]
-        if argv[2] == "shared:y":
+        shared = argv[3]
+        
+        algorithm = argv[2]
+
+        if argv[3] == "shared:y":
             shared = True
-        elif argv[2] == "shared:n":
+        elif argv[3] == "shared:n":
             shared = False
         else:
-            print("Usage: python3 smartgrid.py [district_number] shared:y/n")
+            print("Usage: python3 smartgrid.py [district_number] random/greedy/climber/sim shared:y/n")
 
     housesf = f"database/district_{district_int}/district-{district_int}_houses.csv"
     batteriesf = f"database/district_{district_int}/district-{district_int}_batteries.csv"
@@ -47,24 +48,32 @@ if __name__ == "__main__":
     all_costs = []
     all_runtimes = []
     N = 5
+    IT = 100
 
     for n in range(N):
     #------------------------------random algorithm-------------------------------
-        random_a = Random(smartgrid)
-        final_connections_dict = random_a.run()
+        if algorithm == "random":
+            random_a = Random(smartgrid)
+            final_connections_dict = random_a.run()
 
     #---------------------------random greedy algorithm---------------------------
-        # final_connections_dict = greedy_random.run(smartgrid)
+        elif algorithm == "greedy":
+            randomgreedy_a = RandomGreedy(smartgrid)
+            final_connections_dict = randomgreedy_a.run()
 
     #----------------------------hillclimber algorithm----------------------------
-        # connections_dict = greedy_random.run(smartgrid)
-        # climber = Hillclimber(smartgrid, connections_dict)
-        # final_connections_dict = climber.run(100)
+        elif algorithm == "climber":
+            randomgreedy_a = RandomGreedy(smartgrid)
+            connections_dict = randomgreedy_a.run()
+            climber = Hillclimber(smartgrid, connections_dict)
+            final_connections_dict = climber.run(IT)
 
     # -----------------------------simulated annealing-----------------------------
-        # connections_dict = greedy_random.run(smartgrid)
-        # s_annealing = SimulatedAnnealing(smartgrid, connections_dict)
-        # final_connections_dict = s_annealing.run(3000)
+        elif algorithm == "sim":
+            randomgreedy_a = RandomGreedy(smartgrid)
+            connections_dict = randomgreedy_a.run()
+            s_annealing = SimulatedAnnealing(smartgrid, connections_dict)
+            final_connections_dict = s_annealing.run(IT)
 
         total_cost = smartgrid.costs(final_connections_dict, smartgrid.batteries_dict, shared)
         print(total_cost)
@@ -74,11 +83,11 @@ if __name__ == "__main__":
     
     average_costs  = sum(all_costs) / N
     average_runtime = sum(all_runtimes) / N
-    print(average_costs, statistics.stdev(all_costs))
+    # print(average_costs, statistics.stdev(all_costs))
 
 # compute costs
 total_cost = smartgrid.costs(final_connections_dict, smartgrid.batteries_dict, shared)
 # create grid picture
 grid.create_grid(smartgrid.houses_dict, smartgrid.batteries_dict, final_connections_dict)
 # export output to json file
-smartgrid.output(final_connections_dict, total_cost, (time.time()-runtime), argv[1], shared = True)
+smartgrid.output(final_connections_dict, total_cost, (time.time()-runtime), argv[1], shared)

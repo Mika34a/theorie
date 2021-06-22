@@ -104,7 +104,7 @@ class Hillclimber:
 
         for i in range(iterations):
             
-            print(f'Iteration {i}/{iterations}, current value: {self.cost}') if i % 300 == 0 else None
+            print(f'Iteration {i}/{iterations}, current value: {self.cost}') if i % 10 == 0 else None
             
             while True:
                 
@@ -118,7 +118,6 @@ class Hillclimber:
                 self.add_new_connections(to_connect)
                 
                 if self.check_all_connections() == True:
-                    print(f'Iteration {i}/{iterations}: {len(self.new_connections_dict)}') if i % 300 == 0 else None
                     break
             
             # accept it if it is better

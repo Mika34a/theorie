@@ -12,21 +12,28 @@ class Random:
         self.grid = smartgrid
         self.connections_dict = {}
         self.houses_list = []
-        self.batteries_list= []
+        self.batteries_list = []
 
     def randomise_houses(self):
+        """"
+        Randomises the list of houses.
+        """
         for house in self.houses_dict.values():
             self.houses_list.append(house)
         random.shuffle(self.houses_list) 
 
     def randomise_batteries(self):
+        """"
+        Randomises the list of batteries.
+        """
         for battery in self.batteries_dict.values():
             self.batteries_list.append(battery)
         random.shuffle(self.batteries_list)         
 
-
     def connect_houses(self):
-        connections_dict = {}
+        """"
+        Connects the houses to the batteries.
+        """
         for house in self.houses_list:    
             # check if output of house still fits in capacity battery 
             for battery in self.batteries_list:
@@ -41,27 +48,32 @@ class Random:
                         self.grid.output_capacity(house, battery)
 
                         # put connection in dict
-                        connections_dict[connection.house] = connection   
-        return connections_dict                 
+                        self.connections_dict[connection.house] = connection                  
     
-    def check_all_connections(self, connections_dict): 
+    def check_all_connections(self, connections_dict):
+        """"
+        Checks if all houses are connected.
+        """ 
         # all_connected               
         if self.grid.all_connected(connections_dict):
             return True
         else:
-            for battery in self.batteries_list:
+            for battery in self.batteries_dict.values():
                 battery.reset()
-            for house in self.houses_list:
+            for house in self.houses_dict.values():
                 house.reset()
             return False                          
 
     def run(self):
+        """"
+        Runs the Random algorithm.
+        """
         while True:
             self.randomise_houses()
             self.randomise_batteries()
-            connections_dict = self.connect_houses()
-            if self.check_all_connections(connections_dict) == False:
-                continue     
+            self.connect_houses()
+            if self.check_all_connections(self.connections_dict):
+                return self.connections_dict   
             else:
-                return connections_dict    
+                self.connections_dict = {}       
 
