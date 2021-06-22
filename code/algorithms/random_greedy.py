@@ -2,16 +2,25 @@ from .random import Random
 
 class RandomGreedy(Random):
     """
-    The Greedy class that connects the best possible battery to each house one by one.
+    The Random Greedy class that connects the best possible battery to each house one by one.
     """
     def __init__(self, smartgrid):
+        """
+        Initialises RandomGreedy attributes.
+        """
         Random.__init__(self, smartgrid)
 
     def close_batteries(self, house):
+        """
+        Returns closest batteries.
+        """
         batteries_closest = self.grid.proximity(house, self.grid.batteries_dict)
         return batteries_closest  
 
     def connect_greedy(self):
+        """
+        Connects houses to batteries based on proximity.
+        """
         for house in self.houses_list:
             close_batteries = self.close_batteries(house)
             for battery in close_batteries:
@@ -28,6 +37,9 @@ class RandomGreedy(Random):
                         self.connections_dict[connection.house] = connection
                              
     def run(self):
+        """
+        Runs Random Greedy algorithm.
+        """
         while True:
             self.randomise_houses()
             self.connect_greedy()
