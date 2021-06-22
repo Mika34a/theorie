@@ -10,6 +10,8 @@
 from code.classes.smartgrid import Smartgrid
 from code.algorithms.hillclimber import Hillclimber
 from code.algorithms.sim_annealing import SimulatedAnnealing
+from code.algorithms.random2 import Random
+# from code.algorithms.random_greedy2 import RandomGreedy
 from code.grid import grid
 from code.algorithms import greedy_random, random
 from sys import argv
@@ -48,7 +50,8 @@ if __name__ == "__main__":
 
     for n in range(N):
     #------------------------------random algorithm-------------------------------
-        # final_connections_dict = random.run(smartgrid)
+        random_a = Random(smartgrid)
+        final_connections_dict = random_a.run()
 
     #---------------------------random greedy algorithm---------------------------
         # final_connections_dict = greedy_random.run(smartgrid)
@@ -59,9 +62,9 @@ if __name__ == "__main__":
         # final_connections_dict = climber.run(100)
 
     # -----------------------------simulated annealing-----------------------------
-        connections_dict = greedy_random.run(smartgrid)
-        s_annealing = SimulatedAnnealing(smartgrid, connections_dict)
-        final_connections_dict = s_annealing.run(3000)
+        # connections_dict = greedy_random.run(smartgrid)
+        # s_annealing = SimulatedAnnealing(smartgrid, connections_dict)
+        # final_connections_dict = s_annealing.run(3000)
 
         total_cost = smartgrid.costs(final_connections_dict, smartgrid.batteries_dict, shared)
         print(total_cost)
@@ -78,4 +81,4 @@ total_cost = smartgrid.costs(final_connections_dict, smartgrid.batteries_dict, s
 # create grid picture
 grid.create_grid(smartgrid.houses_dict, smartgrid.batteries_dict, final_connections_dict)
 # export output to json file
-smartgrid.output(final_connections_dict, total_cost, (time.time()-runtime), argv[1], shared = False)
+smartgrid.output(final_connections_dict, total_cost, (time.time()-runtime), argv[1], shared = True)

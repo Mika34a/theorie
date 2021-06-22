@@ -34,10 +34,9 @@ def create_grid(houses, batteries, connections):
 
     # points set to always show full graph
     plt.plot(0, 0)
-    plt.plot(50, 50)    
-    # zip the point lists
+    plt.plot(50, 50)
     
-
+    # plot the connection lines per battery 
     for bat in batteries.values():
         if bat.id == 0:
             
@@ -73,18 +72,12 @@ def create_grid(houses, batteries, connections):
                 if connection.battery_id == bat:
                     plt.plot(connection.points_x, connection.points_y, "w")
             
+            # plot the battery
             plt.plot(bat.x_coordinate, bat.y_coordinate, 'sw')
     
+    # plot the houses
     for house in houses.values():
         plt.plot(house.x_coordinate, house.y_coordinate, 'o')
-
-    # loop through every connection
-    # save all the points of a connection and make them invisible
-    # plot lines between each connection, based on battery colour
-    # draw the lines
-    # for connection in connections.values():
-    #             for point in connection.points_list:
-    #                 plt.plot(point[0], point[1], ",r")
 
     # save as image
     plt.savefig("code/grid/gridtest.png")
