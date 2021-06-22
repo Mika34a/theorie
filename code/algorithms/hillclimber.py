@@ -1,5 +1,4 @@
 import copy
-from hashlib import new
 import random
 
 class Hillclimber:
@@ -21,7 +20,8 @@ class Hillclimber:
 
     def remove_connections(self, part_adjust):
         """
-        Removes subset of connections from connections dict.
+        Removes subset of connections from connections dict and
+        returns a list of disconnected houses.
         """
         PART_ADJUST = part_adjust
         to_connect = []
@@ -32,11 +32,12 @@ class Hillclimber:
             connections_list = list(self.new_connections_dict.keys())
             random_connection = random.choice(connections_list)
             
-            # refill battery capacity, reset house connection
             random_pick = self.new_connections_dict[random_connection]
-            random_pick.battery_id.output_capacity_refill(random_pick.house_id)
             
+            # refill battery, reset house connection
+            random_pick.battery_id.output_capacity_refill(random_pick.house_id)
             random_pick.house_id.reset()
+
             to_connect.append(random_pick.house_id)
             
             # remove connection from new_connections_dict
@@ -59,22 +60,24 @@ class Hillclimber:
                 batteries_list.append(connection.battery_id)
                 random.shuffle(batteries_list)
             
-        # loop through houses
+        # loop through houses and connect if disconnected
         for house in to_connect_house:
-                for battery in batteries_list:
-                    
-                    if house.output <= battery.capacity:
-                        if house.connected == False:
-                            
-                            connection = self.grid.connect(battery, house)
-                            # update battery capacity
-                            self.grid.output_capacity(house, battery)
-                            # put connection in dict
-                            self.new_connections_dict[connection.house] = connection
+            for battery in batteries_list:
+                
+                if house.output <= battery.capacity:
+                    if house.connected == False:
+                        
+                        connection = self.grid.connect(battery, house)
+                        # update battery capacity
+                        self.grid.output_capacity(house, battery)
+                        # put connection in dict
+                        self.new_connections_dict[connection.house] = connection
 
     def check_solution(self, new_connections_dict):
         """
-        Compares the costs of the old and new connections.
+        Compares the costs of the old and new connections
+        and creates a new starting dict if the new connections
+        are cheaper.
         """
         # calculate costs of new grid
         new_costs = self.grid.costs(self.new_connections_dict, self.batteries_dict, shared = False)
@@ -86,7 +89,7 @@ class Hillclimber:
     
     def check_all_connections(self):
         """
-        Returns true if all houses are connected, else is False.
+        Returns True if all houses are connected, else is False.
         """
         if len(self.new_connections_dict) == len(self.connections_dict):
             return True    
@@ -94,7 +97,8 @@ class Hillclimber:
     
     def run(self, iterations, mutate_connections_number = 5):   
         """
-        Runs the hillclimber algorithm for a specific amount of iterations.
+        Runs the hillclimber algorithm for a specific amount of iterations
+        and returns a connections dictionary.
         """   
         self.iterations = iterations  
 

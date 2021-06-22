@@ -7,14 +7,8 @@
 
 from code.classes import *
 from code.classes.connection import Connection
-from code.classes.house import House
-from code.classes.battery import Battery
-from code.algorithms import random
-import time
 from code.classes import loader
 import json
-import random
-import copy
 
 class Smartgrid():
     def __init__(self, filename, filename2):

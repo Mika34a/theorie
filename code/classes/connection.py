@@ -5,7 +5,6 @@
 #
 # - Implements Connection class.
 
-# class Connections
 class Connection:
     def __init__(self, house, battery):
         """
