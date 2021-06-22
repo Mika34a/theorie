@@ -88,13 +88,16 @@ class Smartgrid():
         """
         battery.capacity = battery.capacity - house.output
 
-    def output(self, connections_dict, total_cost, runtime, main):
+    def output(self, connections_dict, total_cost, runtime, main, shared):
         """
         Gives the output of the algorithm in json format.
         """
         total_list = []
 
-        total_list.append({"district": int(main), "costs-shared": (total_cost)})
+        if shared == False:
+            total_list.append({"district": int(main), "costs-own": (total_cost)})
+        else:
+            total_list.append({"district": int(main), "costs-shared": (total_cost)})
 
         for battery in self.batteries_dict.values():
             houses = []

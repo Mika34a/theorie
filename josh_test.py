@@ -29,23 +29,23 @@ if __name__ == "__main__":
     # get info of case
     all_costs = []
     all_runtimes = []
-    N = 30
+    N = 1
 
     for n in range(N):                                                                                                                                                                                     
         connections_dict = greedy_random.run(smartgrid)
         # climber = Hillclimber(smartgrid, connections_dict)
         # climber.run(10000)
         s_annealing = SimulatedAnnealing(smartgrid, connections_dict)
-        final_connections_dict = s_annealing.run(10000)
-        total_cost = smartgrid.costs(s_annealing.connections_dict, smartgrid.batteries_dict, shared = False)
+        final_connections_dict = s_annealing.run(100)
+        total_cost = smartgrid.costs(final_connections_dict, smartgrid.batteries_dict, shared = False)
         print(total_cost)
         print(time.time()-runtime)
         all_costs.append(total_cost)
         all_runtimes.append(time.time()-runtime)
 
-    average_costs  = sum(all_costs) / N
-    average_runtime = sum(all_runtimes) / N
-    print(average_costs, statistics.stdev(all_costs))
+    # average_costs  = sum(all_costs) / N
+    # average_runtime = sum(all_runtimes) / N
+    # print(average_costs, statistics.stdev(all_costs))
 
     # Create grid picture
     grid.create_grid    (smartgrid.houses_dict, smartgrid.batteries_dict, final_connections_dict)
@@ -54,4 +54,4 @@ if __name__ == "__main__":
     #     print(connection.points_list)
     
     # export output to txt file
-    smartgrid.output(connections_dict, total_cost, (time.time()-runtime), argv[1])
+    smartgrid.output(final_connections_dict, total_cost, (time.time()-runtime), argv[1], shared = False)
