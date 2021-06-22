@@ -4,6 +4,9 @@ from matplotlib.pyplot import figure
 import csv
 
 def create_grid(houses, batteries, connections):
+    """
+    Creates
+    """
     plt.style.use('seaborn-pastel')
 
     figure(figsize=(9, 9), dpi=150)

@@ -1,0 +1,9 @@
+Random – Simulated Annealing – District 1
+We finished the algorithm, but we still need to determine the best temperature and/or number of iterations. 
+For the preliminary analysis we used a semi-random temperature of 320. At first, we used the formula e^(-highest diff / temp ) = chance to determine our temperature, 
+where our “highest difference” is 459 based on the longest connection a house can have to a battery. 
+Chance was based on an arbitrary number between 0 and 1, and we chose 0.2. However, we wanted to play around with the temperature and thus decided to increase it to 320. 
+We noticed that when we increased the number of iterations, the algorithm accepted failure more often than with a lower number. 
+For now, we tried an iteration number of 10.000 where T = 320. When we ran it N = 30 times, we ended up with an M = 58733.8 (SD = 280.91). 
+Compared to our baseline, where the mean total costs were 77226.811 (SD = 1552.183), simulated annealing gives considerably better results. 
+We ran it for 2h24m, and we are planning on running it for even longer.

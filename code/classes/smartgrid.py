@@ -75,7 +75,7 @@ class Smartgrid():
 
     def output(self, connections_dict, total_cost, runtime, main, shared):
         """
-        Gives the output of the algorithm in json format.
+        Creates the output of the algorithm in json format.
         """
         total_list = []
 
@@ -125,6 +125,7 @@ class Smartgrid():
         """
         Takes a house and the dictionary of batteries and generates a dictionary
         of batteries in ascending order of the distance between house and battery.
+        Returns the dictionary of sorted batteries.
         """        
         distances = {}
 
@@ -171,6 +172,7 @@ class Smartgrid():
                     else:
                         if distance < minimum_dist:
                             minimum = coordinate                     
+        
         return minimum 
    
 

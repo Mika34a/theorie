@@ -15,23 +15,23 @@ def run(smartgrid):
         # dictionary of connections
         connections_dict = {}
 
+        # initialise randomised list of houses
         houses_list = []
         for house in smartgrid.houses_dict.values():
             houses_list.append(house)
             random.shuffle(houses_list)
 
+        # initialise randomised list of batteries
         batteries_list = []
         for battery in smartgrid.batteries_dict.values():
             batteries_list.append(battery)
             random.shuffle(batteries_list) 
 
         for house in houses_list:    
-            # check if output of house still fits in capacity battery 
             for battery in batteries_list:
-                
-                # connect house to battery 
+                # check if battery capacity can host house
                 if  house.output <= battery.capacity:
-                    # check if house is already connected
+                    # check if house isn't already connected
                     if house.connected == False:
                         connection = smartgrid.connect(battery, house)
 
@@ -41,7 +41,7 @@ def run(smartgrid):
                         # put connection in dict
                         connections_dict[connection.house] = connection
 
-        # all_connected                
+        # check if all are connected                
         if smartgrid.all_connected(connections_dict):
             return connections_dict
         else:
