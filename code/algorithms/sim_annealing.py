@@ -17,7 +17,10 @@ class SimulatedAnnealing(Hillclimber):
     Each improvement or equivalent solution is kept for the next iteration.
     Also sometimes accepts solutions that are worse, depending on the current temperature.
     """
-    def __init__(self, smartgrid, connections_dict, temp=320):
+    def __init__(self, smartgrid, connections_dict, temp=285):
+        """
+        Initialises the Simulated Annealing.
+        """
         super().__init__(smartgrid, connections_dict)
 
         self.T0 = temp

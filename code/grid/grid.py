@@ -5,7 +5,8 @@ import csv
 
 def create_grid(houses, batteries, connections):
     """
-    Creates
+    Creates a png grid visualistion of all houses, batteries
+    and connections.
     """
     plt.style.use('seaborn-pastel')
 

@@ -41,21 +41,37 @@ if __name__ == "__main__":
     # load houses and batteries dict
     smartgrid = Smartgrid(housesf, batteriesf)
 
-#------------------------------random algorithm-------------------------------
-    final_connections_dict = random.run(smartgrid)
+    # get info of case
+    all_costs = []
+    all_runtimes = []
+    N = 5
 
-#---------------------------random greedy algorithm---------------------------
-    final_connections_dict = greedy_random.run(smartgrid)
+    for n in range(N):
+    #------------------------------random algorithm-------------------------------
+        # final_connections_dict = random.run(smartgrid)
 
-#----------------------------hillclimber algorithm----------------------------
-    connections_dict = greedy_random.run(smartgrid)
-    climber = Hillclimber(smartgrid, connections_dict)
-    final_connections_dict = climber.run(100)
+    #---------------------------random greedy algorithm---------------------------
+        # final_connections_dict = greedy_random.run(smartgrid)
 
-# -----------------------------simulated annealing-----------------------------
-    connections_dict = greedy_random.run(smartgrid)
-    s_annealing = SimulatedAnnealing(smartgrid, connections_dict)
-    final_connections_dict = s_annealing.run(100)
+    #----------------------------hillclimber algorithm----------------------------
+        # connections_dict = greedy_random.run(smartgrid)
+        # climber = Hillclimber(smartgrid, connections_dict)
+        # final_connections_dict = climber.run(100)
+
+    # -----------------------------simulated annealing-----------------------------
+        connections_dict = greedy_random.run(smartgrid)
+        s_annealing = SimulatedAnnealing(smartgrid, connections_dict)
+        final_connections_dict = s_annealing.run(3000)
+
+        total_cost = smartgrid.costs(final_connections_dict, smartgrid.batteries_dict, shared)
+        print(total_cost)
+        print(time.time()-runtime)
+        all_costs.append(total_cost)
+        all_runtimes.append(time.time()-runtime)
+    
+    average_costs  = sum(all_costs) / N
+    average_runtime = sum(all_runtimes) / N
+    print(average_costs, statistics.stdev(all_costs))
 
 # compute costs
 total_cost = smartgrid.costs(final_connections_dict, smartgrid.batteries_dict, shared)
