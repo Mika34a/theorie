@@ -35,6 +35,7 @@ if __name__ == "__main__":
             shared = False
         else:
             print("Usage: python3 smartgrid.py [district_number] random/greedy/climber/sim shared:y/n")
+            exit(1)
 
     housesf = f"database/district_{district_int}/district-{district_int}_houses.csv"
     batteriesf = f"database/district_{district_int}/district-{district_int}_batteries.csv"
@@ -45,8 +46,10 @@ if __name__ == "__main__":
     # get info of case
     all_costs = []
     all_runtimes = []
+    # amount of times algorithm needs to run
     N = 5
-    IT = 100
+    # amount of iterations
+    IT = 10000
 
     for n in range(N):
     #------------------------------random algorithm-------------------------------
@@ -72,6 +75,9 @@ if __name__ == "__main__":
             connections_dict = randomgreedy_a.run()
             s_annealing = SimulatedAnnealing(smartgrid, connections_dict)
             final_connections_dict = s_annealing.run(IT)
+        else:
+            print("Error: algorithm name must be random/greedy/climber/sim")
+            exit(1)
 
         total_cost = smartgrid.costs(final_connections_dict, smartgrid.batteries_dict, shared)
         print(total_cost)
