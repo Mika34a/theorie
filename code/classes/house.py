@@ -1,4 +1,4 @@
-# House.py
+# house.py
 #
 # Programmeertheorie
 # Merel Florian, Michael Verdel, Joshua van Zanten
@@ -19,20 +19,25 @@ class House:
     
     def check_connection(self):
         """
-        Returns False if house isn't connected yet, otherwise True
+        Returns False if house isn't connected yet, otherwise True.
         """
         return self.connected
 
     def reset(self):
+        """
+        Changes the connected attribute of a House to False.
+        """
         self.connected = False
-        return 
-        
-    def house_id(self):
-        """
-        Returns the house id as int
-        """
-        return self.id
 
     def output(self):
+        """
+        Returns the output as a float of a house.
+        """
         return self.output
+    
+    def __str__(self) -> str:
+        """
+        Returns the House id in a string.
+        """
+        return f"House: {self.id}"
 

@@ -10,7 +10,9 @@
 import random
 
 def run(smartgrid):
-
+    """
+    Runs the greedy random shared algorithm.
+    """
     while True:
         # dictionary of connections
         connections_dict = {}
@@ -73,7 +75,6 @@ def run(smartgrid):
             print(f"dict len: {len(connections_dict)}") 
             return connections_dict
         else:
-
             # if not reset everything and re-iterate
             for battery in batteries_closest:
                 battery.reset()

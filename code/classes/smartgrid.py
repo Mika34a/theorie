@@ -50,7 +50,7 @@ class Smartgrid():
         else:
             amount_segments_total = 0
 
-            #for every battery
+            # for every battery
             for battery in self.batteries_dict.values():
                 # make empty set
                 set_coordinates = set() 
@@ -65,7 +65,6 @@ class Smartgrid():
 
                 amount_segments_battery = len(set_coordinates)
                 amount_segments_total = amount_segments_battery + amount_segments_total
-                print(amount_segments_total)
 
             cost_cable_all = COST_GRID * amount_segments_total
 
@@ -138,7 +137,7 @@ class Smartgrid():
         for battery in batteries_dict.values():
             distance = (abs(battery.x_coordinate - house.x_coordinate)) + (abs(battery.y_coordinate - house.y_coordinate))
             distances[battery] = distance
-            
+
         # sort batteries ascending by distance value 
         sorted_batteries = {k: v for k, v in sorted(distances.items(), key=lambda item: item[1])}
         return sorted_batteries

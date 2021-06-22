@@ -21,56 +21,54 @@ class Battery:
 
     def check_capacity(self):
         """
-        Returns True if battery still has capacity otherwise False
+        Returns True if battery still has capacity otherwise False.
         """
         return self.capacity_left
 
-    # def bat_id(self):
-    #     """
-    #     Returns the id as int
-    #     """
-    #     # returns id of the battery
-    #     return self.id
-
     def start_capacity(self):
         """
-        Returns the value of the start_capacity attribute
+        Returns the value of the start_capacity attribute.
         """
         return self.start_capacity
 
     def reset(self):
         """
-        Changes the value of capacity to the start_capacity
+        Changes the value of capacity to the start_capacity.
         """
         self.capacity = self.start_capacity
 
     def output_capacity_refill(self, house):
         """
-        Returns True if battery still has capacity otherwise False
+        Refills a Battery's capacity by adding the house output
+        to it's capacity attribute.
         """
         self.capacity = self.capacity + house.output
 
     def __str__(self) -> str:
         """
-        Returns True if battery still has capacity otherwise False
+        Returns the Battery id in a string.
         """
         return f"Battery: {self.id}"
 
     def __eq__(self, o: object) -> bool:
         """
-        Returns True if battery still has capacity otherwise False
+        Makes sure that we can compare different batteries by checking
+        whether two elements are both Battery, and whether they have the
+        same name.
         """
         return self.id == o.id
     
     def __hash__(self) -> int:
         """
-        Returns True if battery still has capacity otherwise False
+        Makes sure we can usee batteries as keys in a dictionary.
         """
         return id(self)
     
     def __ne__(self, o: object) -> bool:
         """
-        Returns True if battery still has capacity otherwise False
+        Make sure we can compare different batterues by checking
+        whether two elements are not Battery, and whether they have a
+        different name.
         """
         return self.id != o.id
 

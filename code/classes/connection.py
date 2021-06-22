@@ -24,11 +24,6 @@ class Connection:
         """
         Adds a point and defines length of connection.
         """
-        # loop through connections that connect to the relevant battery
-        # see if points(x,y) of new connection match with one of these connections
-        # len(list) = length of priced connection (first half)
-        # copy/append last half of list of points to new connection
-
         # get coordinates from house and battery 
         house_x = self.house_id.x_coordinate
         house_y = self.house_id.y_coordinate
@@ -37,6 +32,7 @@ class Connection:
     	
         point_x = house_x 
         point_y = house_y
+        
         # save the starting points
         self.points_list.append((point_x, point_y))
         self.points_x.append(point_x)
@@ -60,8 +56,6 @@ class Connection:
         
         # Manhattan distance, with +1 because of ending location
         self.length = (abs(battery_x - house_x)) + (abs(battery_y - house_y)) + 1
-            
-# functions
 
     def length(self):
         """
@@ -71,59 +65,38 @@ class Connection:
 
     def house(self):
         """
-        Returns house id of connection
+        Returns house id of connection.
         """
         return self.house_id.id
 
     def battery(self):
         """
-        Returns battery id of connection 
+        Returns battery id of connection. 
         """   
         return self.battery_id.id
     
-    def bat_y_coordinate(self):
-        """
-        Returns y coordinate from battery that belongs to connection
-        """   
-        return self.battery_id.y_coordinate     
-
-    def bat_x_coordinate(self):
-        """
-        Returns x coordinate from battery that belongs to connection
-        """  
-        return self.battery_id.x_coordinate
-    
-    def start_capacity(self):
-        """
-        Returns start capacity from battery that belongs to connection
-        """  
-        return self.battery_id.start_capacity
-    
     def house_x_coordinate(self):
         """
-        Returns x coordinate from house that belongs to connection
+        Returns x coordinate from house that belongs to connection.
         """  
         return self.house_id.x_coordinate
 
     def house_y_coordinate(self):
         """
-        Returns y coordinate from house that belongs to connection
+        Returns y coordinate from house that belongs to connection.
         """  
         return self.house_id.y_coordinate
 
     def output(self):
         """
-        Returns output from house that belongs to connection
+        Returns output from house that belongs to connection.
         """  
         return self.house_id.output
 
-    def points_list(self):
-        """
-        Returns list of coordinates that connection crosses
-        """ 
-        return self.points_list
-    
     def __repr__(self) -> str:
+        """
+        Representation of connection.
+        """  
         return f"{self.points_list}"
         
             

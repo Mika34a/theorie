@@ -23,7 +23,6 @@ class Hillclimber:
         Removes subset of connections from connections dict.
         """
         PART_ADJUST = part_adjust
-
         to_connect = []
 
         # remove part of connections
@@ -75,9 +74,6 @@ class Hillclimber:
                             self.grid.output_capacity(house, battery)
                             # put connection in dict
                             self.new_connections_dict[connection.house] = connection
-                            # print(len(self.new_connections_dict))
-        # print(len(to_connect_house))
-            
 
     def check_solution(self, new_connections_dict):
         """
@@ -88,9 +84,8 @@ class Hillclimber:
         old_costs = self.cost
         # compare costs of old and new grids
         if new_costs <= old_costs:
-            self.connections_dict = self.new_connections_dict # weten we zeker dat deze 150 lang is??
+            self.connections_dict = self.new_connections_dict
             self.cost = new_costs
-        #print(self.cost)
     
     def check_all_connections(self):
         """
@@ -113,14 +108,12 @@ class Hillclimber:
             
             while True:
                 
-                #self.new_connections_dict = {}
-                # Create a copy of the solution to simulate the change
+                # create a copy of the solution to simulate the change
                 self.new_connections_dict = copy.deepcopy(self.connections_dict)  
                
 
                 # remove connections from new connections dict
-                to_connect = self.remove_connections(mutate_connections_number) # gaat goed
-                # for battery in self.grid.batteries_dict.values():
+                to_connect = self.remove_connections(mutate_connections_number) 
 
                 # add new random connections to new connections dict
                 self.add_new_connections(to_connect)
@@ -129,7 +122,7 @@ class Hillclimber:
                     print(f'Iteration {i}/{iterations}: {len(self.new_connections_dict)}') if i % 1000 == 0 else None
                     break
             
-            # Accept it if it is better
+            # accept it if it is better
             self.check_solution(self.new_connections_dict)
         
         return self.connections_dict

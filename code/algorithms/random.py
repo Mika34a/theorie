@@ -8,7 +8,9 @@
 import random
 
 def run(smartgrid):
-
+    """
+    Runs the random algorithm.
+    """
     while True:
         # dictionary of connections
         connections_dict = {}

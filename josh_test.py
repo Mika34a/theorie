@@ -12,13 +12,20 @@ runtime = time.time()
 
 if __name__ == "__main__":
 
-    # check command line
-    if len(argv) != 2:
-        print("Usage: python3 smartgrid.py [district_number]")
+  # check command line
+    if len(argv) != 3:
+        print("Usage: python3 smartgrid.py [district_number] shared:y/n")
         exit(1)
     # Load the requested files
-    if len(argv) == 2:
+    if len(argv) == 3:
         district_int = argv[1]
+        shared = argv[2]
+        if argv[2] == "shared:y":
+            shared = True
+        elif argv[2] == "shared:n":
+            shared = False
+        else:
+            print("Usage: python3 smartgrid.py [district_number] shared:y/n")
 
     filename = f"database/district_{district_int}/district-{district_int}_houses.csv"
     filename2 = f"database/district_{district_int}/district-{district_int}_batteries.csv"
@@ -33,11 +40,11 @@ if __name__ == "__main__":
 
     for n in range(N):                                                                                                                                                                                     
         connections_dict = greedy_random.run(smartgrid)
-        # climber = Hillclimber(smartgrid, connections_dict)
-        # climber.run(10000)
-        s_annealing = SimulatedAnnealing(smartgrid, connections_dict)
-        final_connections_dict = s_annealing.run(100)
-        total_cost = smartgrid.costs(final_connections_dict, smartgrid.batteries_dict, shared = False)
+        climber = Hillclimber(smartgrid, connections_dict)
+        final_connections_dict = climber.run(100)
+        # s_annealing = SimulatedAnnealing(smartgrid, connections_dict)
+        # final_connections_dict = s_annealing.run(100)
+        total_cost = smartgrid.costs(final_connections_dict, smartgrid.batteries_dict, shared)
         print(total_cost)
         print(time.time()-runtime)
         all_costs.append(total_cost)
@@ -53,5 +60,5 @@ if __name__ == "__main__":
     # for connection in connections_dict.values():
     #     print(connection.points_list)
     
-    # export output to txt file
+    # export output to json file
     smartgrid.output(final_connections_dict, total_cost, (time.time()-runtime), argv[1], shared = False)

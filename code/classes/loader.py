@@ -3,15 +3,11 @@
 # Programmeertheorie
 # Merel Florian, Michael Verdel, Joshua van Zanten
 #
-# - Implements loader.
+# - Implements the loader functions for houses and batteries.
 
-# import
-import matplotlib.pyplot as plt
-from matplotlib.pyplot import figure
 import csv
 from .house import House
 from .battery import Battery
-from .connection import Connection
 
 def load_house(filename):
     """
