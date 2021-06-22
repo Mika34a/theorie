@@ -62,11 +62,6 @@ class Connection:
         self.length = (abs(battery_x - house_x)) + (abs(battery_y - house_y)) + 1
             
 # functions
-    def return_points(self): 
-        """
-        Returns all points of the grid that the connection crosses.
-        """
-        return self.return_points
 
     def length(self):
         """
@@ -82,29 +77,50 @@ class Connection:
 
     def battery(self):
         """
-        Returns battery id of connection
+        Returns battery id of connection 
         """   
         return self.battery_id.id
     
     def bat_y_coordinate(self):
+        """
+        Returns y coordinate from battery that belongs to connection
+        """   
         return self.battery_id.y_coordinate     
 
     def bat_x_coordinate(self):
+        """
+        Returns x coordinate from battery that belongs to connection
+        """  
         return self.battery_id.x_coordinate
     
     def start_capacity(self):
+        """
+        Returns start capacity from battery that belongs to connection
+        """  
         return self.battery_id.start_capacity
     
     def house_x_coordinate(self):
+        """
+        Returns x coordinate from house that belongs to connection
+        """  
         return self.house_id.x_coordinate
 
     def house_y_coordinate(self):
+        """
+        Returns y coordinate from house that belongs to connection
+        """  
         return self.house_id.y_coordinate
 
     def output(self):
+        """
+        Returns output from house that belongs to connection
+        """  
         return self.house_id.output
 
     def points_list(self):
+        """
+        Returns list of coordinates that connection crosses
+        """ 
         return self.points_list
     
     def __repr__(self) -> str:

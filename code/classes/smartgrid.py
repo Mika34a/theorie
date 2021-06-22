@@ -54,33 +54,25 @@ class Smartgrid():
             for battery in self.batteries_dict.values():
                 # make empty set
                 set_coordinates = set() 
+
                 # for every connection with same battery
                 for con in connections_dict.values():
                     if con.battery_id == battery:
+
                         # loop through points_list and add to set
                         for coordinate in con.points_list:
-                            set_coordinates.add(coordinate)       
+                            set_coordinates.add(coordinate)  
+
                 amount_segments_battery = len(set_coordinates)
                 amount_segments_total = amount_segments_battery + amount_segments_total
                 print(amount_segments_total)
+
             cost_cable_all = COST_GRID * amount_segments_total
 
         cost_battery_all = COST_BATTERY * len(battery_dict)
         cost_all = cost_cable_all + cost_battery_all       
                   
         return cost_all
-
-    def disc_houses(self):
-        """
-        Returns the houses that have not been connected.
-        """
-        pass
-
-    def batteries_left(self):
-        """
-        Returns the batteries that still have leftover capacity.
-        """
-        pass
     
     def output_capacity(self, house, battery):
         """
@@ -100,54 +92,38 @@ class Smartgrid():
             total_list.append({"district": int(main), "costs-shared": (total_cost)})
 
         for battery in self.batteries_dict.values():
+            # initialize houses dict
             houses = []
-            total_list.append({"location": f"{battery.x_coordinate},{battery.y_coordinate}", "capacity": battery.start_capacity, "houses": houses })
-            
+            # add battery information
+            total_list.append({"location":
+                f"{battery.x_coordinate},{battery.y_coordinate}",
+                "capacity": battery.start_capacity, "houses": houses })
+
+            # loop through connections
             for connection in connections_dict.values():
+
                 if connection.battery() == battery.id:
                     cables = []
+
+                    # find cables
                     for point in connection.points_list:
                         x,y = point
                         cables.append(f"{x},{y}")
 
-                    houses.append({"location": f"{connection.house_x_coordinate()},{connection.house_y_coordinate()}", "output": connection.output(), "cables": cables})
-
+                    # add houses information
+                    houses.append({"location": 
+                        f"{connection.house_x_coordinate()},{connection.house_y_coordinate()}", 
+                        "output": connection.output(), "cables": cables})
+       
         # the json file where the output must be stored
-        out_file = open("output.json", "w")
-               
+        out_file = open("output/output.json", "w")
         json.dump(total_list, out_file, indent = 2)
-        
-        out_file.close()
-
-    def output_greedy(self, connections_dict, total_cost, runtime, main):
-        """
-        Prints output information about solution.
-        """
-        total_list = []
-
-        total_list.append({"district": int(main), "costs-shared": (total_cost)})
-
-        for battery in self.batteries_dict.values():
-            houses = []
-            total_list.append({"location": f"{battery.x_coordinate},{battery.y_coordinate}", "capacity": battery.start_capacity, "houses": houses })
-            
-            for connection in connections_dict.values():
-                if connection.battery() == battery.id:
-                    cables = []
-                    for point in connection.points_list:
-                        x,y = point
-                        cables.append(f"{x},{y}")
-
-                    houses.append({"location": f"{connection.house_x_coordinate()},{connection.house_y_coordinate()}", "output": connection.output(), "cables": cables})
-
-        # the json file where the output must be stored
-        out_file = open("output.json", "w")
-               
-        json.dump(total_list, out_file, indent = 2)
-        
         out_file.close()
 
     def all_connected(self, connections_dict):
+        """
+        Returns true if all houses are connected, else false.
+        """
         if len(connections_dict) == 150:
             return True
         return False  
@@ -160,11 +136,9 @@ class Smartgrid():
         distances = {}
 
         for battery in batteries_dict.values():
-            
             distance = (abs(battery.x_coordinate - house.x_coordinate)) + (abs(battery.y_coordinate - house.y_coordinate))
-            
             distances[battery] = distance
-
+            
         # sort batteries ascending by distance value 
         sorted_batteries = {k: v for k, v in sorted(distances.items(), key=lambda item: item[1])}
         return sorted_batteries
@@ -184,16 +158,19 @@ class Smartgrid():
         count = 0
         minimum = False
         # loop through connections
-        for connection in connections_dict.values():    
+        for connection in connections_dict.values():   
+
             # if battery is battery
             if connection.battery_id == battery:
+
                 # loop through points_list
                 for coordinate in connection.points_list:
-                    # check distance for connection.points_list
                     x = coordinate[0]
                     y = coordinate[1]
 
+                    # check Manhattan distance for connection.points_list
                     distance = (abs(x- house.x_coordinate)) + (abs(y - house.y_coordinate))
+
                     if count == 0:
                         minimum = coordinate
                         minimum_dist = distance
