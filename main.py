@@ -5,12 +5,11 @@
 #
 # - Implements several algorithms to connect houses to batteries with capacity. 
 
-from code.algorithms.random_greedy2 import RandomGreedy
+from code.algorithms.random_greedy import RandomGreedy
 from code.classes.smartgrid import Smartgrid
 from code.algorithms.hillclimber import Hillclimber
 from code.algorithms.sim_annealing import SimulatedAnnealing
 from code.algorithms.random import Random
-from code.algorithms.random_greedy2 import RandomGreedy
 from code.grid import grid
 from sys import argv
 import time
@@ -28,7 +27,6 @@ if __name__ == "__main__":
     if len(argv) == 4:
         district_int = argv[1]
         shared = argv[3]
-        
         algorithm = argv[2]
 
         if argv[3] == "shared:y":
@@ -83,7 +81,7 @@ if __name__ == "__main__":
     
     average_costs  = sum(all_costs) / N
     average_runtime = sum(all_runtimes) / N
-    # print(average_costs, statistics.stdev(all_costs))
+    print(average_costs, statistics.stdev(all_costs))
 
 # compute costs
 total_cost = smartgrid.costs(final_connections_dict, smartgrid.batteries_dict, shared)
