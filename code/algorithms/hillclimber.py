@@ -4,10 +4,10 @@ import random
 
 class Hillclimber:
     """
-    The HillClimber class that changes a random subset of connections to random valid new connections. Each improvement or
-    equivalent solution is kept for the next iteration.
+    The HillClimber class that changes a random subset of connections 
+    to random valid new connections. Each improvement or equivalent 
+    solution is kept for the next iteration.
     """
-
     def __init__(self, smartgrid, connections_dict):
         """
         Initializes Hillclimber attributes.
@@ -17,6 +17,7 @@ class Hillclimber:
         self.cost = self.grid.costs(connections_dict, self.grid.batteries_dict, shared = False)
         self.new_connections_dict = {}
         self.batteries_dict = smartgrid.batteries_dict
+
 
     def remove_connections(self, part_adjust):
         """
@@ -33,14 +34,11 @@ class Hillclimber:
             
             # refill battery capacity, reset house connection
             random_pick = self.new_connections_dict[random_connection]
-            # print(random_pick.battery_id.capacity)
             random_pick.battery_id.output_capacity_refill(random_pick.house_id)
             
-            # print(random_pick.battery_id.capacity)
-            # print("break")
             random_pick.house_id.reset()
-
             to_connect.append(random_pick.house_id)
+            
             # remove connection from new_connections_dict
             del(self.new_connections_dict[random_connection])
         
@@ -63,12 +61,11 @@ class Hillclimber:
             
         # loop through houses
         for house in to_connect_house:
-            # loop through batteries
                 for battery in batteries_list:
-
-                # connect house to battery if capacity 
+                    
                     if house.output <= battery.capacity:
                         if house.connected == False:
+                            
                             connection = self.grid.connect(battery, house)
                             # update battery capacity
                             self.grid.output_capacity(house, battery)
@@ -91,7 +88,6 @@ class Hillclimber:
         """
         Returns true if all houses are connected, else is False.
         """
-    
         if len(self.new_connections_dict) == len(self.connections_dict):
             return True    
         return False
@@ -110,7 +106,6 @@ class Hillclimber:
                 
                 # create a copy of the solution to simulate the change
                 self.new_connections_dict = copy.deepcopy(self.connections_dict)  
-               
 
                 # remove connections from new connections dict
                 to_connect = self.remove_connections(mutate_connections_number) 
@@ -126,6 +121,4 @@ class Hillclimber:
             self.check_solution(self.new_connections_dict)
         
         return self.connections_dict
-                
-
   
