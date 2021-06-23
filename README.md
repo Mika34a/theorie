@@ -1,5 +1,6 @@
 # Theory - Smartgrid
 ## Merel Florian, Michael Verdel and Joshua van Zanten
+## Programmeangirls
 
 ## Purpose
 This program includes 4 algorithms to connect houses to batteries in a grid of 51x51.
@@ -29,12 +30,12 @@ optional:
 ### Usage      
 1. "Usage: python3 main.py [district_number] random/greedy/climber/sim shared:y/n") 
     - example: python3 main.py 1 random shared:y
-2. open output/output.json and grid.grid.pgn to see results
+2. open output/output.json and grid.gridtest.png to see results
 3. check results with: check50 -l minprog/theorie-check50/2021/smartgrid 
 
 ## The case - Smartgrid
-In smartgrid, the main goal is to connect all 150 houses to 5 batteries without exceeding capacity. The challenge
-lays in keeping the price of the connections as low as possible by keeping the connections as short as possible. Every segment costs 9€. Batteries also have a price.The total cost of a solution includes the sum of the total cost of the batteries and segments. connections can both be shared or not shared. When connections are shared, only the first cable on the segment will be counted in the total cost of segments.
+In Smartgrid, the main goal is to connect all 150 houses to 5 batteries without exceeding capacity. The challenge
+lies in keeping the price of the connections as low as possible by keeping the connections as short as possible. Every segment costs €9. Batteries also have a price. The total cost of a solution includes the sum of the total cost of the batteries and segments. Connections can either be shared or not shared. When connections are shared, only the first cable on the segment will be counted in the total cost of segments.
 
 ## Features
 ### Random algorithm
@@ -58,4 +59,4 @@ Filling in "shared:y" results in shared connections. "shared:n" results in costs
 ## Acknowledgements 
 We want to thank all teaching assistants from the minor of programming at the UvA that helped us with all our questions. A special thanks to Quinten van der Post and Björn Out for our weekly meetings.
 
-Our simmulated annealing and hillclimber algorithm are highly inspired by the live coding lectures from Quinten van der Post and Wouter Vrielink.
+Our simulated annealing and hillclimber algorithm are highly inspired by the live coding lectures from Quinten van der Post and Wouter Vrielink.
