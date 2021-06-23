@@ -59,17 +59,3 @@ Filling in "shared:y" results in shared connections. "shared:n" results in costs
 We want to thank all teaching assistants from the minor of programming at the UvA that helped us with all our questions. A special thanks to Quinten van der Post and Björn Out for our weekly meetings.
 
 Our simmulated annealing and hillclimber algorithm are highly inspired by the live coding lectures from Quinten van der Post and Wouter Vrielink.
-
-# theorie
-SmartGrid assignment by Programmeangirls
-
-
-install pygame
-command = pip3 install pygame // pip install pygame
-
-
-pip3 install numpy
-
-matplotlib for grid visualisation
-python3 -m pip install -U pip
-python3 -m pip install -U matplotlib
