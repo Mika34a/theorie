@@ -3,12 +3,12 @@
 # Programmeertheorie
 # Merel Florian, Michael Verdel, Joshua van Zanten
 #
-# - Implements a simulated annealing algorithm to connect houses to batteries
-# - connections are shared between houses if more efficient.
-# - with the algorithm preferencing the batteries that are closest by first.
+# - Implements a simulated annealing algorithm to connect houses to batteries 
+#   within capacity.
+
 
 import random
-import math
+import numpy as np
 from .hillclimber import Hillclimber
 
 class SimulatedAnnealing(Hillclimber):
@@ -42,7 +42,7 @@ class SimulatedAnnealing(Hillclimber):
         old_costs = self.cost
         
         costdif = new_costs - old_costs
-        chance = math.exp(-costdif / self.T)
+        chance = np.exp(-costdif / self.T)
 
         if random.random() < chance:
             self.connections_dict = new_connections_dict

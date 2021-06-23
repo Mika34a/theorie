@@ -1,6 +1,12 @@
+# random.py
+#
+# Programmeertheorie
+# Merel Florian, Michael Verdel, Joshua van Zanten
+#
+# - Implements a random algorithm to connect houses to batteries 
+#   within capacity.
 
 import random
-
 
 class Random:
     """
@@ -32,7 +38,7 @@ class Random:
 
     def connect_houses(self):
         """"
-        Connects the houses to the batteries.
+        Connects the houses to the batteries randomly.
         """
         for house in self.houses_list:    
             # check if output of house still fits in capacity battery 
@@ -40,6 +46,7 @@ class Random:
                 
                 # connect house to battery 
                 if  house.output <= battery.capacity:
+                    
                     # check if house is already connected
                     if house.connected == False:
                         connection = self.grid.connect(battery, house)
@@ -52,11 +59,12 @@ class Random:
     
     def check_all_connections(self, connections_dict):
         """"
-        Checks if all houses are connected.
+        Checks if all houses are connected. If not, resets all houses and batteries.
         """ 
-        # all_connected               
+        # if all houses connected              
         if self.grid.all_connected(connections_dict):
             return True
+        # reset is not all connected
         else:
             for battery in self.batteries_dict.values():
                 battery.reset()
@@ -68,12 +76,16 @@ class Random:
         """"
         Runs the Random algorithm.
         """
+        # run until all houses are connected
         while True:
             self.randomise_houses()
             self.randomise_batteries()
             self.connect_houses()
+
+            # if all houses are connected
             if self.check_all_connections(self.connections_dict):
                 return self.connections_dict   
+            # reset connections dict if not all houses are connected
             else:
                 self.connections_dict = {}       
 

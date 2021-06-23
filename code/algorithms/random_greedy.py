@@ -1,3 +1,12 @@
+# random_greedy.py
+#
+# Programmeertheorie
+# Merel Florian, Michael Verdel, Joshua van Zanten
+#
+# - Implements a random greedy algorithm to connect houses to batteries 
+#   within capacity.
+# - Chooses the closest battery possible for every house.
+
 from .random import Random
 
 class RandomGreedy(Random):
@@ -24,6 +33,7 @@ class RandomGreedy(Random):
         for house in self.houses_list:
             close_batteries = self.close_batteries(house)
             for battery in close_batteries:
+                
                 if house.output <= battery.capacity:
                     
                     # check if house is already connected
@@ -40,12 +50,15 @@ class RandomGreedy(Random):
         """
         Runs Random Greedy algorithm.
         """
+        # run until all houses are connected
         while True:
             self.randomise_houses()
             self.connect_greedy()
 
+            # if all houses are connected
             if self.check_all_connections(self.connections_dict):
                 return self.connections_dict    
+            # reset connections dict if not all houses are connected
             else:
                 self.connections_dict = {}     
 
