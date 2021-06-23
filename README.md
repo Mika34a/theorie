@@ -32,6 +32,7 @@ optional:
     - example: python3 main.py 1 random shared:y
 2. open output/output.json and grid.gridtest.png to see results
 3. check results with: check50 -l minprog/theorie-check50/2021/smartgrid 
+4. N = 30 means that the chosen algorithm will run 30 times, and can be changed accordingly in main.py.
 
 ## The case - Smartgrid
 In Smartgrid, the main goal is to connect all 150 houses to 5 batteries without exceeding capacity. The challenge
@@ -44,12 +45,12 @@ This algorithm makes a list of randomly ordered houses and a list of randomly or
 ### Random Greedy algorithm
 This algorithm makes a list of randomly ordered houses. The greedy behaviour is achieved by making dictionary of batteries for every house ordered by distance. The algorithm will connect each house to the closest battery with enough capacity. This algorithm is repeated until all houses have been connected. With every repetition, the houses list gets a new random order to find a better solution.
 
-### Hill climber
+### Hillclimber
 The hillclimber starts with a solution of the random greedy algorithm. After this, the algorithm will remove 5 random connections and will reconnect them randomly until all houses are connected. 
 The amount of iterations is by default 10.000 but can be changed in main.py (IT).
 
 ### Simulated annealing
-Simulated annealing inherits most functions of the Hillclimber. To prevent the hillclimber from getting stuck in a local minimum, we added a descending temperature value that influences the proability of acceptance for every solution. By excepting some bad outcomes in the beginning, the hillclimber gets a chance to escape local minima.
+Simulated annealing inherits most functions of the Hillclimber. To prevent the hillclimber from getting stuck in a local minimum, we added a descending temperature value that influences the proability of acceptance for every solution. By accepting some bad outcomes in the beginning, the hillclimber gets a chance to escape local minima.
 By default, our algorithm has a beginning acceptance chance of 20%. This can be altered by changing the temperature according to the following formula: chance = e^(cost_old - cost_new / temperature). By increasing the starting temperature, or lowering the amount of iterations you can increase the slope of the acceptance chance. Doing the opposite, will decrease the slope.
 
 ### Shared function
