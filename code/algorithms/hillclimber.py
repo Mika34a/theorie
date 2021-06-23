@@ -1,3 +1,11 @@
+# hillclimber.py
+#
+# Programmeertheorie
+# Merel Florian, Michael Verdel, Joshua van Zanten
+#
+# - Implements a hillclimber algorithm to connect houses to batteries
+#   within capacity.
+
 import copy
 import random
 
